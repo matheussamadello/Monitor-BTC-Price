@@ -1,0 +1,60 @@
+name: Monitor BTC
+
+on:
+  schedule:
+    # minuto 20 para nao coincidir com o monitor de XMR: as chamadas a
+    # Kraken ficam espalhadas e da' para saber qual execucao e' qual so
+    # pelo horario no log.
+    - cron: "20 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: monitor-btc
+  cancel-in-progress: false
+
+jobs:
+  atualizar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+
+      - name: Gerar e publicar
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          for tentativa in 1 2 3 4 5; do
+            # O reset vem ANTES do script de proposito: docs/estado.json e'
+            # a memoria entre execucoes (zonas, contadores, estado dos
+            # niveis). Se o script rodasse antes, leria uma copia que o
+            # reset jogaria fora, e o estado se perderia em silencio.
+            git fetch origin main
+            git reset --hard origin/main
+
+            node monitor.mjs
+
+            git add docs
+            if git diff --cached --quiet; then
+              echo "nada mudou"
+              exit 0
+            fi
+
+            git commit -m "monitor: $(date -u '+%Y-%m-%d %H:%M UTC')"
+            if git push origin main; then
+              echo "publicado na tentativa $tentativa"
+              exit 0
+            fi
+
+            echo "push falhou (alguem empurrou antes), tentando de novo"
+            sleep $((tentativa * 5))
+          done
+
+          echo "nao consegui publicar depois de 5 tentativas"
+          exit 1
