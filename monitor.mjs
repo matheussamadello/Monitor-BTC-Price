@@ -1342,6 +1342,20 @@ export function relatorioParaJSON(texto, zonas = null) {
       const bloco = out[tfKey][par];
       const chave = `usd|${tfKey}`;
       bloco.niveis_manuais = {};
+
+      // Faixas manuais publicadas como METADADO, derivadas direto de
+      // NIVEIS_USD.faixas. Nao existe copia dos numeros aqui: mexer em
+      // NIVEIS_USD.faixas muda o JSON sozinho.
+      //
+      // Vem da configuracao e nao do texto, igual a zonas_automaticas
+      // logo abaixo, que tambem e' injetada por fora. A regra de derivar
+      // do texto existe para dado CALCULADO, onde texto e JSON poderiam
+      // divergir; faixa manual e' constante de configuracao, entao nao ha
+      // o que divergir.
+      bloco.niveis_manuais.faixas = (NIVEIS_USD.faixas || []).map(
+        ([inferior, superior, label]) => ({ inferior, superior, label })
+      );
+
       for (const [campo, valor] of Object.entries(bloco)) {
         if (campo.startsWith("nivel_")) bloco.niveis_manuais[campo] = valor;
       }
