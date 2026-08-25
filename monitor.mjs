@@ -2062,23 +2062,34 @@ export function calcularZonas(cfg, tf, d, ctx) {
         ? "acima_da_media_na_epoca"
         : "normal";
     z.timeframes_confirmando = confl ? [tf.key, "semanal"] : [tf.key];
+    // LEGADO — nao mexer: ponto dentro dos limites ESTRUTURAIS, olhando
+    // apenas os niveis que possuem maquina de estados persistente.
     z.confluencia_nivel_manual = (ctx.niveisManuais || []).some(
       (n) => n >= z.limites_estruturais.inferior && n <= z.limites_estruturais.superior
     );
-    // Faixa manual e resistencia macro sao REGIOES, nao pontos: aqui vale
-    // intersecao com os limites estruturais, nao "ponto dentro da zona".
-    z.confluencia_faixa_manual = (ctx.faixasManuais || []).some((f) =>
-      faixasSeTocam(f, z.limites_estruturais)
-    );
-    // Publicado apenas quando existe ancora macro configurada. Um campo
-    // sempre false sugeriria que ha uma macro e que o preco nunca a toca.
-    z.confluencia_resistencia_macro = ctx.resistenciaMacro
-      ? faixasSeTocam(ctx.resistenciaMacro, z.limites_estruturais)
-      : null;
+
+    // NOVOS — faixa x faixa sobre os limites OPERACIONAIS. O operacional
+    // e' estreito por construcao (centro +- 0,35 ATR), entao nao produz
+    // o artefato de uma zona estrutural larga "engolir" a faixa manual.
+    const sobrepoeFaixa = (faixa) =>
+      sobreposicaoFrac(z.limites_operacionais, {
+        inferior: faixa[0],
+        superior: faixa[1],
+      }) >= CONFLUENCIA_SOBREPOSICAO_MIN;
+
+    z.confluencia_faixa_manual = (ctx.faixasManuais || []).some(sobrepoeFaixa);
+
+    const macro = ctx.resistenciaMacro;
+    z.confluencia_resistencia_macro = macro
+      ? sobrepoeFaixa([macro.inferior, macro.superior])
+      : false;
+
+    // Conveniencia para consumidores externos. Nao entra em score,
+    // alerta, gatilho nem ciclo de vida.
     z.confluencia_manual_qualquer =
       z.confluencia_nivel_manual ||
       z.confluencia_faixa_manual ||
-      z.confluencia_resistencia_macro === true;
+      z.confluencia_resistencia_macro;
   }
 
   // ciclo de vida
@@ -2147,15 +2158,6 @@ export function calcularZonas(cfg, tf, d, ctx) {
   };
 }
 
-// Duas regioes se tocam? Usada para confluencia de FAIXA manual e de
-// resistencia macro com os limites estruturais de uma zona. O criterio e'
-// intersecao simples, o analogo de faixa para o "nivel pontual dentro da
-// zona" usado por confluencia_nivel_manual.
-function faixasSeTocam(a, b) {
-  if (!a || !b) return false;
-  return a.inferior <= b.superior && a.superior >= b.inferior;
-}
-
 // Objeto CANONICO. Texto e JSON derivam exatamente daqui.
 function limparZona(z) {
   return {
@@ -2186,10 +2188,7 @@ function limparZona(z) {
     distancia_preco_atual_pct: z.distancia_preco_atual_pct,
     confluencia_nivel_manual: !!z.confluencia_nivel_manual,
     confluencia_faixa_manual: !!z.confluencia_faixa_manual,
-    ...(z.confluencia_resistencia_macro === null ||
-    z.confluencia_resistencia_macro === undefined
-      ? {}
-      : { confluencia_resistencia_macro: !!z.confluencia_resistencia_macro }),
+    confluencia_resistencia_macro: !!z.confluencia_resistencia_macro,
     confluencia_manual_qualquer: !!z.confluencia_manual_qualquer,
     membros: (z.membros || []).map((m) => ({ time: m.time, preco: m.preco, tipo: m.tipo })),
     velasComScoreAlto: z.velasComScoreAlto || 0,
@@ -2218,10 +2217,7 @@ export function zonasParaTexto(zonas, dec, fmtDiaFn) {
         `dist_pct=${z.distancia_preco_atual_pct.toFixed(2)} ` +
         `confluencia_manual=${z.confluencia_nivel_manual ? "sim" : "nao"} ` +
         `confluencia_faixa=${z.confluencia_faixa_manual ? "sim" : "nao"} ` +
-        (z.confluencia_resistencia_macro === null ||
-        z.confluencia_resistencia_macro === undefined
-          ? ""
-          : `confluencia_macro=${z.confluencia_resistencia_macro ? "sim" : "nao"} `) +
+        `confluencia_macro=${z.confluencia_resistencia_macro ? "sim" : "nao"} ` +
         `confluencia_qualquer=${z.confluencia_manual_qualquer ? "sim" : "nao"}`
     );
   });
@@ -2437,10 +2433,7 @@ function readPair(cfg, d, tf, opts = {}) {
     proximoId: opts.proximoIdZona || 1,
     volumeMedia20: vol.media,
     niveisManuais: niveisDoPar(cfg).map((n) => n.nivel),
-    faixasManuais: (cfg.niveis.faixas || []).map(([lo, hi]) => ({
-      inferior: lo,
-      superior: hi,
-    })),
+    faixasManuais: cfg.niveis.faixas || [],
     resistenciaMacro: cfg.niveis.resistenciaMacro || null,
   });
   const zonasAutomaticas = zonasRes.zonas;
