@@ -55,7 +55,6 @@ const NIVEIS_USD = {
     [70000, 72000, "faixa_70k_72k"],
     [64000, 66000, "regiao_suporte_64k_66k"],
   ],
-  // proximidade: [valor, "rotulo"]  // opcional; sem uso por enquanto
   resistencia: 80000,
   resistenciaLabel: "80000",
   suporte: 65000,
@@ -846,8 +845,6 @@ function alertasTecnicos(cfg, d, ind) {
   for (const [lo, hi, nome] of nv.faixas || []) {
     if (p >= lo && p <= hi) a.push(nome);
   }
-  if (nv.proximidade && p <= nv.proximidade[0]) a.push(nv.proximidade[1]);
-
   // Rompimento: intradiario vs confirmado
   if (nv.resistencia !== null && nv.resistencia !== undefined) {
     const R = nv.resistencia;
@@ -2068,6 +2065,20 @@ export function calcularZonas(cfg, tf, d, ctx) {
     z.confluencia_nivel_manual = (ctx.niveisManuais || []).some(
       (n) => n >= z.limites_estruturais.inferior && n <= z.limites_estruturais.superior
     );
+    // Faixa manual e resistencia macro sao REGIOES, nao pontos: aqui vale
+    // intersecao com os limites estruturais, nao "ponto dentro da zona".
+    z.confluencia_faixa_manual = (ctx.faixasManuais || []).some((f) =>
+      faixasSeTocam(f, z.limites_estruturais)
+    );
+    // Publicado apenas quando existe ancora macro configurada. Um campo
+    // sempre false sugeriria que ha uma macro e que o preco nunca a toca.
+    z.confluencia_resistencia_macro = ctx.resistenciaMacro
+      ? faixasSeTocam(ctx.resistenciaMacro, z.limites_estruturais)
+      : null;
+    z.confluencia_manual_qualquer =
+      z.confluencia_nivel_manual ||
+      z.confluencia_faixa_manual ||
+      z.confluencia_resistencia_macro === true;
   }
 
   // ciclo de vida
@@ -2136,6 +2147,15 @@ export function calcularZonas(cfg, tf, d, ctx) {
   };
 }
 
+// Duas regioes se tocam? Usada para confluencia de FAIXA manual e de
+// resistencia macro com os limites estruturais de uma zona. O criterio e'
+// intersecao simples, o analogo de faixa para o "nivel pontual dentro da
+// zona" usado por confluencia_nivel_manual.
+function faixasSeTocam(a, b) {
+  if (!a || !b) return false;
+  return a.inferior <= b.superior && a.superior >= b.inferior;
+}
+
 // Objeto CANONICO. Texto e JSON derivam exatamente daqui.
 function limparZona(z) {
   return {
@@ -2165,6 +2185,12 @@ function limparZona(z) {
     volume_relativo_mediano: z.volume_relativo_mediano ?? null,
     distancia_preco_atual_pct: z.distancia_preco_atual_pct,
     confluencia_nivel_manual: !!z.confluencia_nivel_manual,
+    confluencia_faixa_manual: !!z.confluencia_faixa_manual,
+    ...(z.confluencia_resistencia_macro === null ||
+    z.confluencia_resistencia_macro === undefined
+      ? {}
+      : { confluencia_resistencia_macro: !!z.confluencia_resistencia_macro }),
+    confluencia_manual_qualquer: !!z.confluencia_manual_qualquer,
     membros: (z.membros || []).map((m) => ({ time: m.time, preco: m.preco, tipo: m.tipo })),
     velasComScoreAlto: z.velasComScoreAlto || 0,
     velasEnfraquecida: z.velasEnfraquecida || 0,
@@ -2190,7 +2216,13 @@ export function zonasParaTexto(zonas, dec, fmtDiaFn) {
         `centro=${z.centro.toFixed(dec)} toques=${z.numero_toques} ` +
         `rejeicoes=${z.numero_rejeicoes} role_reversal=${z.role_reversal ? "sim" : "nao"} ` +
         `dist_pct=${z.distancia_preco_atual_pct.toFixed(2)} ` +
-        `confluencia_manual=${z.confluencia_nivel_manual ? "sim" : "nao"}`
+        `confluencia_manual=${z.confluencia_nivel_manual ? "sim" : "nao"} ` +
+        `confluencia_faixa=${z.confluencia_faixa_manual ? "sim" : "nao"} ` +
+        (z.confluencia_resistencia_macro === null ||
+        z.confluencia_resistencia_macro === undefined
+          ? ""
+          : `confluencia_macro=${z.confluencia_resistencia_macro ? "sim" : "nao"} `) +
+        `confluencia_qualquer=${z.confluencia_manual_qualquer ? "sim" : "nao"}`
     );
   });
   return L;
@@ -2405,6 +2437,11 @@ function readPair(cfg, d, tf, opts = {}) {
     proximoId: opts.proximoIdZona || 1,
     volumeMedia20: vol.media,
     niveisManuais: niveisDoPar(cfg).map((n) => n.nivel),
+    faixasManuais: (cfg.niveis.faixas || []).map(([lo, hi]) => ({
+      inferior: lo,
+      superior: hi,
+    })),
+    resistenciaMacro: cfg.niveis.resistenciaMacro || null,
   });
   const zonasAutomaticas = zonasRes.zonas;
   const zonasEstadoPar = zonasRes.zonasEstado || [];
@@ -2615,13 +2652,6 @@ function avaliarGatilhos(d) {
   for (const [lo, hi, nome] of nv.faixas || []) {
     if (p >= lo && p <= hi)
       add(`usd_${nome}`, `BTC/USD entrou na regiao ${lo}-${hi} (agora ${p.toFixed(2)})`);
-  }
-
-  if (nv.proximidade && p <= nv.proximidade[0]) {
-    add(
-      `usd_${nv.proximidade[1]}`,
-      `BTC/USD se aproximou de ${nv.proximidade[0]} (agora ${p.toFixed(2)})`
-    );
   }
 
   // Rompimento so conta com o corpo real acima do nivel — mesmo criterio
