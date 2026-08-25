@@ -186,7 +186,17 @@ Leia, quando presentes:
 - `volume_contexto`;
 - `volume_relativo_mediano`;
 - `distancia_preco_atual_pct`;
-- `confluencia_nivel_manual`.
+- `confluencia_nivel_manual`;
+- `confluencia_faixa_manual`;
+- `confluencia_manual_qualquer`.
+
+`confluencia_nivel_manual` cobre apenas os níveis pontuais.
+
+`confluencia_faixa_manual` cobre as faixas manuais publicadas em `niveis_manuais`.
+
+`confluencia_manual_qualquer` agrega as duas. Não interprete `confluencia_nivel_manual` como se representasse sozinho toda forma possível de confluência manual.
+
+Pode existir também `confluencia_resistencia_macro`, publicado apenas quando houver âncora macro configurada no monitor. Na configuração atual do BTC não há, então o campo não aparece. Sua ausência é esperada e não é motivo de alerta.
 
 ### Limites operacionais x estruturais
 
@@ -202,7 +212,7 @@ Uma zona ganha peso quando apresenta combinação de fatores como:
 - boa recência;
 - confluência diário/semanal;
 - `role_reversal` confirmado;
-- confluência com nível manual.
+- confluência com nível pontual ou faixa manual.
 
 Nunca gere alerta apenas porque:
 
@@ -210,6 +220,7 @@ Nunca gere alerta apenas porque:
 - o score mudou;
 - o status mudou;
 - o tipo mudou;
+- uma penalidade apareceu ou desapareceu;
 - o preço simplesmente entrou na zona.
 
 Exija reação real de preço e as confirmações específicas da regra relevante.
@@ -660,6 +671,15 @@ Divergência provisória exige cautela ainda maior porque depende da vela em for
 
 Não repita uma divergência baseada nos mesmos pivôs já comunicados.
 
+Lembre-se da semântica:
+
+- **regular bullish:** preço faz fundo mais baixo e RSI faz fundo mais alto;
+- **regular bearish:** preço faz topo mais alto e RSI faz topo mais baixo;
+- **oculta bullish:** preço faz fundo mais alto e RSI faz fundo mais baixo;
+- **oculta bearish:** preço faz topo mais baixo e RSI faz topo mais alto.
+
+Compare pivôs correspondentes. Não classifique divergência apenas porque, genericamente, "o preço subiu e o RSI caiu" sem verificar os topos ou fundos relevantes.
+
 ---
 
 ## Padrões de candles
@@ -700,7 +720,8 @@ Não alerte só porque:
 - o preço se afastou de um nível;
 - apareceu uma zona nova;
 - uma zona mudou score;
-- uma zona mudou status.
+- uma zona mudou status;
+- uma zona mudou de tipo.
 
 Só envie manutenção quando houver evidência forte e persistente de obsolescência ou de nova região estrutural claramente melhor, como combinação de:
 
@@ -780,6 +801,16 @@ Inclua apenas métricas que ajudam a explicar a mudança. Não despeje todo o JS
 
 Se não houver uma mudança **realmente nova, material e operacionalmente útil** desde o último alerta, permaneça em silêncio.
 
-Timestamp novo, preço oscilando dentro da mesma região, persistência do mesmo estado, RSI ainda sobrecomprado, zona ainda em teste ou volume mudando sozinho **não são motivos suficientes** para repetir um alerta.
+Não são motivos suficientes, isoladamente, para repetir uma mensagem:
+
+- timestamp novo;
+- preço oscilando dentro da mesma região;
+- persistência do mesmo estado;
+- RSI ainda sobrecomprado ou sobrevendido;
+- zona ainda em teste;
+- simples mudança de score;
+- volume mudando sozinho;
+- mesma divergência baseada nos mesmos pivôs;
+- mesmo rompimento/reteste ainda em andamento sem fato novo.
 
 A finalidade deste prompt é reduzir ruído: uma execução pode analisar todo o relatório e concluir corretamente que nenhuma mensagem deve ser enviada.

@@ -234,10 +234,20 @@ Uma zona pode publicar, entre outros campos:
 
 - `timeframes_confirmando`;
 - `confluencia_nivel_manual`;
+- `confluencia_faixa_manual`;
+- `confluencia_manual_qualquer`;
 - `cruzamento_confirmado`;
 - `volume_contexto`;
 - `volume_relativo_mediano`;
 - `distancia_preco_atual_pct`.
+
+`confluencia_nivel_manual` cobre apenas os níveis pontuais: é verdadeiro quando o nível cai dentro dos limites estruturais da zona.
+
+`confluencia_faixa_manual` cobre as faixas de `NIVEIS_USD.faixas`. Como faixa é região e não linha, o critério é interseção entre a faixa e os limites estruturais da zona.
+
+`confluencia_manual_qualquer` agrega as duas. Consumidores externos não devem inferir que `confluencia_nivel_manual` representa sozinho toda forma possível de confluência manual.
+
+Existe ainda `confluencia_resistencia_macro`, publicado apenas quando há uma âncora macro configurada em `NIVEIS_USD.resistenciaMacro`. Na configuração atual não há, então o campo não aparece. Sua ausência é esperada, não é erro.
 
 No relatório público são mostradas até **três zonas acima e três abaixo do preço** entre as zonas publicáveis. O `estado.json` mantém todas as zonas vivas necessárias para preservar identidade e histórico, mesmo quando alguma delas não aparece entre as mais próximas no relatório público.
 
@@ -360,6 +370,8 @@ A cada execução, o workflow:
 7. em caso de conflito por outro push concorrente, repete o ciclo até cinco vezes.
 
 O `reset` antes da execução é importante porque `docs/estado.json` funciona como memória persistente. Dessa forma, cada tentativa lê o estado mais recente já publicado antes de recalcular o relatório.
+
+O checkout usa `fetch-depth: 0`. Push a partir de clone raso funciona no GitHub, mas o ciclo de `fetch` e `reset --hard` dentro do loop de retry fica mais previsível com o histórico completo.
 
 ## Executando localmente
 
