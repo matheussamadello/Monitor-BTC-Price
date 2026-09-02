@@ -96,6 +96,18 @@ Como a vela atual pode estar incompleta, o monitor publica também a fração do
 
 No semanal existe ainda uma comparação equivalente: o volume dos dias já fechados da semana atual pode ser comparado com os mesmos primeiros dias de semanas anteriores, evitando comparar uma semana parcial diretamente com semanas completas.
 
+### A classificação olha a vela fechada, não a em formação
+
+Volume é **acumulado**. Uma vela diária às 6h da manhã tem só as horas já decorridas; compará-la com a média de velas completas dá sempre um número catastrófico, sem que haja nada de anormal acontecendo.
+
+Como este par negocia 24/7, o contador zera toda meia-noite UTC — então o problema não era raro, aparecia **toda madrugada**. Pior que o número feio: um rompimento real nessa janela saía carimbado como `rompimento_com_volume_fraco`.
+
+A correção óbvia seria escalar a média pela fração decorrida, mas isso supõe que o giro se espalha por igual ao longo do período, o que não acontece. A saída sem suposição nenhuma é comparar **período inteiro contra período inteiro**: `volume_vs_media_pct` e `volume_classificacao` olham a última vela **fechada**, e o relatório declara isso em `volume_referencia: ultima_vela_fechada`.
+
+O volume da vela em formação continua publicado, cru, em `volume_atual`, com `volume_parcial: sim` ao lado.
+
+Isso também corrigiu uma incoerência antiga: `rompimento_confirmado` é avaliado sobre a vela **fechada**, mas buscava a confirmação de volume na vela **viva** — duas velas diferentes na mesma frase. O estado `inconclusivo_periodo_inicial` deixou de existir junto: não há mais período inicial a desconfiar.
+
 ### Pivôs e estrutura de mercado
 
 O monitor usa pivôs fractais confirmados para classificar estrutura de preço e publica campos como:
