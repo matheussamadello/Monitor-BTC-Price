@@ -2,9 +2,10 @@ name: Monitor BTC
 
 on:
   schedule:
-    # minuto 20 para nao coincidir com o monitor de XMR: as chamadas a
-    # Kraken ficam espalhadas e da' para saber qual execucao e' qual so
-    # pelo horario no log.
+    # Os tres monitores rodam de hora em hora, espacados 20 minutos: XMR
+    # no 00, BTC no 20, USD no 40. As chamadas as fontes ficam
+    # distribuidas, e da' para saber qual execucao e' qual so pelo
+    # horario no log.
     - cron: "20 * * * *"
   workflow_dispatch:
 
@@ -23,12 +24,18 @@ jobs:
         with:
           # Historico completo. Push a partir de clone raso funciona, mas
           # o fetch/reset do loop de retry fica mais previsivel com o
-          # historico inteiro — e e' o que o monitor de XMR ja usa.
+          # historico inteiro.
           fetch-depth: 0
 
       - uses: actions/setup-node@v5
         with:
           node-version: "22"
+
+      - name: Teste de fumaca
+        # Roda com series sinteticas, sem tocar na rede: se um refactor
+        # quebrou o parse ou o calculo, o job para aqui em vez de
+        # publicar um relatorio pela metade.
+        run: node teste-fumaca.mjs
 
       - name: Gerar e publicar
         run: |

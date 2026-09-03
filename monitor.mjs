@@ -74,6 +74,13 @@ const PAIRS = [
   },
 ];
 
+// Busca a configuracao de um par pelo rotulo publicado no relatorio.
+// Mesma forma nos tres monitores: e' o que permite ao parser do JSON
+// nao ter rotulo nenhum cravado no codigo.
+function parPorLabel(label) {
+  return PAIRS.find((c) => c.label === label) || null;
+}
+
 function urlKraken(cfg, tf) {
   return `https://api.kraken.com/0/public/OHLC?pair=${cfg.par}&interval=${tf.interval}&assetVersion=1`;
 }
@@ -1329,7 +1336,7 @@ export function relatorioParaJSON(texto, zonas = null) {
       continue;
     }
 
-    if (linha === "BTC/USD") {
+    if (parPorLabel(linha)) {
       parAtual = linha;
       if (tfAtual) out[tfAtual][parAtual] = {};
       continue;
@@ -1353,20 +1360,22 @@ export function relatorioParaJSON(texto, zonas = null) {
   // niveis_manuais e zonas_automaticas ficam SEPARADOS por par/timeframe
   for (const tfKey of ["diario", "semanal"]) {
     for (const par of Object.keys(out[tfKey] || {})) {
+      const cfgPar = parPorLabel(par);
+      if (!cfgPar) continue;
       const bloco = out[tfKey][par];
-      const chave = `usd|${tfKey}`;
+      const chave = `${cfgPar.key}|${tfKey}`;
       bloco.niveis_manuais = {};
 
-      // Faixas manuais publicadas como METADADO, derivadas direto de
-      // NIVEIS_USD.faixas. Nao existe copia dos numeros aqui: mexer em
-      // NIVEIS_USD.faixas muda o JSON sozinho.
+      // Faixas manuais publicadas como METADADO, derivadas direto da
+      // configuracao do par. Nao existe copia dos numeros aqui: mexer
+      // nas faixas do par muda o JSON sozinho.
       //
       // Vem da configuracao e nao do texto, igual a zonas_automaticas
       // logo abaixo, que tambem e' injetada por fora. A regra de derivar
       // do texto existe para dado CALCULADO, onde texto e JSON poderiam
       // divergir; faixa manual e' constante de configuracao, entao nao ha
       // o que divergir.
-      bloco.niveis_manuais.faixas = (NIVEIS_USD.faixas || []).map(
+      bloco.niveis_manuais.faixas = (cfgPar.niveis.faixas || []).map(
         ([inferior, superior, label]) => ({ inferior, superior, label })
       );
 
