@@ -79,16 +79,39 @@ const TIMEFRAMES = [
 // BTC estava quando este arquivo foi gerado. Confira no seu grafico
 // antes de confiar neles.
 // ------------------------------------------------------------
+// Reancorado em 2026-09-11 sobre as zonas automaticas observadas, que
+// sao onde o preco de fato reagiu. As faixas anteriores (78-80k, 70-72k,
+// 64-66k) tinham envelhecido: a mais importante estava ~1k abaixo da
+// regiao que o mercado respeita, a do meio ~2k abaixo, e a de suporte
+// nao encostava em zona nenhuma. O campo niveis_manuais_alinhamento
+// marcava "0 de 3" no semanal e nada no relatorio dizia isso antes.
+//
+// Cada faixa abaixo cobre integralmente uma zona automatica do DIARIO:
+//   79-81k  zona de score 99, 8 toques e 7 REJEICOES -- o nivel mais
+//           respeitado do grafico, e onde a resistencia pontual mora
+//   76-78k  zona de score 79, 9 toques; e' a unica que tambem casa com
+//           o semanal (zona de score 70), e o preco esta nela agora
+//   72-74k  zona de score 79, 10 toques -- o primeiro suporte abaixo,
+//           e onde o suporte pontual passa a morar
+//
+// O semanal continua com 1 de 3, e nao ha conserto: as zonas semanais
+// ficam em 66-68k e 58-60k, muito abaixo, e um unico conjunto de faixas
+// serve aos dois timeframes. O suporte semanal de score 90 em 66-68k
+// existe e nao foi marcado, para as faixas nao ficarem espalhadas
+// demais; se um dia o preco descer para la, vale marca-lo.
 const NIVEIS_USD = {
   faixas: [
-    [78000, 80000, "faixa_78k_80k"],
-    [70000, 72000, "faixa_70k_72k"],
-    [64000, 66000, "regiao_suporte_64k_66k"],
+    [79000, 81000, "faixa_79k_81k"],
+    [76000, 78000, "faixa_76k_78k"],
+    [72000, 74000, "regiao_suporte_72k_74k"],
   ],
+  // Dentro da zona de score 99: e' o preco que mais rejeitou o mercado.
   resistencia: 80000,
   resistenciaLabel: "80000",
-  suporte: 65000,
-  suporteLabel: "65000",
+  // Era 65000, que nao encostava em zona nenhuma. 73000 fica dentro da
+  // zona de 10 toques, e dentro da faixa de suporte acima.
+  suporte: 73000,
+  suporteLabel: "73000",
 };
 
 const PAIRS = [
@@ -3527,20 +3550,22 @@ const ADX_FORTE = 25;
 // pulando o 1. Estar dentro de uma faixa e' o fato mais decisivo da
 // tela para quem escolhe entre comprar mais e converter.
 //
-// Sai em palavras, sem jargao, e diz "suas faixas" porque e' o que sao:
-// niveis escolhidos a mao, nao calculados.
+// Sai em palavras, sem jargao, e diz "faixa manual" porque e' o termo
+// que o resto do projeto usa: niveis escolhidos a mao, nao calculados.
 export function ondeNosNiveis(situacao, distAtr, faixa, alinhamento) {
   if (!situacao || situacao === "indefinida") return null;
   const ehSuporte = typeof faixa === "string" && /suporte/.test(faixa);
   let texto;
   if (situacao === "obsoleto") {
-    texto = "longe das suas faixas";
+    texto = "longe das faixas manuais";
   } else if (typeof distAtr === "number" && distAtr <= 0) {
-    texto = ehSuporte ? "dentro da sua região de suporte" : "dentro de uma das suas faixas";
+    texto = ehSuporte
+      ? "dentro da região de suporte manual"
+      : "dentro de uma faixa manual";
   } else if (situacao === "atual") {
-    texto = "encostando numa das suas faixas";
+    texto = "encostando numa faixa manual";
   } else {
-    texto = "perto de uma das suas faixas";
+    texto = "perto de uma faixa manual";
   }
   // Uma faixa que as zonas observadas nao corroboram e' um numero velho.
   // Cita-la no lugar de destaque sem dizer isso seria dar peso a um

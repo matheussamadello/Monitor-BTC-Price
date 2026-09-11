@@ -242,11 +242,15 @@ Na versão atual do projeto, as faixas publicadas são:
 
 | Faixa | Label |
 | --- | --- |
-| US$ 78.000–80.000 | `faixa_78k_80k` |
-| US$ 70.000–72.000 | `faixa_70k_72k` |
-| US$ 64.000–66.000 | `regiao_suporte_64k_66k` |
+| US$ 79.000–81.000 | `faixa_79k_81k` |
+| US$ 76.000–78.000 | `faixa_76k_78k` |
+| US$ 72.000–74.000 | `regiao_suporte_72k_74k` |
 
-Além das faixas, o código mantém atualmente uma resistência pontual em **US$ 80.000** e um suporte pontual em **US$ 65.000** para a máquina de estados de rompimento/reteste.
+Além das faixas, o código mantém uma resistência pontual em **US$ 80.000** e um suporte pontual em **US$ 73.000** para a máquina de estados de rompimento/reteste. Os dois ficam dentro de uma faixa, e não soltos: 80.000 na zona mais rejeitada do gráfico, 73.000 na de mais toques abaixo do preço.
+
+**As faixas foram reancoradas em 2026-09-11**, sobre as zonas automáticas observadas. As anteriores tinham envelhecido: a principal estava cerca de mil dólares abaixo da região que o mercado respeita, a do meio cerca de dois mil, e a de suporte não encostava em zona nenhuma. Cada faixa atual cobre integralmente uma zona do diário: 79–81k é a de score 99, com 8 toques e 7 rejeições; 76–78k é a de score 79 com 9 toques, a única que também casa com o semanal; 72–74k é a de score 79 com 10 toques.
+
+No semanal o alinhamento continua em 1 de 3, e não há conserto: as zonas semanais ficam em 66–68k e 58–60k, muito abaixo, e um único conjunto de faixas serve aos dois timeframes. O suporte semanal de score 90 em 66–68k existe e não foi marcado, para as faixas não ficarem espalhadas demais.
 
 As faixas são publicadas diretamente no objeto `niveis_manuais` do `relatorio.json`, derivadas da configuração do código. Portanto, consumidores externos devem preferir o JSON como fonte de verdade dos valores atuais em vez de manter cópias eternas desses números.
 
@@ -274,7 +278,7 @@ A distância é medida em ATR, e não em porcentagem, de propósito. Cinco por c
 
 **Situação e alinhamento medem coisas diferentes.** A situação mede a distância do preço; o alinhamento mede se as faixas continuam caindo onde o mercado de fato reage, comparando cada uma com as zonas automáticas pelo mesmo critério de sobreposição usado nas confluências. Os dois podem discordar, e é justamente a discordância que interessa: uma faixa pode estar a 0,66 ATR do preço, portanto `atual`, e mesmo assim estar deslocada da região que o mercado respeita.
 
-Era o caso do monitor de BTC quando este campo foi criado. Nenhuma das três faixas manuais atingia o limite de sobreposição em nenhum dos dois timeframes, e as duas do diário ficavam logo abaixo dele porque estavam cerca de 1.500 dólares abaixo de onde o mercado reagia: a zona automática de score 99 ficava em 79.536 a 81.093, contra a faixa configurada de 78.000 a 80.000. Nada no relatório dizia isso, porque o único campo que olhava as faixas media distância até o preço. O sinal existia por zona, em `confluencia_faixa_manual`, mas nunca era somado.
+Era o caso do monitor de BTC quando este campo foi criado, e foi ele que motivou a reancoragem das faixas. Nenhuma das três atingia o limite de sobreposição no semanal, e no diário a mais importante ficava cerca de mil dólares abaixo da região que o mercado respeitava. Nada no relatório dizia isso, porque o único campo que olhava as faixas media distância até o preço. O sinal existia por zona, em `confluencia_faixa_manual`, mas nunca era somado.
 
 `obsoleto` não é alerta de mercado: é aviso de manutenção. Significa que os níveis descrevem um regime que ficou para trás e precisam de revisão.
 
@@ -521,7 +525,7 @@ Barato e caindo saem com rótulos diferentes de propósito: juntar os dois seria
 
 **A linha mostra os números que a produziram, e nenhum deles em jargão.** Essa é a única parte da página escrita para quem não sabe análise técnica, e um número numa unidade que a pessoa não entende não deixa nada conferível, que era a razão de a linha existir. Então:
 
-- a linha começa pelos **níveis**, que são a prioridade 1 da lista do prompt. A faixa nascia apoiada na média longa (prioridade 3) e nos indicadores (prioridade 5), pulando o item mais importante. Sai como `dentro de uma das suas faixas`, `dentro da sua região de suporte`, `encostando`, `perto` ou `longe das suas faixas`, e diz "suas" porque são níveis escolhidos à mão, não calculados;
+- a linha começa pelos **níveis**, que são a prioridade 1 da lista do prompt. A faixa nascia apoiada na média longa (prioridade 3) e nos indicadores (prioridade 5), pulando o item mais importante. Sai como `dentro de uma faixa manual`, `dentro da região de suporte manual`, `encostando`, `perto` ou `longe das faixas manuais`, no mesmo vocabulário que o resto do projeto usa para níveis escolhidos à mão;
 - uma faixa que as zonas observadas não corroboram é citada **com a ressalva** `(que o mercado não vem respeitando)`. Dar destaque a um nível desalinhado sem avisar seria pior que omiti-lo;
 - a distância sai em **porcentagem**, que dispensa explicação, e não em ATR;
 - o critério de 1 ATR vira **palavra**: `bem acima` e `bem abaixo` contra `perto`. A palavra carrega o critério, o número carrega o tamanho;
@@ -696,14 +700,14 @@ Exemplo da estrutura atual:
 ```js
 const NIVEIS_USD = {
   faixas: [
-    [78000, 80000, "faixa_78k_80k"],
-    [70000, 72000, "faixa_70k_72k"],
-    [64000, 66000, "regiao_suporte_64k_66k"],
+    [79000, 81000, "faixa_79k_81k"],
+    [76000, 78000, "faixa_76k_78k"],
+    [72000, 74000, "regiao_suporte_72k_74k"],
   ],
   resistencia: 80000,
   resistenciaLabel: "80000",
-  suporte: 65000,
-  suporteLabel: "65000",
+  suporte: 73000,
+  suporteLabel: "73000",
 };
 ```
 

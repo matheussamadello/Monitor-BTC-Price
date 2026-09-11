@@ -147,11 +147,11 @@ Não dependa eternamente de valores hardcoded neste prompt quando o JSON já tro
 
 Na configuração atual do projeto, as faixas publicadas são:
 
-- US$ 78.000–80.000 — `faixa_78k_80k`;
-- US$ 70.000–72.000 — `faixa_70k_72k`;
-- US$ 64.000–66.000 — `regiao_suporte_64k_66k`.
+- US$ 79.000–81.000 — `faixa_79k_81k`;
+- US$ 76.000–78.000 — `faixa_76k_78k`;
+- US$ 72.000–74.000 — `regiao_suporte_72k_74k`.
 
-Historicamente, o monitor também usa US$ 80.000 como resistência pontual principal e US$ 65.000 como suporte pontual principal na máquina de estados. Esses números são **baseline/contexto legado**, não valores eternos.
+O monitor também usa US$ 80.000 como resistência pontual principal e US$ 73.000 como suporte pontual principal na máquina de estados. Estes números são a configuração de 2026-09-11, reancorada sobre as zonas observadas, e vão envelhecer como os anteriores. Prevalece o JSON.
 
 Se o JSON atualizado publicar outros níveis/faixas, **prevalece o JSON**. Para resistência/suporte pontual, leia o valor atual diretamente de `niveis_manuais` quando houver metadado suficiente para isso. Se o relatório ainda não publicar explicitamente o número pontual, use temporariamente o valor legado conhecido sem transformar essa ausência em alerta.
 
@@ -448,7 +448,7 @@ Explique que é um sinal intermediário: superior à janela agressiva e inferior
 
 ## Confirmação conservadora de entrada
 
-Use a resistência manual principal publicada em `niveis_manuais` como âncora enquanto ela continuar estruturalmente relevante. Historicamente essa âncora é US$ 80.000, mas se o JSON publicar outra configuração, prevalece o JSON.
+Use a resistência manual principal publicada em `niveis_manuais` como âncora enquanto ela continuar estruturalmente relevante. Na configuração atual essa âncora é US$ 80.000, mas se o JSON publicar outra, prevalece o JSON.
 
 Trate o nível como **âncora de uma região de decisão**, não como linha exata. Use também as faixas manuais e zonas automáticas próximas para definir a região efetivamente relevante.
 
@@ -617,7 +617,7 @@ quando uma falha/rejeição relevante vier acompanhada de **deterioração estru
 
 A perda da região de suporte manual principal também pode evoluir para esse alerta quando houver confirmação por fechamento e deterioração estrutural relevante.
 
-Historicamente a âncora inferior pontual do monitor é US$ 65.000 e a faixa relacionada atual publicada é US$ 64.000–66.000, mas leia a configuração atual do JSON sempre que disponível.
+Na configuração atual a âncora inferior pontual é US$ 73.000 e a faixa relacionada é US$ 72.000–74.000, mas leia a configuração do JSON sempre que disponível.
 
 Não transforme uma simples aproximação ou perfuração intradiária em confirmação conservadora.
 
@@ -724,7 +724,7 @@ Use exatamente esse título quando a travessia for para cima, com a mesma estrut
 
 Enquanto o suporte pontual/manual principal publicado em `niveis_manuais` continuar estruturalmente relevante, trate-o como âncora de uma **REGIÃO de suporte**, não como linha exata.
 
-Historicamente essa âncora é US$ 65.000, mas, se o JSON publicar outro valor como suporte principal, prevalece o JSON. Use as faixas manuais atuais e as zonas automáticas próximas para definir a região estrutural efetiva.
+Na configuração atual essa âncora é US$ 73.000, mas, se o JSON publicar outro valor como suporte principal, prevalece o JSON. Use as faixas manuais atuais e as zonas automáticas próximas para definir a região estrutural efetiva.
 
 Simples toque ou perfuração intradiária não basta.
 
