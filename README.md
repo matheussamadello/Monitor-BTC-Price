@@ -2,7 +2,7 @@
 
 Monitor técnico automatizado de **BTC/USD** que coleta candles da Kraken, calcula indicadores, acompanha estrutura de mercado e publica um relatório estático em HTML, texto e JSON para consulta humana ou consumo por bots, agentes e LLMs.
 
-O projeto foi desenhado para acompanhamento de **swing trades e operações de prazo mais longo**, com o gráfico diário como referência principal de timing e o semanal como filtro de contexto estrutural.
+Este monitor é voltado a **swing trades com horizonte mínimo aproximado de uma semana** e a **position trades**, não a operações de curto prazo ou day trade. O gráfico diário é a referência principal de timing e o semanal, o filtro de contexto estrutural.
 
 ## Links públicos
 
