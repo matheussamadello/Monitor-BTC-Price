@@ -89,10 +89,19 @@ const TIMEFRAMES = [
 // Cada faixa abaixo cobre integralmente uma zona automatica do DIARIO:
 //   79-81k  zona de score 99, 8 toques e 7 REJEICOES -- o nivel mais
 //           respeitado do grafico, e onde a resistencia pontual mora
-//   76-78k  zona de score 79, 9 toques; e' a unica que tambem casa com
-//           o semanal (zona de score 70), e o preco esta nela agora
+//   76-78k  zona de score 79, 9 toques; casa tambem com o semanal
+//   74-76k  zona de score 82, 9 toques -- promovida em 2026-09-11 pelo
+//           radar, que a apontou por estar madura e descoberta. Ela
+//           caia no vao entre as duas vizinhas.
 //   72-74k  zona de score 79, 10 toques -- o primeiro suporte abaixo,
-//           e onde o suporte pontual passa a morar
+//           e onde o suporte pontual mora
+//
+// Com a de 74-76k o intervalo de 72k a 78k fica CONTINUAMENTE coberto
+// por tres faixas encostadas. Isso e' o que os dados dizem -- as tres
+// zonas tem de 9 a 10 toques cada --, mas tem um efeito colateral:
+// "dentro de uma faixa manual" deixa de discriminar nessa janela. O que
+// segura a leitura util e' a frase nomear QUAL faixa, e nao so dizer
+// que esta em uma.
 //
 // O semanal continua com 1 de 3, e nao ha conserto: as zonas semanais
 // ficam em 66-68k e 58-60k, muito abaixo, e um unico conjunto de faixas
@@ -103,6 +112,7 @@ const NIVEIS_USD = {
   faixas: [
     [79000, 81000, "faixa_79k_81k"],
     [76000, 78000, "faixa_76k_78k"],
+    [74000, 76000, "faixa_74k_76k"],
     [72000, 74000, "regiao_suporte_72k_74k"],
   ],
   // Dentro da zona de score 99: e' o preco que mais rejeitou o mercado.

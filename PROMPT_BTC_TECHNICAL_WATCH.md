@@ -149,7 +149,10 @@ Na configuração atual do projeto, as faixas publicadas são:
 
 - US$ 79.000–81.000 — `faixa_79k_81k`;
 - US$ 76.000–78.000 — `faixa_76k_78k`;
+- US$ 74.000–76.000 — `faixa_74k_76k`;
 - US$ 72.000–74.000 — `regiao_suporte_72k_74k`.
+
+As três de baixo são **contíguas**: entre 72.000 e 78.000 o preço está sempre dentro de alguma. Diga sempre **qual** faixa, nunca apenas que está em uma.
 
 O monitor também usa US$ 80.000 como resistência pontual principal e US$ 73.000 como suporte pontual principal na máquina de estados. Estes números são a configuração de 2026-09-11, reancorada sobre as zonas observadas, e vão envelhecer como os anteriores. Prevalece o JSON.
 

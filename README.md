@@ -244,13 +244,18 @@ Na versão atual do projeto, as faixas publicadas são:
 | --- | --- |
 | US$ 79.000–81.000 | `faixa_79k_81k` |
 | US$ 76.000–78.000 | `faixa_76k_78k` |
+| US$ 74.000–76.000 | `faixa_74k_76k` |
 | US$ 72.000–74.000 | `regiao_suporte_72k_74k` |
 
 Além das faixas, o código mantém uma resistência pontual em **US$ 80.000** e um suporte pontual em **US$ 73.000** para a máquina de estados de rompimento/reteste. Os dois ficam dentro de uma faixa, e não soltos: 80.000 na zona mais rejeitada do gráfico, 73.000 na de mais toques abaixo do preço.
 
 **As faixas foram reancoradas em 2026-09-11**, sobre as zonas automáticas observadas. As anteriores tinham envelhecido: a principal estava cerca de mil dólares abaixo da região que o mercado respeita, a do meio cerca de dois mil, e a de suporte não encostava em zona nenhuma. Cada faixa atual cobre integralmente uma zona do diário: 79–81k é a de score 99, com 8 toques e 7 rejeições; 76–78k é a de score 79 com 9 toques, a única que também casa com o semanal; 72–74k é a de score 79 com 10 toques.
 
-No semanal o alinhamento continua em 1 de 3, e não há conserto: as zonas semanais ficam em 66–68k e 58–60k, muito abaixo, e um único conjunto de faixas serve aos dois timeframes. O suporte semanal de score 90 em 66–68k existe e não foi marcado, para as faixas não ficarem espalhadas demais.
+A faixa de **74–76k entrou depois, em 2026-09-11**, promovida pelo radar: ele a apontou como zona madura (score 82, 9 toques) e descoberta, caindo no vão entre as duas vizinhas. Com ela o diário foi a 4 de 4 e o radar parou de apontar.
+
+Isso tem um efeito colateral que vale conhecer: com 72–74k, 74–76k e 76–78k encostadas, o intervalo de **72k a 78k fica continuamente coberto**. É o que os dados dizem, já que as três zonas têm de 9 a 10 toques cada, mas significa que "dentro de uma faixa manual" deixa de discriminar nessa janela. O que segura a leitura útil é a frase nomear **qual** faixa, e não só dizer que está em uma.
+
+No semanal o alinhamento fica em 2 de 4, e não há conserto: as zonas semanais ficam em 66–68k e 58–60k, muito abaixo, e um único conjunto de faixas serve aos dois timeframes. O suporte semanal de score 90 em 66–68k existe e não foi marcado, para as faixas não ficarem espalhadas demais.
 
 As faixas são publicadas diretamente no objeto `niveis_manuais` do `relatorio.json`, derivadas da configuração do código. Portanto, consumidores externos devem preferir o JSON como fonte de verdade dos valores atuais em vez de manter cópias eternas desses números.
 
@@ -716,6 +721,7 @@ const NIVEIS_USD = {
   faixas: [
     [79000, 81000, "faixa_79k_81k"],
     [76000, 78000, "faixa_76k_78k"],
+    [74000, 76000, "faixa_74k_76k"],
     [72000, 74000, "regiao_suporte_72k_74k"],
   ],
   resistencia: 80000,
