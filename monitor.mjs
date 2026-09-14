@@ -122,11 +122,19 @@ const TIMEFRAMES = [
 // contrario do antigo: faixa manual nao expira, e marcar ANTES de o
 // preco chegar la e' justamente o que preserva a referencia.
 //
-// Com ela o semanal sai de 1 de 4 para 2 de 5 corroboradas -- a zona
-// semanal de 64.900-69.985 (score 90, 7 toques) entra na conta. O
-// semanal nunca fecha inteiro: as zonas de la ficam noutro patamar e um
-// unico conjunto de faixas serve aos dois timeframes, sendo o diario o
-// operacional.
+// No DIARIO ela fecha a conta: 5 de 5 corroboradas, alinhado. E' a
+// unica faixa que nenhuma zona PUBLICADA corrobora -- a zona que a
+// sustenta e' a que o corte de exibicao escondia --, entao ela so nao
+// sai como desalinhada porque o alinhamento passou a ler o conjunto
+// inteiro de zonas vivas no mesmo commit.
+//
+// No SEMANAL ela nao e' corroborada, e o numero fica em 2 de 5. A zona
+// semanal de score 90 fica perto mas nao o bastante: a janela
+// operacional dela e' 66.430,9-68.454,1, e so 569 dolares disso caem
+// dentro da faixa -- sobreposicao de 0,281, abaixo do corte de 0,35.
+// Nao e' defeito da faixa nem do conserto: as zonas semanais ficam
+// noutro patamar e um unico conjunto de faixas serve aos dois
+// timeframes, sendo o diario o operacional.
 const NIVEIS_USD = {
   faixas: [
     [79000, 81000, "faixa_79k_81k"],
