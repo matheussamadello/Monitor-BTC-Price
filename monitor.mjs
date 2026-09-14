@@ -96,6 +96,11 @@ const TIMEFRAMES = [
 //           caia no vao entre as duas vizinhas.
 //   72-74k  zona de score 79, 10 toques -- o primeiro suporte abaixo,
 //           e onde o suporte pontual mora
+//   64-67k  zona de score 78 (bruto 91), 10 toques e 7 rejeicoes --
+//           promovida em 2026-09-14 pelo radar, na primeira execucao
+//           em que ele passou a olhar o conjunto inteiro de zonas.
+//           Ela estava madura e descoberta o tempo todo; o que a
+//           escondia era o corte de exibicao de tres zonas por lado.
 //
 // Com a de 74-76k o intervalo de 72k a 78k fica CONTINUAMENTE coberto
 // por tres faixas encostadas. Isso e' o que os dados dizem -- as tres
@@ -104,17 +109,45 @@ const TIMEFRAMES = [
 // segura a leitura util e' a frase nomear QUAL faixa, e nao so dizer
 // que esta em uma.
 //
-// O semanal continua com 1 de 3, e nao ha conserto: as zonas semanais
-// ficam em 66-68k e 58-60k, muito abaixo, e um unico conjunto de faixas
-// serve aos dois timeframes. O suporte semanal de score 90 em 66-68k
-// existe e nao foi marcado, para as faixas nao ficarem espalhadas
-// demais; se um dia o preco descer para la, vale marca-lo.
+// A faixa de 64-67k nao encosta em nenhuma das outras: entre 67k e 72k
+// fica um vao de 5k sem faixa marcada, e e' assim que deve ser, porque
+// nao ha zona nenhuma la. Ela e' a regiao de suporte PROFUNDO, longe do
+// preco (18,6% abaixo, a 77.801,90), e existe para o monitor reconhecer
+// onde o preco reagiu dez vezes caso um dia desca ate la.
+//
+// Ela tambem revoga uma decisao antiga registrada aqui: a de nao marcar
+// o suporte semanal de score 90 em 66-68k "para as faixas nao ficarem
+// espalhadas demais", deixando para marca-lo se o preco descesse. Os
+// 64-67k cobrem parte dessa regiao, e o motivo de marcar agora e' o
+// contrario do antigo: faixa manual nao expira, e marcar ANTES de o
+// preco chegar la e' justamente o que preserva a referencia.
+//
+// Com ela o semanal sai de 1 de 4 para 2 de 5 corroboradas -- a zona
+// semanal de 64.900-69.985 (score 90, 7 toques) entra na conta. O
+// semanal nunca fecha inteiro: as zonas de la ficam noutro patamar e um
+// unico conjunto de faixas serve aos dois timeframes, sendo o diario o
+// operacional.
 const NIVEIS_USD = {
   faixas: [
     [79000, 81000, "faixa_79k_81k"],
     [76000, 78000, "faixa_76k_78k"],
     [74000, 76000, "faixa_74k_76k"],
     [72000, 74000, "regiao_suporte_72k_74k"],
+    // Promovida do radar de manutencao em 2026-09-14. A zona automatica
+    // usd|diario|z3 vinha com score 78 (bruto 91, penalizada em
+    // rompida_2x_sem_reacao), 10 toques e 7 rejeicoes, forca de reacao
+    // media de 2,84 ATR, volume acima da media na epoca, confirmada no
+    // diario E no semanal, com role reversal e sem confluencia com
+    // faixa manual nenhuma. Primeiro toque em 2024-10-14, ultimo em
+    // 2026-08-17.
+    //
+    // Os limites ESTRUTURais eram 64.419,30 e 66.836,00. Arredondei para
+    // fora, para os milhares que as outras faixas usam: 64.000-67.000
+    // cobre a zona inteira (sobreposicao 1,00) e nao invade vizinha
+    // nenhuma, porque a mais proxima comeca em 72.000. E' o mesmo
+    // criterio da promocao de 74-76k, que preferiu numeros redondos a
+    // cobertura perfeita quando as duas coisas competiam.
+    [64000, 67000, "faixa_64k_67k"],
   ],
   // Dentro da zona de score 99: e' o preco que mais rejeitou o mercado.
   resistencia: 80000,
@@ -3012,7 +3045,15 @@ export function readPair(cfg, d, tf, opts = {}) {
   L.push(`niveis_manuais_situacao: ${sitNiveis.situacao}`);
   L.push(`niveis_manuais_faixa_mais_proxima: ${sitNiveis.faixa || "--"}`);
   L.push(`niveis_manuais_distancia_atr: ${num(sitNiveis.distanciaAtr, 2)}`);
-  const alinNiveis = alinhamentoNiveis(cfg.niveis, zonasAutomaticas);
+  // Conjunto INTEIRO de zonas vivas, pelo mesmo motivo do radar logo
+  // abaixo. "As faixas manuais ainda caem onde o mercado reage?" nao
+  // pode depender do corte de exibicao: a faixa de suporte profundo do
+  // BTC (64-67k) cobre uma zona de 10 toques que nao cabe na lista
+  // publicada, e comparando so com a lista o relatorio diria "parcial",
+  // acusando de desalinhada justamente a faixa mais bem apoiada.
+  const alinNiveis = alinhamentoNiveis(
+    cfg.niveis, zonasRes.zonasVivas || zonasAutomaticas
+  );
   L.push(`niveis_manuais_alinhamento: ${alinNiveis.situacao}`);
   L.push(
     `niveis_manuais_faixas_corroboradas: ${alinNiveis.corroboradas} de ${alinNiveis.total}`

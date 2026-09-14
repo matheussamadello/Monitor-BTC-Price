@@ -257,6 +257,7 @@ Na versão atual do projeto, as faixas publicadas são:
 | US$ 76.000–78.000 | `faixa_76k_78k` |
 | US$ 74.000–76.000 | `faixa_74k_76k` |
 | US$ 72.000–74.000 | `regiao_suporte_72k_74k` |
+| US$ 64.000–67.000 | `faixa_64k_67k` |
 
 Além das faixas, o código mantém uma resistência pontual em **US$ 80.000** e um suporte pontual em **US$ 73.000** para a máquina de estados de rompimento/reteste. Os dois ficam dentro de uma faixa, e não soltos: 80.000 na zona mais rejeitada do gráfico, 73.000 na de mais toques abaixo do preço.
 
@@ -266,7 +267,11 @@ A faixa de **74–76k entrou depois, em 2026-09-11**, promovida pelo radar: ele 
 
 Isso tem um efeito colateral que vale conhecer: com 72–74k, 74–76k e 76–78k encostadas, o intervalo de **72k a 78k fica continuamente coberto**. É o que os dados dizem, já que as três zonas têm de 9 a 10 toques cada, mas significa que "dentro de uma faixa manual" deixa de discriminar nessa janela. O que segura a leitura útil é a frase nomear **qual** faixa, e não só dizer que está em uma.
 
-No semanal o alinhamento fica em 2 de 4, e não há conserto: as zonas semanais ficam em 66–68k e 58–60k, muito abaixo, e um único conjunto de faixas serve aos dois timeframes. O suporte semanal de score 90 em 66–68k existe e não foi marcado, para as faixas não ficarem espalhadas demais.
+A faixa de **64–67k entrou em 2026-09-14**, na primeira execução em que o radar passou a ler o conjunto inteiro de zonas. A região estava madura e descoberta o tempo todo — zona de score 78 (bruto 91), **10 toques e 7 rejeições**, confirmada no diário e no semanal, com reação média de 2,84 ATR e volume acima da média da época. O que a escondia não era fraqueza, era o corte de exibição de três zonas por lado.
+
+Ela é diferente das outras quatro em uma coisa que vale entender: é **suporte profundo**, não nível de trabalho. Fica a quase 19% abaixo do preço, e entre 67k e 72k há um vão de cinco mil dólares sem faixa nenhuma — de propósito, porque não há zona nenhuma ali. Ela existe para o monitor reconhecer a região caso o preço um dia desça até lá, não para gerar leitura no dia a dia.
+
+E ela revoga uma decisão registrada aqui antes: a de **não** marcar o suporte semanal de score 90 em 66–68k, para as faixas não ficarem espalhadas demais, deixando para marcá-lo se o preço descesse. A faixa nova cobre parte dessa região, e o motivo de marcar agora é o inverso do antigo: faixa manual não expira, e marcar antes de o preço chegar lá é justamente o que preserva a referência. Com ela o semanal vai de 2 de 4 para **2 de 5** corroboradas — a zona semanal de 64.900–69.985 entra na conta. O semanal nunca fecha inteiro: as zonas de lá ficam noutro patamar e um único conjunto de faixas serve aos dois timeframes, sendo o diário o operacional.
 
 As faixas são publicadas diretamente no objeto `niveis_manuais` do `relatorio.json`, derivadas da configuração do código. Portanto, consumidores externos devem preferir o JSON como fonte de verdade dos valores atuais em vez de manter cópias eternas desses números.
 
@@ -292,7 +297,9 @@ As duas pontas da conta usam **vela fechada** — o fechamento e o ATR. A primei
 
 A distância é medida em ATR, e não em porcentagem, de propósito. Cinco por cento é muito num par de câmbio e pouco num de cripto, enquanto "três vezes a volatilidade diária" quer dizer a mesma coisa em qualquer um — um limiar só serve para os três monitores, sem recalibragem.
 
-**Situação e alinhamento medem coisas diferentes.** A situação mede a distância do preço; o alinhamento mede se as faixas continuam caindo onde o mercado de fato reage, comparando cada uma com as zonas automáticas pelo mesmo critério de sobreposição usado nas confluências. Os dois podem discordar, e é justamente a discordância que interessa: uma faixa pode estar a 0,66 ATR do preço, portanto `atual`, e mesmo assim estar deslocada da região que o mercado respeita.
+**Situação e alinhamento medem coisas diferentes.** A situação mede a distância do preço; o alinhamento mede se as faixas continuam caindo onde o mercado de fato reage, comparando cada uma com as zonas automáticas pelo mesmo critério de sobreposição usado nas confluências. A comparação usa **todas as zonas vivas do par**, não a lista publicada.
+
+Essa distinção não é detalhe. A página mostra no máximo três zonas de cada lado do preço, e o alinhamento herdava esse corte — então uma faixa longe do preço só podia ser comparada com zonas perto do preço, e estava condenada a sair como não corroborada para sempre. Uma faixa de suporte profundo, marcada exatamente sobre uma zona de dez toques, seria acusada de desalinhada pelo relatório. O corte de três é de exibição; medir alinhamento com ele era medir a coisa errada. No retrato de regressão do BTC o conserto sozinho levou o diário de `desalinhado`, 0 de 4, para 3 de 5 corroboradas. Os dois podem discordar, e é justamente a discordância que interessa: uma faixa pode estar a 0,66 ATR do preço, portanto `atual`, e mesmo assim estar deslocada da região que o mercado respeita.
 
 Era o caso do monitor de BTC quando este campo foi criado, e foi ele que motivou a reancoragem das faixas. Nenhuma das três atingia o limite de sobreposição no semanal, e no diário a mais importante ficava cerca de mil dólares abaixo da região que o mercado respeitava. Nada no relatório dizia isso, porque o único campo que olhava as faixas media distância até o preço. O sinal existia por zona, em `confluencia_faixa_manual`, mas nunca era somado.
 
@@ -905,6 +912,7 @@ const NIVEIS_USD = {
     [76000, 78000, "faixa_76k_78k"],
     [74000, 76000, "faixa_74k_76k"],
     [72000, 74000, "regiao_suporte_72k_74k"],
+    [64000, 67000, "faixa_64k_67k"],
   ],
   resistencia: 80000,
   resistenciaLabel: "80000",
