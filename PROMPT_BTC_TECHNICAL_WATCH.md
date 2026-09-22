@@ -149,13 +149,16 @@ Não dependa eternamente de valores hardcoded neste prompt quando o JSON já tro
 
 Na configuração atual do projeto, as faixas publicadas são:
 
+- US$ 85.847,83–89.595,87 — `faixa_85847_83_89595_87`;
 - US$ 79.000–81.000 — `faixa_79k_81k`;
 - US$ 76.000–78.000 — `faixa_76k_78k`;
 - US$ 74.000–76.000 — `faixa_74k_76k`;
 - US$ 72.000–74.000 — `regiao_suporte_72k_74k`;
 - US$ 64.000–67.000 — `faixa_64k_67k`.
 
-As três do meio são **contíguas**: entre 72.000 e 78.000 o preço está sempre dentro de alguma. Diga sempre **qual** faixa, nunca apenas que está em uma.
+A faixa de US$ 85.847,83–89.595,87 foi promovida pelo radar em 2026-09-22, com score 74, 7 toques e status ativo naquele snapshot. Ela é uma referência manual permanente, sem criar um ciclo próprio de rompimento/reteste. Sua inclusão é manutenção de configuração e, por si só, não representa um novo sinal de mercado.
+
+As faixas de 72–74k, 74–76k e 76–78k são **contíguas**: entre 72.000 e 78.000 o preço está sempre dentro de alguma. Diga sempre **qual** faixa, nunca apenas que está em uma.
 
 A de 64.000–67.000 é **suporte profundo**, promovida pelo radar em 2026-09-14. Ela fica isolada, muito abaixo das outras — entre 67.000 e 72.000 não há faixa nenhuma, porque não há zona nenhuma lá. Não a trate como nível próximo: com o preço na casa dos 77 mil ela está a quase 19% de distância, o que é contexto de queda profunda, não gatilho. Só ganha relevância se o preço de fato descer para essa região.
 

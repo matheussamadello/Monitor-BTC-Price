@@ -137,6 +137,9 @@ const TIMEFRAMES = [
 // timeframes, sendo o diario o operacional.
 const NIVEIS_USD = {
   faixas: [
+    // Promovida do radar em 2026-09-22: usd|diario|z26, ativa,
+    // score 74 e 7 toques. Preserva os limites estruturais publicados.
+    [85847.83, 89595.87, "faixa_85847_83_89595_87"],
     [79000, 81000, "faixa_79k_81k"],
     [76000, 78000, "faixa_76k_78k"],
     [74000, 76000, "faixa_74k_76k"],

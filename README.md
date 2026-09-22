@@ -277,11 +277,16 @@ Na versão atual do projeto, as faixas publicadas são:
 
 | Faixa | Label |
 | --- | --- |
+| US$ 85.847,83–89.595,87 | `faixa_85847_83_89595_87` |
 | US$ 79.000–81.000 | `faixa_79k_81k` |
 | US$ 76.000–78.000 | `faixa_76k_78k` |
 | US$ 74.000–76.000 | `faixa_74k_76k` |
 | US$ 72.000–74.000 | `regiao_suporte_72k_74k` |
 | US$ 64.000–67.000 | `faixa_64k_67k` |
+
+**A faixa de US$ 85.847,83–89.595,87 foi adicionada em 2026-09-22**, promovida da zona diária `usd|diario|z26`, com status ativo, score 74 e 7 toques no snapshot das 05:09 UTC. Os limites estruturais publicados foram preservados com duas casas decimais. A configuração passa a ter seis faixas. A região se torna uma referência manual permanente, sem criar outro nível pontual de rompimento/reteste. O radar deixa de sugerir essa mesma região quando reconhece sua cobertura pela nova faixa.
+
+Os números de score, distância e quantidade de faixas corroboradas nos relatos de alterações abaixo são históricos, referentes às datas indicadas. A situação atual deve ser consultada no `relatorio.json`.
 
 Além das faixas, o código mantém uma resistência pontual em **US$ 80.000** e um suporte pontual em **US$ 73.000** para a máquina de estados de rompimento/reteste. Os dois ficam dentro de uma faixa, e não soltos: 80.000 na zona mais rejeitada do gráfico, 73.000 na de mais toques abaixo do preço.
 
@@ -942,6 +947,7 @@ Exemplo da estrutura atual:
 ```js
 const NIVEIS_USD = {
   faixas: [
+    [85847.83, 89595.87, "faixa_85847_83_89595_87"],
     [79000, 81000, "faixa_79k_81k"],
     [76000, 78000, "faixa_76k_78k"],
     [74000, 76000, "faixa_74k_76k"],
