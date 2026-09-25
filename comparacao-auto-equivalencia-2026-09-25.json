@@ -1,0 +1,442 @@
+{
+  "capturado_em": "2026-09-25T01:36:30.294Z",
+  "limites_antes": {
+    "diario": 0.8,
+    "semanal": 1.2
+  },
+  "limites_depois": {
+    "diario": 0.5,
+    "semanal": 0.3
+  },
+  "pares": [
+    {
+      "par": "BTC/USD",
+      "tf": "diario",
+      "atr": 2514.2340486610888,
+      "calculadas_antes": 26,
+      "calculadas_depois": 28,
+      "antes": [
+        {
+          "id": "usd|diario|z26",
+          "limites": {
+            "inferior": 88372.86489270083,
+            "superior": 89602.13510729917
+          },
+          "score": 72,
+          "toques": 8,
+          "rejeicoes": 5,
+          "status": "ativa",
+          "pivos": [
+            89005.8,
+            88750,
+            89042.7,
+            89225
+          ],
+          "role_reversal": true
+        },
+        {
+          "id": "usd|diario|z40",
+          "limites": {
+            "inferior": 90358.86489270083,
+            "superior": 92177.13510729917
+          },
+          "score": 58,
+          "toques": 15,
+          "rejeicoes": 10,
+          "status": "enfraquecida",
+          "pivos": [
+            90736,
+            91000,
+            91256.6,
+            91800
+          ],
+          "role_reversal": true
+        },
+        {
+          "id": "usd|diario|z50",
+          "limites": {
+            "inferior": 93011.56489270083,
+            "superior": 94488.13510729917
+          },
+          "score": 61,
+          "toques": 18,
+          "rejeicoes": 14,
+          "status": "enfraquecida",
+          "pivos": [
+            93435,
+            94111,
+            93388.7,
+            93398.5,
+            94051.6
+          ],
+          "role_reversal": true
+        },
+        {
+          "id": "usd|diario|z25",
+          "limites": {
+            "inferior": 83493.66489270084,
+            "superior": 84798.53510729916
+          },
+          "score": 85,
+          "toques": 4,
+          "rejeicoes": 2,
+          "status": "ativa",
+          "pivos": [
+            83870.8,
+            84421.4
+          ],
+          "role_reversal": false
+        },
+        {
+          "id": "usd|diario|z39",
+          "limites": {
+            "inferior": 81937.40129029137,
+            "superior": 83141.59870970863
+          },
+          "score": 90,
+          "toques": 5,
+          "rejeicoes": 3,
+          "status": "ativa",
+          "pivos": [
+            82288.1,
+            82790.9
+          ],
+          "role_reversal": false
+        },
+        {
+          "id": "usd|diario|z49",
+          "limites": {
+            "inferior": 81092.9146247661,
+            "superior": 81829.0853752339
+          },
+          "score": 78,
+          "toques": 3,
+          "rejeicoes": 2,
+          "status": "candidata",
+          "pivos": [
+            81461
+          ],
+          "role_reversal": false
+        }
+      ],
+      "depois": [
+        {
+          "id": "usd|diario|z26",
+          "limites": {
+            "inferior": 88624.28829756695,
+            "superior": 89350.71170243305
+          },
+          "score": 61,
+          "toques": 8,
+          "rejeicoes": 5,
+          "status": "ativa",
+          "pivos": [
+            89005.8,
+            88750,
+            89042.7,
+            89225
+          ],
+          "role_reversal": true
+        },
+        {
+          "id": "usd|diario|z40",
+          "limites": {
+            "inferior": 90610.28829756695,
+            "superior": 91382.31170243306
+          },
+          "score": 61,
+          "toques": 15,
+          "rejeicoes": 10,
+          "status": "enfraquecida",
+          "pivos": [
+            90736,
+            91000,
+            91256.6
+          ],
+          "role_reversal": true
+        },
+        {
+          "id": "usd|diario|z50",
+          "limites": {
+            "inferior": 93262.98829756695,
+            "superior": 94236.71170243305
+          },
+          "score": 61,
+          "toques": 18,
+          "rejeicoes": 14,
+          "status": "enfraquecida",
+          "pivos": [
+            93435,
+            94111,
+            93388.7,
+            93398.5,
+            94051.6
+          ],
+          "role_reversal": true
+        },
+        {
+          "id": "usd|diario|z25",
+          "limites": {
+            "inferior": 83745.08829756695,
+            "superior": 84547.11170243305
+          },
+          "score": 85,
+          "toques": 4,
+          "rejeicoes": 2,
+          "status": "ativa",
+          "pivos": [
+            83870.8,
+            84421.4
+          ],
+          "role_reversal": false
+        },
+        {
+          "id": "usd|diario|z39",
+          "limites": {
+            "inferior": 82171.20043009713,
+            "superior": 82907.79956990287
+          },
+          "score": 90,
+          "toques": 5,
+          "rejeicoes": 3,
+          "status": "ativa",
+          "pivos": [
+            82288.1,
+            82790.9
+          ],
+          "role_reversal": false
+        },
+        {
+          "id": "usd|diario|z49",
+          "limites": {
+            "inferior": 81338.30487492203,
+            "superior": 81583.69512507797
+          },
+          "score": 65,
+          "toques": 3,
+          "rejeicoes": 2,
+          "status": "candidata",
+          "pivos": [
+            81461
+          ],
+          "role_reversal": false
+        }
+      ]
+    },
+    {
+      "par": "BTC/USD",
+      "tf": "semanal",
+      "atr": 6474.874879298288,
+      "calculadas_antes": 42,
+      "calculadas_depois": 52,
+      "antes": [
+        {
+          "id": "usd|semanal|z27",
+          "limites": {
+            "inferior": 83450.16876810526,
+            "superior": 89977.03123189474
+          },
+          "score": 67,
+          "toques": 3,
+          "rejeicoes": 1,
+          "status": "ativa",
+          "pivos": [
+            84421.4,
+            89005.8
+          ],
+          "role_reversal": false
+        },
+        {
+          "id": "usd|semanal|z28",
+          "limites": {
+            "inferior": 93612.46876810526,
+            "superior": 98870.93123189473
+          },
+          "score": 26,
+          "toques": 1,
+          "rejeicoes": 1,
+          "status": "enfraquecida",
+          "pivos": [
+            94583.7,
+            97899.7
+          ],
+          "role_reversal": false
+        },
+        {
+          "id": "usd|semanal|z42",
+          "limites": {
+            "inferior": 97305.96876810526,
+            "superior": 100971.23123189474
+          },
+          "score": 83,
+          "toques": 4,
+          "rejeicoes": 3,
+          "status": "enfraquecida",
+          "pivos": [
+            98277.2,
+            100000
+          ],
+          "role_reversal": true
+        },
+        {
+          "id": "usd|semanal|z37",
+          "limites": {
+            "inferior": 81819.66876810526,
+            "superior": 83762.13123189473
+          },
+          "score": 53,
+          "toques": 2,
+          "rejeicoes": 1,
+          "status": "candidata",
+          "pivos": [
+            82790.9
+          ],
+          "role_reversal": false
+        },
+        {
+          "id": "usd|semanal|z41",
+          "limites": {
+            "inferior": 75644.46876810526,
+            "superior": 81566.43123189473
+          },
+          "score": 88,
+          "toques": 4,
+          "rejeicoes": 2,
+          "status": "candidata",
+          "pivos": [
+            76615.7,
+            80595.2
+          ],
+          "role_reversal": true
+        },
+        {
+          "id": "usd|semanal|z26",
+          "limites": {
+            "inferior": 70925.16876810526,
+            "superior": 76969.33123189474
+          },
+          "score": 70,
+          "toques": 5,
+          "rejeicoes": 1,
+          "status": "ativa",
+          "pivos": [
+            71896.4,
+            71900,
+            72731.5,
+            73734,
+            75998.1
+          ],
+          "role_reversal": true
+        }
+      ],
+      "depois": [
+        {
+          "id": "usd|semanal|z27",
+          "limites": {
+            "inferior": 84097.65625603509,
+            "superior": 84745.1437439649
+          },
+          "score": 62,
+          "toques": 3,
+          "rejeicoes": 1,
+          "status": "ativa",
+          "pivos": [
+            84421.4
+          ],
+          "role_reversal": false
+        },
+        {
+          "id": "usd|semanal|z28",
+          "limites": {
+            "inferior": 97575.95625603509,
+            "superior": 98223.4437439649
+          },
+          "score": 26,
+          "toques": 1,
+          "rejeicoes": 1,
+          "status": "enfraquecida",
+          "pivos": [
+            97899.7
+          ],
+          "role_reversal": false
+        },
+        {
+          "id": "usd|semanal|z52",
+          "limites": {
+            "inferior": 106931.25625603509,
+            "superior": 107578.74374396491
+          },
+          "score": 55,
+          "toques": 3,
+          "rejeicoes": 2,
+          "status": "enfraquecida",
+          "pivos": [
+            107255
+          ],
+          "role_reversal": false
+        },
+        {
+          "id": "usd|semanal|z37",
+          "limites": {
+            "inferior": 82467.15625603509,
+            "superior": 83114.6437439649
+          },
+          "score": 53,
+          "toques": 2,
+          "rejeicoes": 1,
+          "status": "candidata",
+          "pivos": [
+            82790.9
+          ],
+          "role_reversal": false
+        },
+        {
+          "id": "usd|semanal|z41",
+          "limites": {
+            "inferior": 80271.45625603509,
+            "superior": 80918.9437439649
+          },
+          "score": 88,
+          "toques": 4,
+          "rejeicoes": 2,
+          "status": "candidata",
+          "pivos": [
+            80595.2
+          ],
+          "role_reversal": true
+        },
+        {
+          "id": "usd|semanal|z26",
+          "limites": {
+            "inferior": 71572.65625603509,
+            "superior": 73055.24374396491
+          },
+          "score": 76,
+          "toques": 6,
+          "rejeicoes": 3,
+          "status": "ativa",
+          "pivos": [
+            71896.4,
+            71900,
+            72731.5
+          ],
+          "role_reversal": true
+        }
+      ]
+    }
+  ],
+  "gatilhos_antes": [
+    {
+      "id": "usd_rompe_80000",
+      "msg": "BTC/USD fechou o diario acima de 80000 com corpo confirmando (fech 84380.00, abert 84384.50)"
+    }
+  ],
+  "gatilhos_depois": [
+    {
+      "id": "usd_rompe_80000",
+      "msg": "BTC/USD fechou o diario acima de 80000 com corpo confirmando (fech 84380.00, abert 84384.50)"
+    }
+  ],
+  "retries_estaveis": 3,
+  "base_commit": "f506d92bedefbec75fc888e332f79c8524fad367"
+}
