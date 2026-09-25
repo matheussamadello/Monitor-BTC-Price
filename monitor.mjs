@@ -171,11 +171,14 @@ const NIVEIS_USD = {
     [73400, 73800, "regiao_suporte_73400_73800"],
     [64600, 65700, "faixa_64600_65700"],
   ],
-  // Dentro da zona de score 99: e' o preco que mais rejeitou o mercado.
+  // Pontuais mantidos de proposito no reajuste de 2026-09-25 ("pontos de
+  // rompimento intactos"). Desde entao NAO ficam dentro de faixa manual:
+  // 80.000 cai no vao entre 79.300-79.700 e 80.469-80.721, e 73.000 fica
+  // 400 abaixo de 73.400-73.800. Nada depende disso -- a maquina de
+  // rompimento/reteste usa so o numero pontual --, mas quem ler um nivel
+  // e uma faixa lado a lado nao deve supor que um contem o outro.
   resistencia: 80000,
   resistenciaLabel: "80000",
-  // Era 65000, que nao encostava em zona nenhuma. 73000 fica dentro da
-  // zona de 10 toques, e dentro da faixa de suporte acima.
   suporte: 73000,
   suporteLabel: "73000",
 };
@@ -1941,11 +1944,12 @@ function clusterCabe(membros, tfKey, atrAtual) {
     membros.every((p, i) => membros.slice(i + 1).every((q) => distNorm(p, q) <= CLUSTER_DIAMETRO_MAX));
 }
 
-// Divide somente onde ha um vao real entre duas concentracoes de
-// pivos. Dois pontos isolados ou uma nuvem uniforme nao viram varias
-// microzonas: conserva-se o nucleo compacto com mais pivos, usando
-// recencia e menor amplitude como desempates. As bordas continuam
-// vindo dos membros selecionados, nunca de um corte de precos.
+// Divide primeiro onde ha um vao real entre duas concentracoes de
+// pivos. Sem vao limpo -- nuvem uniforme, ponto afastado --, separa o
+// nucleo compacto com mais pivos (recencia e menor amplitude desempatam)
+// e reagrupa o que sobra de cada lado. Todo pivo termina em exatamente
+// uma zona, e toda zona respeita o teto de largura do timeframe. As
+// bordas continuam vindo dos membros, nunca de um corte de precos.
 export function dividirCluster(membros, tfKey = "diario", atrAtual = null) {
   if (!membros.length) return [];
   const ord = [...membros].sort((a, b) => a.preco - b.preco || a.time - b.time);
@@ -1966,7 +1970,7 @@ export function dividirCluster(membros, tfKey = "diario", atrAtual = null) {
     ];
     if (partes.every((c) => new Set(c.map((p) => p.time)).size >= 2)) return partes;
   }
-  let melhor = [ord[0]];
+  let melhor = [ord[0]], bi = 0, bj = 1;
   const recente = (c) => Math.max(...c.map((p) => p.time));
   const amplitude = (c) => c.at(-1).preco - c[0].preco;
   for (let i = 0; i < ord.length; i++) {
@@ -1975,10 +1979,22 @@ export function dividirCluster(membros, tfKey = "diario", atrAtual = null) {
       if (!clusterCabe(c, tfKey, atrAtual)) continue;
       if (c.length > melhor.length || (c.length === melhor.length &&
           (recente(c) > recente(melhor) || (recente(c) === recente(melhor) &&
-           amplitude(c) < amplitude(melhor))))) melhor = c;
+           amplitude(c) < amplitude(melhor))))) { melhor = c; bi = i; bj = j; }
     }
   }
-  return [melhor];
+  // O que sobra de cada lado do nucleo e' reagrupado, nunca descartado.
+  // Descartar fazia pivos confirmados sumirem de TODA zona: nas series de
+  // 2026-09-25, 2 a 42 pivos por serie, varios perto do preco -- entre eles
+  // o 79.490,7 que ancora a faixa manual 79.300-79.700 do BTC, que por isso
+  // saia sem corroboracao. O teto de largura continua valendo em cada
+  // parte; o "sem microzonas" segue garantido adiante, porque zona fraca
+  // nao passa do score minimo de publicacao nem do radar.
+  const esquerda = ord.slice(0, bi), direita = ord.slice(bj);
+  return [
+    ...(esquerda.length ? dividirCluster(esquerda, tfKey, atrAtual) : []),
+    melhor,
+    ...(direita.length ? dividirCluster(direita, tfKey, atrAtual) : []),
+  ];
 }
 
 // Exportada para teste: o piso e o teto de largura sao calibrados por
