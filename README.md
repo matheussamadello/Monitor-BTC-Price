@@ -283,26 +283,26 @@ Em integrações com bots ou LLMs, é recomendável que sinais de maior convicç
 
 ## Níveis manuais
 
-As faixas foram revisadas em **2026-09-25**, usando o teto de **0,8 ATR diário** na calibração. São referências fixas até a próxima revisão, não limites dinâmicos. Faixas já compatíveis foram mantidas. Os níveis pontuais e seus ciclos de rompimento/reteste permanecem iguais.
+Faixas refinadas em 2026-09-25 com teto total de **0,25 ATR diário e 1% do preço central**, usando o menor dos dois limites na calibração. São referências fixas ancoradas em pivôs confirmados. Não acompanham o ATR automaticamente. Os níveis pontuais e seus ciclos de rompimento/reteste permanecem iguais.
+
+A faixa ampla foi substituída por um núcleo observado dentro dela, sem aumentar o número de faixas. Isso deixa lacunas entre referências distintas. Onde existe apenas um pivô confirmado, a faixa é uma âncora manual, sem alegação de múltiplos testes. O detector automático e sua tolerância operacional permanecem iguais.
 
 ### BTC/USD
 
-| Faixa atual | Label |
-| --- | --- |
-| 88.372,86–89.602,14 | `faixa_88372_86_89602_14` |
-| 79.000–81.000 | `faixa_79k_81k` |
-| 76.000–78.000 | `faixa_76k_78k` |
-| 74.000–76.000 | `faixa_74k_76k` |
-| 72.000–74.000 | `regiao_suporte_72k_74k` |
-| 64.297,86–66.023,34 | `faixa_64297_86_66023_34` |
+| Faixa atual | Label | Pivôs no núcleo |
+| --- | --- | --- |
+| 88.700–89.300 | `faixa_88700_89300` | 88.750, 89.005,8, 89.042,7, 89.225 |
+| 79.300–79.700 | `faixa_79300_79700` | 79.490,7 |
+| 76.150–76.700 | `faixa_76150_76700` | 76.236,9, 76.615,7 |
+| 74.700–75.100 | `faixa_74700_75100` | 74.891,5, 74.940 |
+| 73.400–73.800 | `regiao_suporte_73400_73800` | 73.574,9 |
+| 64.900–65.500 | `faixa_64900_65500` | 64.960, 65.072,2, 65.199, 65.425,5 |
 
 Resistência pontual: **80.000**. Suporte pontual: **73.000**.
 
-A revisão inclui faixas promovidas pelo radar. Quando uma faixa antiga cobria duas ou mais concentrações separadas, ela foi dividida. Regiões muito próximas puderam continuar juntas quando todos os pivôs relevantes e uma margem couberam no limite. Não foram criados suportes ou resistências pontuais novos.
+Os valores anteriores e os pivôs com datas constam na [evidência desta calibração](revisao-faixas-manuais-2026-09-25.json). A [revisão inicial de zonas](REVISAO_ZONAS_2026-09-25.md) é um registro histórico anterior a este refinamento.
 
-O [relatório da revisão](REVISAO_ZONAS_2026-09-25.md) registra os valores anteriores, os novos, a origem dos dados e os efeitos observados. Os scores e contagens desse relatório são históricos. O `relatorio.json` continua sendo a fonte de verdade para a configuração e leitura atuais.
-
-As faixas são serializadas diretamente em `niveis_manuais.faixas`, com `inferior`, `superior` e `label`. A mudança de configuração não reescreve `historico.jsonl`. Labels antigos permanecem nos registros históricos.
+O relatório atual é a fonte de verdade para `niveis_manuais.faixas`. A mudança de configuração não reescreve o histórico. Labels antigos permanecem nos registros anteriores. Um novo label pode alterar a assinatura no primeiro processamento, sem indicar movimento novo de preço.
 
 ## Vigilância dos níveis manuais
 
@@ -936,12 +936,12 @@ Exemplo da estrutura atual:
 ```js
 const NIVEIS_USD = {
   faixas: [
-    [88372.86, 89602.14, "faixa_88372_86_89602_14"],
-    [79000, 81000, "faixa_79k_81k"],
-    [76000, 78000, "faixa_76k_78k"],
-    [74000, 76000, "faixa_74k_76k"],
-    [72000, 74000, "regiao_suporte_72k_74k"],
-    [64297.86, 66023.34, "faixa_64297_86_66023_34"],
+    [88700, 89300, "faixa_88700_89300"],
+    [79300, 79700, "faixa_79300_79700"],
+    [76150, 76700, "faixa_76150_76700"],
+    [74700, 75100, "faixa_74700_75100"],
+    [73400, 73800, "regiao_suporte_73400_73800"],
+    [64900, 65500, "faixa_64900_65500"],
   ],
   resistencia: 80000,
   resistenciaLabel: "80000",

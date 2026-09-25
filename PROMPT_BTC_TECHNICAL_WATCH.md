@@ -143,7 +143,7 @@ Todo alerta de mercado deve ser rotulado por horizonte — ver `Formato obrigat�
 
 ### Fonte de verdade dos níveis manuais
 
-Faixas revisadas em 2026-09-25 com teto de 0,8 ATR diário na calibração. As que já cabiam foram mantidas. Continuam fixas até revisão manual, e não acompanham o ATR automaticamente. Uma troca de limites ou labels é manutenção de configuração, não evidência de movimento novo do preço.
+Faixas refinadas em 2026-09-25 com teto total de **0,25 ATR diário e 1% do preço central**, usando o menor dos dois limites na calibração. São referências fixas ancoradas em pivôs confirmados. Não acompanham o ATR automaticamente. Os níveis pontuais e seus ciclos de rompimento/reteste permanecem iguais. Uma troca de limites ou labels é manutenção de configuração, não evidência de movimento novo do preço.
 
 Sempre que o `relatorio.json` publicar explicitamente faixas dentro de `niveis_manuais`, leia essas faixas diretamente do relatório e trate seus limites e labels como **fonte de verdade**.
 
@@ -151,18 +151,18 @@ Não dependa eternamente de valores hardcoded neste prompt quando o JSON já tro
 
 Na configuração atual do projeto, as faixas publicadas são:
 
-- US$ 88.372,86–89.602,14 — `faixa_88372_86_89602_14`;
-- US$ 79.000–81.000 — `faixa_79k_81k`;
-- US$ 76.000–78.000 — `faixa_76k_78k`;
-- US$ 74.000–76.000 — `faixa_74k_76k`;
-- US$ 72.000–74.000 — `regiao_suporte_72k_74k`;
-- US$ 64.297,86–66.023,34 — `faixa_64297_86_66023_34`;
+- US$ 88.700–89.300 — `faixa_88700_89300`;
+- US$ 79.300–79.700 — `faixa_79300_79700`;
+- US$ 76.150–76.700 — `faixa_76150_76700`;
+- US$ 74.700–75.100 — `faixa_74700_75100`;
+- US$ 73.400–73.800 — `regiao_suporte_73400_73800`;
+- US$ 64.900–65.500 — `faixa_64900_65500`;
 
-A região promovida pelo radar em 2026-09-22 foi recalibrada em 2026-09-25 para US$ 88.372,86–89.602,14, seguindo os pivôs atuais. Continua sendo referência manual permanente, sem ciclo próprio de rompimento/reteste. A recalibração é manutenção, não um novo sinal de mercado.
+A região promovida pelo radar em 2026-09-22 foi recalibrada em 2026-09-25 para US$ 88.700–89.300, seguindo os pivôs atuais. Continua sendo referência manual permanente, sem ciclo próprio de rompimento/reteste. A recalibração é manutenção, não um novo sinal de mercado.
 
-As faixas de 72–74k, 74–76k e 76–78k são **contíguas**: entre 72.000 e 78.000 o preço está sempre dentro de alguma. Diga sempre **qual** faixa, nunca apenas que está em uma.
+As faixas refinadas são separadas e deixam lacunas entre os núcleos. Estar entre duas faixas não significa estar dentro de uma delas. Diga sempre **qual** faixa, nunca apenas que está em uma.
 
-A faixa de US$ 64.297,86–66.023,34 é suporte profundo, originalmente promovida em 2026-09-14 e estreitada em 2026-09-25. Só ganha relevância operacional se o preço de fato se aproximar dela. Não a transforme em alvo de queda.
+A faixa de US$ 64.900–65.500 é suporte profundo, originalmente promovida em 2026-09-14 e estreitada em 2026-09-25. Só ganha relevância operacional se o preço de fato se aproximar dela. Não a transforme em alvo de queda.
 
 O monitor também usa US$ 80.000 como resistência pontual principal e US$ 73.000 como suporte pontual principal na máquina de estados. Estes números são a configuração de 2026-09-11, reancorada sobre as zonas observadas, e vão envelhecer como os anteriores. Prevalece o JSON.
 
@@ -632,7 +632,7 @@ quando uma falha/rejeição relevante vier acompanhada de **deterioração estru
 
 A perda da região de suporte manual principal também pode evoluir para esse alerta quando houver confirmação por fechamento e deterioração estrutural relevante.
 
-Na configuração atual a âncora inferior pontual é US$ 73.000 e a faixa relacionada é US$ 72.000–74.000, mas leia a configuração do JSON sempre que disponível.
+Na configuração atual a âncora inferior pontual é US$ 73.000 e a faixa relacionada é US$ 73.400–73.800, mas leia a configuração do JSON sempre que disponível.
 
 Não transforme uma simples aproximação ou perfuração intradiária em confirmação conservadora.
 

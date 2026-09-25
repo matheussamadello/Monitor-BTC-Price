@@ -68,6 +68,8 @@ const TIMEFRAMES = [
 
 // ------------------------------------------------------------
 // NIVEIS MANUAIS — o unico lugar a editar quando o preco andar.
+// As notas datadas abaixo registram revisoes anteriores. Os limites atuais
+// foram refinados em revisao-faixas-manuais-2026-09-25.json.
 //
 // Tres consumidores leem daqui e so daqui: alertasTecnicos (faixas e
 // rompimento/perda intradiarios), niveisDoPar (maquina de estados de
@@ -137,13 +139,14 @@ const TIMEFRAMES = [
 // timeframes, sendo o diario o operacional.
 const NIVEIS_USD = {
   faixas: [
-    // Recalibracao de largura em 2026-09-25: ver REVISAO_ZONAS_2026-09-25.md.
-    [88372.86, 89602.14, "faixa_88372_86_89602_14"],
-    [79000, 81000, "faixa_79k_81k"],
-    [76000, 78000, "faixa_76k_78k"],
-    [74000, 76000, "faixa_74k_76k"],
-    [72000, 74000, "regiao_suporte_72k_74k"],
-    [64297.86, 66023.34, "faixa_64297_86_66023_34"],
+    // Nucleos manuais em 2026-09-25: teto de 0,25 ATR diario e 1% do centro.
+    // Evidencia: revisao-faixas-manuais-2026-09-25.json. Pontos de rompimento intactos.
+    [88700, 89300, "faixa_88700_89300"],
+    [79300, 79700, "faixa_79300_79700"],
+    [76150, 76700, "faixa_76150_76700"],
+    [74700, 75100, "faixa_74700_75100"],
+    [73400, 73800, "regiao_suporte_73400_73800"],
+    [64900, 65500, "faixa_64900_65500"],
   ],
   // Dentro da zona de score 99: e' o preco que mais rejeitou o mercado.
   resistencia: 80000,
