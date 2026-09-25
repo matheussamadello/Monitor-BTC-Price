@@ -292,6 +292,8 @@ As faixas não mudam automaticamente com o ATR. A revisão preservou o número d
 | Faixa atual | Label | Pivôs confirmados incluídos |
 | --- | --- | --- |
 | 88.700–89.300 | `faixa_88700_89300` | 88.750, 89.005,8, 89.042,7, 89.225 |
+| 82.171–82.908 | `faixa_82171_82908` | 82.288,1, 82.790,9 |
+| 80.469–80.721 | `faixa_80469_80721` | 80.595,2 |
 | 79.300–79.700 | `faixa_79300_79700` | 79.490,7 |
 | 76.150–76.700 | `faixa_76150_76700` | 76.236,9, 76.615,7 |
 | 74.700–75.100 | `faixa_74700_75100` | 74.891,5, 74.940 |
@@ -299,6 +301,10 @@ As faixas não mudam automaticamente com o ATR. A revisão preservou o número d
 | 64.600–65.700 | `faixa_64600_65700` | 64.675, 64.960, 65.072,2, 65.199, 65.425,5, 65.646,2 |
 
 Resistência pontual: **80.000**. Suporte pontual: **73.000**.
+
+**Promoções de 2026-09-25.** As faixas de 82.171–82.908 e 80.469–80.721 vieram do radar, e usam os limites **estruturais** das zonas `usd|diario|z39` (score 90, 5 toques, 3 rejeições, 1,53 ATR de reação média) e `usd|diario|z8` (score 84, 6 toques, 4 rejeições, 2,42 ATR, com role reversal), ambas confirmadas no diário e no semanal. Os limites foram arredondados para fora no inteiro mais próximo, o que alarga 0,05% e 0,23% — a identidade da região não muda. Os limites **operacionais** ficaram de fora de propósito: são uma janela derivada do ATR corrente e se movem a cada execução, enquanto faixa manual não expira nem respira com o regime.
+
+Nenhuma das duas sobrepõe as faixas recalibradas: restam 5.792 até a de 88.700, 1.450 entre elas e 769 até a de 79.300–79.700. A resistência pontual de 80.000 cai nesse vão de baixo, **fora** da faixa de 80.469–80.721, então a máquina de rompimento/reteste dela segue intacta e exclusiva dos níveis pontuais.
 
 Os [resultados do reajuste](REAJUSTE_FAIXAS_2026-09-25.md) e a [evidência com pivôs, janelas e medidas](reajuste-faixas-manuais-2026-09-25.json) documentam os limites atuais. A [auditoria anterior](AUDITORIA_FAIXAS_2026-09-25.md) e a [calibração mais estreita](revisao-faixas-manuais-2026-09-25.json) permanecem como registros históricos.
 

@@ -142,6 +142,29 @@ const NIVEIS_USD = {
     // Faixas fixas revistas por pivos/reacoes em 2026-09-25; teto de 0,5 ATR na calibracao.
     // Evidencia: reajuste-faixas-manuais-2026-09-25.json. Pontos de rompimento intactos.
     [88700, 89300, "faixa_88700_89300"],
+    // Promovidas pelo radar em 2026-09-25, com os limites ESTRUTURais das
+    // zonas, arredondados para fora no inteiro mais proximo -- 0,05% e
+    // 0,23% de alargamento, entao a identidade da regiao nao muda. Os
+    // operacionais NAO entram aqui: sao uma janela de ATR corrente e se
+    // mexem a cada execucao; faixa manual nao pode respirar com o regime.
+    //
+    //   82171-82908  zona usd|diario|z39, score 90, 5 toques e 3 rejeicoes,
+    //                reacao media de 1,53 ATR, volume acima da media na
+    //                epoca, confirmada no diario E no semanal. Pivos de
+    //                82.288,10 (2026-09-03) e 82.790,90 (2026-04-30).
+    //   80469-80721  zona usd|diario|z8, score 84, 6 toques e 4 rejeicoes,
+    //                reacao media de 2,42 ATR, role reversal, tambem
+    //                confirmada nos dois timeframes. Nucleo apertado em
+    //                torno do pivo de 80.595,20, no mesmo espirito estreito
+    //                da recalibracao de 2026-09-25.
+    //
+    // Nenhuma das duas encosta nas faixas recalibradas: sobram 5.792 ate a
+    // de 88.700, 1.450 entre elas e 769 ate a de 79.300-79.700. A
+    // resistencia pontual de 80.000 fica no vao de baixo, FORA das duas --
+    // a maquina de rompimento/reteste dela segue intacta e exclusiva dos
+    // pontuais, como sempre foi.
+    [82171, 82908, "faixa_82171_82908"],
+    [80469, 80721, "faixa_80469_80721"],
     [79300, 79700, "faixa_79300_79700"],
     [76150, 76700, "faixa_76150_76700"],
     [74700, 75100, "faixa_74700_75100"],

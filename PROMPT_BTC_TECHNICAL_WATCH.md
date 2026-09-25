@@ -152,6 +152,8 @@ Não dependa eternamente de valores hardcoded neste prompt quando o JSON já tro
 Na configuração atual do projeto, as faixas publicadas são:
 
 - US$ 88.700–89.300 — `faixa_88700_89300`;
+- US$ 82.171–82.908 — `faixa_82171_82908`;
+- US$ 80.469–80.721 — `faixa_80469_80721`;
 - US$ 79.300–79.700 — `faixa_79300_79700`;
 - US$ 76.150–76.700 — `faixa_76150_76700`;
 - US$ 74.700–75.100 — `faixa_74700_75100`;
@@ -159,6 +161,10 @@ Na configuração atual do projeto, as faixas publicadas são:
 - US$ 64.600–65.700 — `faixa_64600_65700`;
 
 A região promovida pelo radar em 2026-09-22 foi recalibrada em 2026-09-25 para US$ 88.700–89.300, seguindo os pivôs atuais. Continua sendo referência manual permanente, sem ciclo próprio de rompimento/reteste. A recalibração é manutenção, não um novo sinal de mercado.
+
+As faixas de US$ 82.171–82.908 e US$ 80.469–80.721 foram promovidas pelo radar em 2026-09-25, e usam os limites **estruturais** das zonas que as originaram — não os operacionais, que são uma janela de ATR corrente e mudam a cada execução. A primeira vem de uma zona de score 90 com 5 toques e 3 rejeições; a segunda, de uma de score 84 com 6 toques e 4 rejeições. Ambas confirmadas no diário e no semanal. Como qualquer faixa, são referência manual permanente **sem ciclo próprio de rompimento/reteste**: esse acompanhamento continua exclusivo dos níveis pontuais.
+
+Nenhuma das duas encosta nas faixas recalibradas, e a resistência pontual de US$ 80.000 fica no vão **abaixo** da faixa de 80.469–80.721, fora dela. Estar perto de 80.000 não é estar dentro dessa faixa.
 
 As faixas refinadas são separadas e deixam lacunas entre os núcleos. Estar entre duas faixas não significa estar dentro de uma delas. Diga sempre **qual** faixa, nunca apenas que está em uma.
 
