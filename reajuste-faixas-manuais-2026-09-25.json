@@ -1,0 +1,1517 @@
+{
+  "capturado_em": "2026-09-25T01:36:30.294Z",
+  "base_commit": "97392658ed6ca8560535697aeab6eda3f9289ba0",
+  "criterio": "Revisao manual por concentracoes de pivos e reacoes, sem otimizacao de score. Teto de seguranca de 0,5 ATR diario na calibracao, sem largura alvo uniforme ou teto percentual de 1%. So alarga onde havia evidencia proxima excluida. Niveis ficam fixos ate nova revisao.",
+  "teto_atr_diario": 0.5,
+  "teto_fracao_preco": null,
+  "faixas_manuais": [
+    {
+      "key": "usd",
+      "par": "BTC/USD",
+      "atr_diario_referencia": 2514.2340486610888,
+      "ultima_vela_diaria": 1790208000,
+      "suporte_pontual": 73000,
+      "resistencia_pontual": 80000,
+      "origem_ampla": [
+        [
+          88372.86,
+          89602.14,
+          "faixa_88372_86_89602_14"
+        ],
+        [
+          79000,
+          81000,
+          "faixa_79k_81k"
+        ],
+        [
+          76000,
+          78000,
+          "faixa_76k_78k"
+        ],
+        [
+          74000,
+          76000,
+          "faixa_74k_76k"
+        ],
+        [
+          72000,
+          74000,
+          "regiao_suporte_72k_74k"
+        ],
+        [
+          64297.86,
+          66023.34,
+          "faixa_64297_86_66023_34"
+        ]
+      ],
+      "antes": [
+        [
+          88700,
+          89300,
+          "faixa_88700_89300"
+        ],
+        [
+          79300,
+          79700,
+          "faixa_79300_79700"
+        ],
+        [
+          76150,
+          76700,
+          "faixa_76150_76700"
+        ],
+        [
+          74700,
+          75100,
+          "faixa_74700_75100"
+        ],
+        [
+          73400,
+          73800,
+          "regiao_suporte_73400_73800"
+        ],
+        [
+          64900,
+          65500,
+          "faixa_64900_65500"
+        ]
+      ],
+      "depois": [
+        [
+          88700,
+          89300,
+          "faixa_88700_89300"
+        ],
+        [
+          79300,
+          79700,
+          "faixa_79300_79700"
+        ],
+        [
+          76150,
+          76700,
+          "faixa_76150_76700"
+        ],
+        [
+          74700,
+          75100,
+          "faixa_74700_75100"
+        ],
+        [
+          73400,
+          73800,
+          "regiao_suporte_73400_73800"
+        ],
+        [
+          64600,
+          65700,
+          "faixa_64600_65700"
+        ]
+      ],
+      "ancoras": [
+        {
+          "label": "faixa_88700_89300",
+          "tipo": "concentracao_de_pivos",
+          "pivos": [
+            {
+              "preco": 88750,
+              "time": 1742774400,
+              "tipo": "topo"
+            },
+            {
+              "preco": 89005.8,
+              "time": 1736726400,
+              "tipo": "fundo"
+            },
+            {
+              "preco": 89042.7,
+              "time": 1743552000,
+              "tipo": "topo"
+            },
+            {
+              "preco": 89225,
+              "time": 1767830400,
+              "tipo": "fundo"
+            }
+          ],
+          "candidatos_na_faixa_anterior": [
+            {
+              "preco": 88750,
+              "time": 1742774400,
+              "tipo": "topo"
+            },
+            {
+              "preco": 89005.8,
+              "time": 1736726400,
+              "tipo": "fundo"
+            },
+            {
+              "preco": 89042.7,
+              "time": 1743552000,
+              "tipo": "topo"
+            },
+            {
+              "preco": 89225,
+              "time": 1767830400,
+              "tipo": "fundo"
+            }
+          ],
+          "alterada": false,
+          "motivo": "Mantida: evidencia do nucleo preservada; alargar para recuperar contatos distantes uniria regioes diferentes ou nao tem justificativa adicional suficiente."
+        },
+        {
+          "label": "faixa_79300_79700",
+          "tipo": "pivo_isolado_manual",
+          "pivos": [
+            {
+              "preco": 79490.7,
+              "time": 1776816000,
+              "tipo": "topo"
+            }
+          ],
+          "candidatos_na_faixa_anterior": [
+            {
+              "preco": 79490.7,
+              "time": 1776816000,
+              "tipo": "topo"
+            },
+            {
+              "preco": 80595.2,
+              "time": 1763683200,
+              "tipo": "fundo"
+            }
+          ],
+          "alterada": false,
+          "motivo": "Mantida: evidencia do nucleo preservada; alargar para recuperar contatos distantes uniria regioes diferentes ou nao tem justificativa adicional suficiente."
+        },
+        {
+          "label": "faixa_76150_76700",
+          "tipo": "concentracao_de_pivos",
+          "pivos": [
+            {
+              "preco": 76236.9,
+              "time": 1788307200,
+              "tipo": "fundo"
+            },
+            {
+              "preco": 76615.7,
+              "time": 1741651200,
+              "tipo": "fundo"
+            }
+          ],
+          "candidatos_na_faixa_anterior": [
+            {
+              "preco": 76236.9,
+              "time": 1788307200,
+              "tipo": "fundo"
+            },
+            {
+              "preco": 76615.7,
+              "time": 1741651200,
+              "tipo": "fundo"
+            }
+          ],
+          "alterada": false,
+          "motivo": "Mantida: evidencia do nucleo preservada; alargar para recuperar contatos distantes uniria regioes diferentes ou nao tem justificativa adicional suficiente."
+        },
+        {
+          "label": "faixa_74700_75100",
+          "tipo": "concentracao_de_pivos",
+          "pivos": [
+            {
+              "preco": 74891.5,
+              "time": 1789430400,
+              "tipo": "fundo"
+            },
+            {
+              "preco": 74940,
+              "time": 1777420800,
+              "tipo": "fundo"
+            }
+          ],
+          "candidatos_na_faixa_anterior": [
+            {
+              "preco": 74062.1,
+              "time": 1772582400,
+              "tipo": "topo"
+            },
+            {
+              "preco": 74409.1,
+              "time": 1743984000,
+              "tipo": "fundo"
+            },
+            {
+              "preco": 74891.5,
+              "time": 1789430400,
+              "tipo": "fundo"
+            },
+            {
+              "preco": 74940,
+              "time": 1777420800,
+              "tipo": "fundo"
+            },
+            {
+              "preco": 75998.1,
+              "time": 1773705600,
+              "tipo": "topo"
+            }
+          ],
+          "alterada": false,
+          "motivo": "Mantida: evidencia do nucleo preservada; alargar para recuperar contatos distantes uniria regioes diferentes ou nao tem justificativa adicional suficiente."
+        },
+        {
+          "label": "regiao_suporte_73400_73800",
+          "tipo": "pivo_isolado_manual",
+          "pivos": [
+            {
+              "preco": 73574.9,
+              "time": 1730160000,
+              "tipo": "topo"
+            }
+          ],
+          "candidatos_na_faixa_anterior": [
+            {
+              "preco": 73574.9,
+              "time": 1730160000,
+              "tipo": "topo"
+            }
+          ],
+          "alterada": false,
+          "motivo": "Mantida: evidencia do nucleo preservada; alargar para recuperar contatos distantes uniria regioes diferentes ou nao tem justificativa adicional suficiente."
+        },
+        {
+          "label": "faixa_64600_65700",
+          "tipo": "concentracao_de_pivos",
+          "pivos": [
+            {
+              "preco": 64675,
+              "time": 1783296000,
+              "tipo": "topo"
+            },
+            {
+              "preco": 64960,
+              "time": 1774742400,
+              "tipo": "fundo"
+            },
+            {
+              "preco": 65072.2,
+              "time": 1770854400,
+              "tipo": "fundo"
+            },
+            {
+              "preco": 65199,
+              "time": 1729641600,
+              "tipo": "fundo"
+            },
+            {
+              "preco": 65425.5,
+              "time": 1786233600,
+              "tipo": "topo"
+            },
+            {
+              "preco": 65646.2,
+              "time": 1772928000,
+              "tipo": "fundo"
+            }
+          ],
+          "candidatos_na_faixa_anterior": [
+            {
+              "preco": 64675,
+              "time": 1783296000,
+              "tipo": "topo"
+            },
+            {
+              "preco": 64960,
+              "time": 1774742400,
+              "tipo": "fundo"
+            },
+            {
+              "preco": 65072.2,
+              "time": 1770854400,
+              "tipo": "fundo"
+            },
+            {
+              "preco": 65199,
+              "time": 1729641600,
+              "tipo": "fundo"
+            },
+            {
+              "preco": 65425.5,
+              "time": 1786233600,
+              "tipo": "topo"
+            },
+            {
+              "preco": 65646.2,
+              "time": 1772928000,
+              "tipo": "fundo"
+            }
+          ],
+          "alterada": true,
+          "motivo": "O nucleo estreito excluia os pivos confirmados de 64675 e 65646,2 de uma concentracao continua com outros quatro pivos. Limites ao redor do conjunto, sem unir regioes distantes."
+        }
+      ],
+      "avaliacao": [
+        {
+          "inicio": 1736726400,
+          "inicio_pos_confirmacao": 1737158400,
+          "timeframes": {
+            "diario": {
+              "antes": {
+                "score": 72,
+                "score_bruto": 85,
+                "fator_penalidade": 0.85,
+                "penalidades": [
+                  "rompida_2x_sem_reacao"
+                ],
+                "numero_toques": 10,
+                "numero_rejeicoes": 7,
+                "forca_reacao_atr": 2.63,
+                "score_sem_bonus_semanal": 61,
+                "episodios_concluidos": 10,
+                "episodios_abertos": 0,
+                "toques_ultimas_90_velas": 0,
+                "rejeicoes_ultimas_90_velas": 0,
+                "velas_desde_ultimo_toque": 238,
+                "ultimo_toque": "2026-01-29",
+                "volume_aplicavel": true,
+                "volume_relativo_mediano": 1.678386641921204,
+                "confirmacao_semanal": [
+                  "usd|semanal|z27"
+                ],
+                "numero_role_reversals": 2
+              },
+              "depois": {
+                "score": 72,
+                "score_bruto": 85,
+                "fator_penalidade": 0.85,
+                "penalidades": [
+                  "rompida_2x_sem_reacao"
+                ],
+                "numero_toques": 10,
+                "numero_rejeicoes": 7,
+                "forca_reacao_atr": 2.63,
+                "score_sem_bonus_semanal": 61,
+                "episodios_concluidos": 10,
+                "episodios_abertos": 0,
+                "toques_ultimas_90_velas": 0,
+                "rejeicoes_ultimas_90_velas": 0,
+                "velas_desde_ultimo_toque": 238,
+                "ultimo_toque": "2026-01-29",
+                "volume_aplicavel": true,
+                "volume_relativo_mediano": 1.678386641921204,
+                "confirmacao_semanal": [
+                  "usd|semanal|z27"
+                ],
+                "numero_role_reversals": 2
+              },
+              "pos_confirmacao_antes": {
+                "score": 72,
+                "score_bruto": 85,
+                "fator_penalidade": 0.85,
+                "penalidades": [
+                  "rompida_2x_sem_reacao"
+                ],
+                "numero_toques": 9,
+                "numero_rejeicoes": 6,
+                "forca_reacao_atr": 2.57,
+                "score_sem_bonus_semanal": 61,
+                "episodios_concluidos": 9,
+                "episodios_abertos": 0,
+                "toques_ultimas_90_velas": 0,
+                "rejeicoes_ultimas_90_velas": 0,
+                "velas_desde_ultimo_toque": 238,
+                "ultimo_toque": "2026-01-29",
+                "volume_aplicavel": true,
+                "volume_relativo_mediano": 1.3946106442480293,
+                "confirmacao_semanal": [
+                  "usd|semanal|z27"
+                ],
+                "numero_role_reversals": 2
+              },
+              "pos_confirmacao_depois": {
+                "score": 72,
+                "score_bruto": 85,
+                "fator_penalidade": 0.85,
+                "penalidades": [
+                  "rompida_2x_sem_reacao"
+                ],
+                "numero_toques": 9,
+                "numero_rejeicoes": 6,
+                "forca_reacao_atr": 2.57,
+                "score_sem_bonus_semanal": 61,
+                "episodios_concluidos": 9,
+                "episodios_abertos": 0,
+                "toques_ultimas_90_velas": 0,
+                "rejeicoes_ultimas_90_velas": 0,
+                "velas_desde_ultimo_toque": 238,
+                "ultimo_toque": "2026-01-29",
+                "volume_aplicavel": true,
+                "volume_relativo_mediano": 1.3946106442480293,
+                "confirmacao_semanal": [
+                  "usd|semanal|z27"
+                ],
+                "numero_role_reversals": 2
+              }
+            },
+            "semanal": {
+              "antes": {
+                "score": 45,
+                "score_bruto": 45,
+                "fator_penalidade": 1,
+                "penalidades": [],
+                "numero_toques": 2,
+                "numero_rejeicoes": 1,
+                "forca_reacao_atr": 2.75,
+                "score_sem_bonus_semanal": 45,
+                "episodios_concluidos": 2,
+                "episodios_abertos": 0,
+                "toques_ultimas_90_velas": 2,
+                "rejeicoes_ultimas_90_velas": 1,
+                "velas_desde_ultimo_toque": 33,
+                "ultimo_toque": "2026-01-29",
+                "volume_aplicavel": true,
+                "volume_relativo_mediano": 1.817360899365633,
+                "confirmacao_semanal": [],
+                "numero_role_reversals": 0
+              },
+              "depois": {
+                "score": 45,
+                "score_bruto": 45,
+                "fator_penalidade": 1,
+                "penalidades": [],
+                "numero_toques": 2,
+                "numero_rejeicoes": 1,
+                "forca_reacao_atr": 2.75,
+                "score_sem_bonus_semanal": 45,
+                "episodios_concluidos": 2,
+                "episodios_abertos": 0,
+                "toques_ultimas_90_velas": 2,
+                "rejeicoes_ultimas_90_velas": 1,
+                "velas_desde_ultimo_toque": 33,
+                "ultimo_toque": "2026-01-29",
+                "volume_aplicavel": true,
+                "volume_relativo_mediano": 1.817360899365633,
+                "confirmacao_semanal": [],
+                "numero_role_reversals": 0
+              },
+              "pos_confirmacao_antes": {
+                "score": 45,
+                "score_bruto": 45,
+                "fator_penalidade": 1,
+                "penalidades": [],
+                "numero_toques": 2,
+                "numero_rejeicoes": 1,
+                "forca_reacao_atr": 2.75,
+                "score_sem_bonus_semanal": 45,
+                "episodios_concluidos": 2,
+                "episodios_abertos": 0,
+                "toques_ultimas_90_velas": 2,
+                "rejeicoes_ultimas_90_velas": 1,
+                "velas_desde_ultimo_toque": 33,
+                "ultimo_toque": "2026-01-29",
+                "volume_aplicavel": true,
+                "volume_relativo_mediano": 1.817360899365633,
+                "confirmacao_semanal": [],
+                "numero_role_reversals": 0
+              },
+              "pos_confirmacao_depois": {
+                "score": 45,
+                "score_bruto": 45,
+                "fator_penalidade": 1,
+                "penalidades": [],
+                "numero_toques": 2,
+                "numero_rejeicoes": 1,
+                "forca_reacao_atr": 2.75,
+                "score_sem_bonus_semanal": 45,
+                "episodios_concluidos": 2,
+                "episodios_abertos": 0,
+                "toques_ultimas_90_velas": 2,
+                "rejeicoes_ultimas_90_velas": 1,
+                "velas_desde_ultimo_toque": 33,
+                "ultimo_toque": "2026-01-29",
+                "volume_aplicavel": true,
+                "volume_relativo_mediano": 1.817360899365633,
+                "confirmacao_semanal": [],
+                "numero_role_reversals": 0
+              }
+            }
+          }
+        },
+        {
+          "inicio": 1763683200,
+          "inicio_pos_confirmacao": 1777248000,
+          "timeframes": {
+            "diario": {
+              "antes": {
+                "score": 83,
+                "score_bruto": 97,
+                "fator_penalidade": 0.85,
+                "penalidades": [
+                  "rompida_2x_sem_reacao"
+                ],
+                "numero_toques": 9,
+                "numero_rejeicoes": 5,
+                "forca_reacao_atr": 2.22,
+                "score_sem_bonus_semanal": 72,
+                "episodios_concluidos": 9,
+                "episodios_abertos": 0,
+                "toques_ultimas_90_velas": 5,
+                "rejeicoes_ultimas_90_velas": 4,
+                "velas_desde_ultimo_toque": 6,
+                "ultimo_toque": "2026-09-18",
+                "volume_aplicavel": true,
+                "volume_relativo_mediano": 1.611082485559776,
+                "confirmacao_semanal": [
+                  "usd|semanal|z41"
+                ],
+                "numero_role_reversals": 1
+              },
+              "depois": {
+                "score": 83,
+                "score_bruto": 97,
+                "fator_penalidade": 0.85,
+                "penalidades": [
+                  "rompida_2x_sem_reacao"
+                ],
+                "numero_toques": 9,
+                "numero_rejeicoes": 5,
+                "forca_reacao_atr": 2.22,
+                "score_sem_bonus_semanal": 72,
+                "episodios_concluidos": 9,
+                "episodios_abertos": 0,
+                "toques_ultimas_90_velas": 5,
+                "rejeicoes_ultimas_90_velas": 4,
+                "velas_desde_ultimo_toque": 6,
+                "ultimo_toque": "2026-09-18",
+                "volume_aplicavel": true,
+                "volume_relativo_mediano": 1.611082485559776,
+                "confirmacao_semanal": [
+                  "usd|semanal|z41"
+                ],
+                "numero_role_reversals": 1
+              },
+              "pos_confirmacao_antes": {
+                "score": 76,
+                "score_bruto": 89,
+                "fator_penalidade": 0.85,
+                "penalidades": [
+                  "rompida_2x_sem_reacao"
+                ],
+                "numero_toques": 8,
+                "numero_rejeicoes": 5,
+                "forca_reacao_atr": 1.89,
+                "score_sem_bonus_semanal": 65,
+                "episodios_concluidos": 8,
+                "episodios_abertos": 0,
+                "toques_ultimas_90_velas": 5,
+                "rejeicoes_ultimas_90_velas": 4,
+                "velas_desde_ultimo_toque": 6,
+                "ultimo_toque": "2026-09-18",
+                "volume_aplicavel": true,
+                "volume_relativo_mediano": 1.611082485559776,
+                "confirmacao_semanal": [
+                  "usd|semanal|z41"
+                ],
+                "numero_role_reversals": 0
+              },
+              "pos_confirmacao_depois": {
+                "score": 76,
+                "score_bruto": 89,
+                "fator_penalidade": 0.85,
+                "penalidades": [
+                  "rompida_2x_sem_reacao"
+                ],
+                "numero_toques": 8,
+                "numero_rejeicoes": 5,
+                "forca_reacao_atr": 1.89,
+                "score_sem_bonus_semanal": 65,
+                "episodios_concluidos": 8,
+                "episodios_abertos": 0,
+                "toques_ultimas_90_velas": 5,
+                "rejeicoes_ultimas_90_velas": 4,
+                "velas_desde_ultimo_toque": 6,
+                "ultimo_toque": "2026-09-18",
+                "volume_aplicavel": true,
+                "volume_relativo_mediano": 1.611082485559776,
+                "confirmacao_semanal": [
+                  "usd|semanal|z41"
+                ],
+                "numero_role_reversals": 0
+              }
+            },
+            "semanal": {
+              "antes": {
+                "score": 73,
+                "score_bruto": 73,
+                "fator_penalidade": 1,
+                "penalidades": [],
+                "numero_toques": 3,
+                "numero_rejeicoes": 1,
+                "forca_reacao_atr": 1.58,
+                "score_sem_bonus_semanal": 73,
+                "episodios_concluidos": 2,
+                "episodios_abertos": 1,
+                "toques_ultimas_90_velas": 3,
+                "rejeicoes_ultimas_90_velas": 1,
+                "velas_desde_ultimo_toque": 0,
+                "ultimo_toque": "2026-09-17",
+                "volume_aplicavel": true,
+                "volume_relativo_mediano": 2.0174204647307707,
+                "confirmacao_semanal": [],
+                "numero_role_reversals": 1
+              },
+              "depois": {
+                "score": 73,
+                "score_bruto": 73,
+                "fator_penalidade": 1,
+                "penalidades": [],
+                "numero_toques": 3,
+                "numero_rejeicoes": 1,
+                "forca_reacao_atr": 1.58,
+                "score_sem_bonus_semanal": 73,
+                "episodios_concluidos": 2,
+                "episodios_abertos": 1,
+                "toques_ultimas_90_velas": 3,
+                "rejeicoes_ultimas_90_velas": 1,
+                "velas_desde_ultimo_toque": 0,
+                "ultimo_toque": "2026-09-17",
+                "volume_aplicavel": true,
+                "volume_relativo_mediano": 2.0174204647307707,
+                "confirmacao_semanal": [],
+                "numero_role_reversals": 1
+              },
+              "pos_confirmacao_antes": {
+                "score": 56,
+                "score_bruto": 56,
+                "fator_penalidade": 1,
+                "penalidades": [],
+                "numero_toques": 2,
+                "numero_rejeicoes": 1,
+                "forca_reacao_atr": 1.37,
+                "score_sem_bonus_semanal": 56,
+                "episodios_concluidos": 1,
+                "episodios_abertos": 1,
+                "toques_ultimas_90_velas": 2,
+                "rejeicoes_ultimas_90_velas": 1,
+                "velas_desde_ultimo_toque": 0,
+                "ultimo_toque": "2026-09-17",
+                "volume_aplicavel": true,
+                "volume_relativo_mediano": 2.0174204647307707,
+                "confirmacao_semanal": [],
+                "numero_role_reversals": 0
+              },
+              "pos_confirmacao_depois": {
+                "score": 56,
+                "score_bruto": 56,
+                "fator_penalidade": 1,
+                "penalidades": [],
+                "numero_toques": 2,
+                "numero_rejeicoes": 1,
+                "forca_reacao_atr": 1.37,
+                "score_sem_bonus_semanal": 56,
+                "episodios_concluidos": 1,
+                "episodios_abertos": 1,
+                "toques_ultimas_90_velas": 2,
+                "rejeicoes_ultimas_90_velas": 1,
+                "velas_desde_ultimo_toque": 0,
+                "ultimo_toque": "2026-09-17",
+                "volume_aplicavel": true,
+                "volume_relativo_mediano": 2.0174204647307707,
+                "confirmacao_semanal": [],
+                "numero_role_reversals": 0
+              }
+            }
+          }
+        },
+        {
+          "inicio": 1741651200,
+          "inicio_pos_confirmacao": 1742083200,
+          "timeframes": {
+            "diario": {
+              "antes": {
+                "score": 77,
+                "score_bruto": 90,
+                "fator_penalidade": 0.85,
+                "penalidades": [
+                  "rompida_2x_sem_reacao"
+                ],
+                "numero_toques": 8,
+                "numero_rejeicoes": 4,
+                "forca_reacao_atr": 2.68,
+                "score_sem_bonus_semanal": 66,
+                "episodios_concluidos": 8,
+                "episodios_abertos": 0,
+                "toques_ultimas_90_velas": 3,
+                "rejeicoes_ultimas_90_velas": 2,
+                "velas_desde_ultimo_toque": 6,
+                "ultimo_toque": "2026-09-18",
+                "volume_aplicavel": true,
+                "volume_relativo_mediano": 1.52949446373904,
+                "confirmacao_semanal": [
+                  "usd|semanal|z26",
+                  "usd|semanal|z41"
+                ],
+                "numero_role_reversals": 0
+              },
+              "depois": {
+                "score": 77,
+                "score_bruto": 90,
+                "fator_penalidade": 0.85,
+                "penalidades": [
+                  "rompida_2x_sem_reacao"
+                ],
+                "numero_toques": 8,
+                "numero_rejeicoes": 4,
+                "forca_reacao_atr": 2.68,
+                "score_sem_bonus_semanal": 66,
+                "episodios_concluidos": 8,
+                "episodios_abertos": 0,
+                "toques_ultimas_90_velas": 3,
+                "rejeicoes_ultimas_90_velas": 2,
+                "velas_desde_ultimo_toque": 6,
+                "ultimo_toque": "2026-09-18",
+                "volume_aplicavel": true,
+                "volume_relativo_mediano": 1.52949446373904,
+                "confirmacao_semanal": [
+                  "usd|semanal|z26",
+                  "usd|semanal|z41"
+                ],
+                "numero_role_reversals": 0
+              },
+              "pos_confirmacao_antes": {
+                "score": 77,
+                "score_bruto": 90,
+                "fator_penalidade": 0.85,
+                "penalidades": [
+                  "rompida_2x_sem_reacao"
+                ],
+                "numero_toques": 7,
+                "numero_rejeicoes": 3,
+                "forca_reacao_atr": 2.82,
+                "score_sem_bonus_semanal": 66,
+                "episodios_concluidos": 7,
+                "episodios_abertos": 0,
+                "toques_ultimas_90_velas": 3,
+                "rejeicoes_ultimas_90_velas": 2,
+                "velas_desde_ultimo_toque": 6,
+                "ultimo_toque": "2026-09-18",
+                "volume_aplicavel": true,
+                "volume_relativo_mediano": 1.52949446373904,
+                "confirmacao_semanal": [
+                  "usd|semanal|z26",
+                  "usd|semanal|z41"
+                ],
+                "numero_role_reversals": 0
+              },
+              "pos_confirmacao_depois": {
+                "score": 77,
+                "score_bruto": 90,
+                "fator_penalidade": 0.85,
+                "penalidades": [
+                  "rompida_2x_sem_reacao"
+                ],
+                "numero_toques": 7,
+                "numero_rejeicoes": 3,
+                "forca_reacao_atr": 2.82,
+                "score_sem_bonus_semanal": 66,
+                "episodios_concluidos": 7,
+                "episodios_abertos": 0,
+                "toques_ultimas_90_velas": 3,
+                "rejeicoes_ultimas_90_velas": 2,
+                "velas_desde_ultimo_toque": 6,
+                "ultimo_toque": "2026-09-18",
+                "volume_aplicavel": true,
+                "volume_relativo_mediano": 1.52949446373904,
+                "confirmacao_semanal": [
+                  "usd|semanal|z26",
+                  "usd|semanal|z41"
+                ],
+                "numero_role_reversals": 0
+              }
+            },
+            "semanal": {
+              "antes": {
+                "score": 88,
+                "score_bruto": 88,
+                "fator_penalidade": 1,
+                "penalidades": [],
+                "numero_toques": 4,
+                "numero_rejeicoes": 2,
+                "forca_reacao_atr": 1.49,
+                "score_sem_bonus_semanal": 88,
+                "episodios_concluidos": 3,
+                "episodios_abertos": 1,
+                "toques_ultimas_90_velas": 4,
+                "rejeicoes_ultimas_90_velas": 2,
+                "velas_desde_ultimo_toque": 0,
+                "ultimo_toque": "2026-09-17",
+                "volume_aplicavel": true,
+                "volume_relativo_mediano": 2.0174204647307707,
+                "confirmacao_semanal": [],
+                "numero_role_reversals": 1
+              },
+              "depois": {
+                "score": 88,
+                "score_bruto": 88,
+                "fator_penalidade": 1,
+                "penalidades": [],
+                "numero_toques": 4,
+                "numero_rejeicoes": 2,
+                "forca_reacao_atr": 1.49,
+                "score_sem_bonus_semanal": 88,
+                "episodios_concluidos": 3,
+                "episodios_abertos": 1,
+                "toques_ultimas_90_velas": 4,
+                "rejeicoes_ultimas_90_velas": 2,
+                "velas_desde_ultimo_toque": 0,
+                "ultimo_toque": "2026-09-17",
+                "volume_aplicavel": true,
+                "volume_relativo_mediano": 2.0174204647307707,
+                "confirmacao_semanal": [],
+                "numero_role_reversals": 1
+              },
+              "pos_confirmacao_antes": {
+                "score": 88,
+                "score_bruto": 88,
+                "fator_penalidade": 1,
+                "penalidades": [],
+                "numero_toques": 4,
+                "numero_rejeicoes": 2,
+                "forca_reacao_atr": 1.49,
+                "score_sem_bonus_semanal": 88,
+                "episodios_concluidos": 3,
+                "episodios_abertos": 1,
+                "toques_ultimas_90_velas": 4,
+                "rejeicoes_ultimas_90_velas": 2,
+                "velas_desde_ultimo_toque": 0,
+                "ultimo_toque": "2026-09-17",
+                "volume_aplicavel": true,
+                "volume_relativo_mediano": 2.0174204647307707,
+                "confirmacao_semanal": [],
+                "numero_role_reversals": 1
+              },
+              "pos_confirmacao_depois": {
+                "score": 88,
+                "score_bruto": 88,
+                "fator_penalidade": 1,
+                "penalidades": [],
+                "numero_toques": 4,
+                "numero_rejeicoes": 2,
+                "forca_reacao_atr": 1.49,
+                "score_sem_bonus_semanal": 88,
+                "episodios_concluidos": 3,
+                "episodios_abertos": 1,
+                "toques_ultimas_90_velas": 4,
+                "rejeicoes_ultimas_90_velas": 2,
+                "velas_desde_ultimo_toque": 0,
+                "ultimo_toque": "2026-09-17",
+                "volume_aplicavel": true,
+                "volume_relativo_mediano": 2.0174204647307707,
+                "confirmacao_semanal": [],
+                "numero_role_reversals": 1
+              }
+            }
+          }
+        },
+        {
+          "inicio": 1743984000,
+          "inicio_pos_confirmacao": 1777852800,
+          "timeframes": {
+            "diario": {
+              "antes": {
+                "score": 82,
+                "score_bruto": 96,
+                "fator_penalidade": 0.85,
+                "penalidades": [
+                  "rompida_2x_sem_reacao"
+                ],
+                "numero_toques": 9,
+                "numero_rejeicoes": 5,
+                "forca_reacao_atr": 2.69,
+                "score_sem_bonus_semanal": 71,
+                "episodios_concluidos": 9,
+                "episodios_abertos": 0,
+                "toques_ultimas_90_velas": 2,
+                "rejeicoes_ultimas_90_velas": 1,
+                "velas_desde_ultimo_toque": 8,
+                "ultimo_toque": "2026-09-16",
+                "volume_aplicavel": true,
+                "volume_relativo_mediano": 1.2666976904921876,
+                "confirmacao_semanal": [
+                  "usd|semanal|z26"
+                ],
+                "numero_role_reversals": 2
+              },
+              "depois": {
+                "score": 82,
+                "score_bruto": 96,
+                "fator_penalidade": 0.85,
+                "penalidades": [
+                  "rompida_2x_sem_reacao"
+                ],
+                "numero_toques": 9,
+                "numero_rejeicoes": 5,
+                "forca_reacao_atr": 2.69,
+                "score_sem_bonus_semanal": 71,
+                "episodios_concluidos": 9,
+                "episodios_abertos": 0,
+                "toques_ultimas_90_velas": 2,
+                "rejeicoes_ultimas_90_velas": 1,
+                "velas_desde_ultimo_toque": 8,
+                "ultimo_toque": "2026-09-16",
+                "volume_aplicavel": true,
+                "volume_relativo_mediano": 1.2666976904921876,
+                "confirmacao_semanal": [
+                  "usd|semanal|z26"
+                ],
+                "numero_role_reversals": 2
+              },
+              "pos_confirmacao_antes": {
+                "score": 70,
+                "score_bruto": 82,
+                "fator_penalidade": 0.85,
+                "penalidades": [
+                  "rompida_2x_sem_reacao"
+                ],
+                "numero_toques": 4,
+                "numero_rejeicoes": 2,
+                "forca_reacao_atr": 3.17,
+                "score_sem_bonus_semanal": 59,
+                "episodios_concluidos": 4,
+                "episodios_abertos": 0,
+                "toques_ultimas_90_velas": 2,
+                "rejeicoes_ultimas_90_velas": 1,
+                "velas_desde_ultimo_toque": 8,
+                "ultimo_toque": "2026-09-16",
+                "volume_aplicavel": true,
+                "volume_relativo_mediano": 1.6405721014315182,
+                "confirmacao_semanal": [
+                  "usd|semanal|z26"
+                ],
+                "numero_role_reversals": 0
+              },
+              "pos_confirmacao_depois": {
+                "score": 70,
+                "score_bruto": 82,
+                "fator_penalidade": 0.85,
+                "penalidades": [
+                  "rompida_2x_sem_reacao"
+                ],
+                "numero_toques": 4,
+                "numero_rejeicoes": 2,
+                "forca_reacao_atr": 3.17,
+                "score_sem_bonus_semanal": 59,
+                "episodios_concluidos": 4,
+                "episodios_abertos": 0,
+                "toques_ultimas_90_velas": 2,
+                "rejeicoes_ultimas_90_velas": 1,
+                "velas_desde_ultimo_toque": 8,
+                "ultimo_toque": "2026-09-16",
+                "volume_aplicavel": true,
+                "volume_relativo_mediano": 1.6405721014315182,
+                "confirmacao_semanal": [
+                  "usd|semanal|z26"
+                ],
+                "numero_role_reversals": 0
+              }
+            },
+            "semanal": {
+              "antes": {
+                "score": 44,
+                "score_bruto": 52,
+                "fator_penalidade": 0.85,
+                "penalidades": [
+                  "rompida_2x_sem_reacao"
+                ],
+                "numero_toques": 2,
+                "numero_rejeicoes": 0,
+                "forca_reacao_atr": 2.01,
+                "score_sem_bonus_semanal": 44,
+                "episodios_concluidos": 2,
+                "episodios_abertos": 0,
+                "toques_ultimas_90_velas": 2,
+                "rejeicoes_ultimas_90_velas": 0,
+                "velas_desde_ultimo_toque": 1,
+                "ultimo_toque": "2026-09-10",
+                "volume_aplicavel": true,
+                "volume_relativo_mediano": 2.297431491828427,
+                "confirmacao_semanal": [],
+                "numero_role_reversals": 0
+              },
+              "depois": {
+                "score": 44,
+                "score_bruto": 52,
+                "fator_penalidade": 0.85,
+                "penalidades": [
+                  "rompida_2x_sem_reacao"
+                ],
+                "numero_toques": 2,
+                "numero_rejeicoes": 0,
+                "forca_reacao_atr": 2.01,
+                "score_sem_bonus_semanal": 44,
+                "episodios_concluidos": 2,
+                "episodios_abertos": 0,
+                "toques_ultimas_90_velas": 2,
+                "rejeicoes_ultimas_90_velas": 0,
+                "velas_desde_ultimo_toque": 1,
+                "ultimo_toque": "2026-09-10",
+                "volume_aplicavel": true,
+                "volume_relativo_mediano": 2.297431491828427,
+                "confirmacao_semanal": [],
+                "numero_role_reversals": 0
+              },
+              "pos_confirmacao_antes": {
+                "score": 44,
+                "score_bruto": 52,
+                "fator_penalidade": 0.85,
+                "penalidades": [
+                  "rompida_2x_sem_reacao"
+                ],
+                "numero_toques": 2,
+                "numero_rejeicoes": 0,
+                "forca_reacao_atr": 2.01,
+                "score_sem_bonus_semanal": 44,
+                "episodios_concluidos": 2,
+                "episodios_abertos": 0,
+                "toques_ultimas_90_velas": 2,
+                "rejeicoes_ultimas_90_velas": 0,
+                "velas_desde_ultimo_toque": 1,
+                "ultimo_toque": "2026-09-10",
+                "volume_aplicavel": true,
+                "volume_relativo_mediano": 2.0174204647307707,
+                "confirmacao_semanal": [],
+                "numero_role_reversals": 0
+              },
+              "pos_confirmacao_depois": {
+                "score": 44,
+                "score_bruto": 52,
+                "fator_penalidade": 0.85,
+                "penalidades": [
+                  "rompida_2x_sem_reacao"
+                ],
+                "numero_toques": 2,
+                "numero_rejeicoes": 0,
+                "forca_reacao_atr": 2.01,
+                "score_sem_bonus_semanal": 44,
+                "episodios_concluidos": 2,
+                "episodios_abertos": 0,
+                "toques_ultimas_90_velas": 2,
+                "rejeicoes_ultimas_90_velas": 0,
+                "velas_desde_ultimo_toque": 1,
+                "ultimo_toque": "2026-09-10",
+                "volume_aplicavel": true,
+                "volume_relativo_mediano": 2.0174204647307707,
+                "confirmacao_semanal": [],
+                "numero_role_reversals": 0
+              }
+            }
+          }
+        },
+        {
+          "inicio": 1730160000,
+          "inicio_pos_confirmacao": 1730592000,
+          "timeframes": {
+            "diario": {
+              "antes": {
+                "score": 76,
+                "score_bruto": 90,
+                "fator_penalidade": 0.85,
+                "penalidades": [
+                  "rompida_2x_sem_reacao"
+                ],
+                "numero_toques": 10,
+                "numero_rejeicoes": 5,
+                "forca_reacao_atr": 2.58,
+                "score_sem_bonus_semanal": 65,
+                "episodios_concluidos": 10,
+                "episodios_abertos": 0,
+                "toques_ultimas_90_velas": 1,
+                "rejeicoes_ultimas_90_velas": 0,
+                "velas_desde_ultimo_toque": 34,
+                "ultimo_toque": "2026-08-21",
+                "volume_aplicavel": true,
+                "volume_relativo_mediano": 1.8525724177852667,
+                "confirmacao_semanal": [
+                  "usd|semanal|z26"
+                ],
+                "numero_role_reversals": 1
+              },
+              "depois": {
+                "score": 76,
+                "score_bruto": 90,
+                "fator_penalidade": 0.85,
+                "penalidades": [
+                  "rompida_2x_sem_reacao"
+                ],
+                "numero_toques": 10,
+                "numero_rejeicoes": 5,
+                "forca_reacao_atr": 2.58,
+                "score_sem_bonus_semanal": 65,
+                "episodios_concluidos": 10,
+                "episodios_abertos": 0,
+                "toques_ultimas_90_velas": 1,
+                "rejeicoes_ultimas_90_velas": 0,
+                "velas_desde_ultimo_toque": 34,
+                "ultimo_toque": "2026-08-21",
+                "volume_aplicavel": true,
+                "volume_relativo_mediano": 1.8525724177852667,
+                "confirmacao_semanal": [
+                  "usd|semanal|z26"
+                ],
+                "numero_role_reversals": 1
+              },
+              "pos_confirmacao_antes": {
+                "score": 76,
+                "score_bruto": 90,
+                "fator_penalidade": 0.85,
+                "penalidades": [
+                  "rompida_2x_sem_reacao"
+                ],
+                "numero_toques": 9,
+                "numero_rejeicoes": 4,
+                "forca_reacao_atr": 2.63,
+                "score_sem_bonus_semanal": 65,
+                "episodios_concluidos": 9,
+                "episodios_abertos": 0,
+                "toques_ultimas_90_velas": 1,
+                "rejeicoes_ultimas_90_velas": 0,
+                "velas_desde_ultimo_toque": 34,
+                "ultimo_toque": "2026-08-21",
+                "volume_aplicavel": true,
+                "volume_relativo_mediano": 1.7230709717642145,
+                "confirmacao_semanal": [
+                  "usd|semanal|z26"
+                ],
+                "numero_role_reversals": 1
+              },
+              "pos_confirmacao_depois": {
+                "score": 76,
+                "score_bruto": 90,
+                "fator_penalidade": 0.85,
+                "penalidades": [
+                  "rompida_2x_sem_reacao"
+                ],
+                "numero_toques": 9,
+                "numero_rejeicoes": 4,
+                "forca_reacao_atr": 2.63,
+                "score_sem_bonus_semanal": 65,
+                "episodios_concluidos": 9,
+                "episodios_abertos": 0,
+                "toques_ultimas_90_velas": 1,
+                "rejeicoes_ultimas_90_velas": 0,
+                "velas_desde_ultimo_toque": 34,
+                "ultimo_toque": "2026-08-21",
+                "volume_aplicavel": true,
+                "volume_relativo_mediano": 1.7230709717642145,
+                "confirmacao_semanal": [
+                  "usd|semanal|z26"
+                ],
+                "numero_role_reversals": 1
+              }
+            },
+            "semanal": {
+              "antes": {
+                "score": 46,
+                "score_bruto": 54,
+                "fator_penalidade": 0.85,
+                "penalidades": [
+                  "rompida_2x_sem_reacao"
+                ],
+                "numero_toques": 3,
+                "numero_rejeicoes": 0,
+                "forca_reacao_atr": 2.49,
+                "score_sem_bonus_semanal": 46,
+                "episodios_concluidos": 3,
+                "episodios_abertos": 0,
+                "toques_ultimas_90_velas": 2,
+                "rejeicoes_ultimas_90_velas": 0,
+                "velas_desde_ultimo_toque": 4,
+                "ultimo_toque": "2026-08-20",
+                "volume_aplicavel": true,
+                "volume_relativo_mediano": 2.0174204647307707,
+                "confirmacao_semanal": [],
+                "numero_role_reversals": 0
+              },
+              "depois": {
+                "score": 46,
+                "score_bruto": 54,
+                "fator_penalidade": 0.85,
+                "penalidades": [
+                  "rompida_2x_sem_reacao"
+                ],
+                "numero_toques": 3,
+                "numero_rejeicoes": 0,
+                "forca_reacao_atr": 2.49,
+                "score_sem_bonus_semanal": 46,
+                "episodios_concluidos": 3,
+                "episodios_abertos": 0,
+                "toques_ultimas_90_velas": 2,
+                "rejeicoes_ultimas_90_velas": 0,
+                "velas_desde_ultimo_toque": 4,
+                "ultimo_toque": "2026-08-20",
+                "volume_aplicavel": true,
+                "volume_relativo_mediano": 2.0174204647307707,
+                "confirmacao_semanal": [],
+                "numero_role_reversals": 0
+              },
+              "pos_confirmacao_antes": {
+                "score": 40,
+                "score_bruto": 47,
+                "fator_penalidade": 0.85,
+                "penalidades": [
+                  "rompida_2x_sem_reacao"
+                ],
+                "numero_toques": 2,
+                "numero_rejeicoes": 0,
+                "forca_reacao_atr": 2.05,
+                "score_sem_bonus_semanal": 40,
+                "episodios_concluidos": 2,
+                "episodios_abertos": 0,
+                "toques_ultimas_90_velas": 2,
+                "rejeicoes_ultimas_90_velas": 0,
+                "velas_desde_ultimo_toque": 4,
+                "ultimo_toque": "2026-08-20",
+                "volume_aplicavel": true,
+                "volume_relativo_mediano": 2.297431491828427,
+                "confirmacao_semanal": [],
+                "numero_role_reversals": 0
+              },
+              "pos_confirmacao_depois": {
+                "score": 40,
+                "score_bruto": 47,
+                "fator_penalidade": 0.85,
+                "penalidades": [
+                  "rompida_2x_sem_reacao"
+                ],
+                "numero_toques": 2,
+                "numero_rejeicoes": 0,
+                "forca_reacao_atr": 2.05,
+                "score_sem_bonus_semanal": 40,
+                "episodios_concluidos": 2,
+                "episodios_abertos": 0,
+                "toques_ultimas_90_velas": 2,
+                "rejeicoes_ultimas_90_velas": 0,
+                "velas_desde_ultimo_toque": 4,
+                "ultimo_toque": "2026-08-20",
+                "volume_aplicavel": true,
+                "volume_relativo_mediano": 2.297431491828427,
+                "confirmacao_semanal": [],
+                "numero_role_reversals": 0
+              }
+            }
+          }
+        },
+        {
+          "inicio": 1729641600,
+          "inicio_pos_confirmacao": 1730073600,
+          "timeframes": {
+            "diario": {
+              "antes": {
+                "score": 73,
+                "score_bruto": 85,
+                "fator_penalidade": 0.85,
+                "penalidades": [
+                  "rompida_2x_sem_reacao"
+                ],
+                "numero_toques": 10,
+                "numero_rejeicoes": 8,
+                "forca_reacao_atr": 2.67,
+                "score_sem_bonus_semanal": 61,
+                "episodios_concluidos": 10,
+                "episodios_abertos": 0,
+                "toques_ultimas_90_velas": 3,
+                "rejeicoes_ultimas_90_velas": 2,
+                "velas_desde_ultimo_toque": 36,
+                "ultimo_toque": "2026-08-19",
+                "volume_aplicavel": true,
+                "volume_relativo_mediano": 1.0730717123159694,
+                "confirmacao_semanal": [
+                  "usd|semanal|z25"
+                ],
+                "numero_role_reversals": 1
+              },
+              "depois": {
+                "score": 73,
+                "score_bruto": 85,
+                "fator_penalidade": 0.85,
+                "penalidades": [
+                  "rompida_2x_sem_reacao"
+                ],
+                "numero_toques": 15,
+                "numero_rejeicoes": 13,
+                "forca_reacao_atr": 2.38,
+                "score_sem_bonus_semanal": 61,
+                "episodios_concluidos": 15,
+                "episodios_abertos": 0,
+                "toques_ultimas_90_velas": 5,
+                "rejeicoes_ultimas_90_velas": 4,
+                "velas_desde_ultimo_toque": 36,
+                "ultimo_toque": "2026-08-19",
+                "volume_aplicavel": true,
+                "volume_relativo_mediano": 1.1183727955255753,
+                "confirmacao_semanal": [
+                  "usd|semanal|z25"
+                ],
+                "numero_role_reversals": 1
+              },
+              "pos_confirmacao_antes": {
+                "score": 73,
+                "score_bruto": 85,
+                "fator_penalidade": 0.85,
+                "penalidades": [
+                  "rompida_2x_sem_reacao"
+                ],
+                "numero_toques": 9,
+                "numero_rejeicoes": 7,
+                "forca_reacao_atr": 2.78,
+                "score_sem_bonus_semanal": 61,
+                "episodios_concluidos": 9,
+                "episodios_abertos": 0,
+                "toques_ultimas_90_velas": 3,
+                "rejeicoes_ultimas_90_velas": 2,
+                "velas_desde_ultimo_toque": 36,
+                "ultimo_toque": "2026-08-19",
+                "volume_aplicavel": true,
+                "volume_relativo_mediano": 1.0730717123159694,
+                "confirmacao_semanal": [
+                  "usd|semanal|z25"
+                ],
+                "numero_role_reversals": 1
+              },
+              "pos_confirmacao_depois": {
+                "score": 73,
+                "score_bruto": 85,
+                "fator_penalidade": 0.85,
+                "penalidades": [
+                  "rompida_2x_sem_reacao"
+                ],
+                "numero_toques": 13,
+                "numero_rejeicoes": 11,
+                "forca_reacao_atr": 2.31,
+                "score_sem_bonus_semanal": 61,
+                "episodios_concluidos": 13,
+                "episodios_abertos": 0,
+                "toques_ultimas_90_velas": 5,
+                "rejeicoes_ultimas_90_velas": 4,
+                "velas_desde_ultimo_toque": 36,
+                "ultimo_toque": "2026-08-19",
+                "volume_aplicavel": true,
+                "volume_relativo_mediano": 1.1012409908345155,
+                "confirmacao_semanal": [
+                  "usd|semanal|z25"
+                ],
+                "numero_role_reversals": 1
+              }
+            },
+            "semanal": {
+              "antes": {
+                "score": 62,
+                "score_bruto": 62,
+                "fator_penalidade": 1,
+                "penalidades": [],
+                "numero_toques": 2,
+                "numero_rejeicoes": 2,
+                "forca_reacao_atr": 2.18,
+                "score_sem_bonus_semanal": 62,
+                "episodios_concluidos": 2,
+                "episodios_abertos": 0,
+                "toques_ultimas_90_velas": 2,
+                "rejeicoes_ultimas_90_velas": 2,
+                "velas_desde_ultimo_toque": 5,
+                "ultimo_toque": "2026-08-13",
+                "volume_aplicavel": true,
+                "volume_relativo_mediano": 2.2734890169381266,
+                "confirmacao_semanal": [],
+                "numero_role_reversals": 0
+              },
+              "depois": {
+                "score": 73,
+                "score_bruto": 73,
+                "fator_penalidade": 1,
+                "penalidades": [],
+                "numero_toques": 3,
+                "numero_rejeicoes": 3,
+                "forca_reacao_atr": 2.87,
+                "score_sem_bonus_semanal": 73,
+                "episodios_concluidos": 3,
+                "episodios_abertos": 0,
+                "toques_ultimas_90_velas": 2,
+                "rejeicoes_ultimas_90_velas": 2,
+                "velas_desde_ultimo_toque": 5,
+                "ultimo_toque": "2026-08-13",
+                "volume_aplicavel": true,
+                "volume_relativo_mediano": 1.0367615187953125,
+                "confirmacao_semanal": [],
+                "numero_role_reversals": 0
+              },
+              "pos_confirmacao_antes": {
+                "score": 62,
+                "score_bruto": 62,
+                "fator_penalidade": 1,
+                "penalidades": [],
+                "numero_toques": 2,
+                "numero_rejeicoes": 2,
+                "forca_reacao_atr": 2.18,
+                "score_sem_bonus_semanal": 62,
+                "episodios_concluidos": 2,
+                "episodios_abertos": 0,
+                "toques_ultimas_90_velas": 2,
+                "rejeicoes_ultimas_90_velas": 2,
+                "velas_desde_ultimo_toque": 5,
+                "ultimo_toque": "2026-08-13",
+                "volume_aplicavel": true,
+                "volume_relativo_mediano": 2.2734890169381266,
+                "confirmacao_semanal": [],
+                "numero_role_reversals": 0
+              },
+              "pos_confirmacao_depois": {
+                "score": 62,
+                "score_bruto": 62,
+                "fator_penalidade": 1,
+                "penalidades": [],
+                "numero_toques": 2,
+                "numero_rejeicoes": 2,
+                "forca_reacao_atr": 2.15,
+                "score_sem_bonus_semanal": 62,
+                "episodios_concluidos": 2,
+                "episodios_abertos": 0,
+                "toques_ultimas_90_velas": 2,
+                "rejeicoes_ultimas_90_velas": 2,
+                "velas_desde_ultimo_toque": 5,
+                "ultimo_toque": "2026-08-13",
+                "volume_aplicavel": true,
+                "volume_relativo_mediano": 2.2734890169381266,
+                "confirmacao_semanal": [],
+                "numero_role_reversals": 0
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "comparacao": {
+    "gatilhos_antes": [
+      {
+        "id": "usd_rompe_80000",
+        "msg": "BTC/USD fechou o diario acima de 80000 com corpo confirmando (fech 84380.00, abert 84384.50)"
+      }
+    ],
+    "gatilhos_depois": [
+      {
+        "id": "usd_rompe_80000",
+        "msg": "BTC/USD fechou o diario acima de 80000 com corpo confirmando (fech 84380.00, abert 84384.50)"
+      }
+    ],
+    "campos_alterados": {
+      "usd|diario": [
+        "niveis_manuais"
+      ],
+      "usd|semanal": [
+        "niveis_manuais"
+      ]
+    },
+    "estrutura_indicadores_niveis_pontuais_inalterados": true,
+    "geometria_score_toques_rejeicoes_automaticas_inalterados": true
+  }
+}

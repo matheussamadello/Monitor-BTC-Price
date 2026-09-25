@@ -143,7 +143,7 @@ Todo alerta de mercado deve ser rotulado por horizonte — ver `Formato obrigat�
 
 ### Fonte de verdade dos níveis manuais
 
-Faixas refinadas em 2026-09-25 com teto total de **0,25 ATR diário e 1% do preço central**, usando o menor dos dois limites na calibração. São referências fixas ancoradas em pivôs confirmados. Não acompanham o ATR automaticamente. Os níveis pontuais e seus ciclos de rompimento/reteste permanecem iguais. Uma troca de limites ou labels é manutenção de configuração, não evidência de movimento novo do preço.
+Faixas revistas em 2026-09-25 conforme as concentrações de pivôs e reações. O teto de segurança na calibração é **0,5 ATR diário de largura total**, sem largura alvo uniforme nem limite percentual de 1%. Apenas faixas que excluíam evidência próxima foram alargadas. Permanecem fixas até revisão manual. Os níveis pontuais e seus ciclos de rompimento/reteste continuam iguais. Uma troca de limites ou labels é manutenção de configuração, não evidência de movimento novo do preço.
 
 Sempre que o `relatorio.json` publicar explicitamente faixas dentro de `niveis_manuais`, leia essas faixas diretamente do relatório e trate seus limites e labels como **fonte de verdade**.
 
@@ -156,13 +156,13 @@ Na configuração atual do projeto, as faixas publicadas são:
 - US$ 76.150–76.700 — `faixa_76150_76700`;
 - US$ 74.700–75.100 — `faixa_74700_75100`;
 - US$ 73.400–73.800 — `regiao_suporte_73400_73800`;
-- US$ 64.900–65.500 — `faixa_64900_65500`;
+- US$ 64.600–65.700 — `faixa_64600_65700`;
 
 A região promovida pelo radar em 2026-09-22 foi recalibrada em 2026-09-25 para US$ 88.700–89.300, seguindo os pivôs atuais. Continua sendo referência manual permanente, sem ciclo próprio de rompimento/reteste. A recalibração é manutenção, não um novo sinal de mercado.
 
 As faixas refinadas são separadas e deixam lacunas entre os núcleos. Estar entre duas faixas não significa estar dentro de uma delas. Diga sempre **qual** faixa, nunca apenas que está em uma.
 
-A faixa de US$ 64.900–65.500 é suporte profundo, originalmente promovida em 2026-09-14 e estreitada em 2026-09-25. Só ganha relevância operacional se o preço de fato se aproximar dela. Não a transforme em alvo de queda.
+A faixa de US$ 64.600–65.700 é suporte profundo, originalmente promovida em 2026-09-14 e estreitada em 2026-09-25. Só ganha relevância operacional se o preço de fato se aproximar dela. Não a transforme em alvo de queda.
 
 O monitor também usa US$ 80.000 como resistência pontual principal e US$ 73.000 como suporte pontual principal na máquina de estados. Estes números são a configuração de 2026-09-11, reancorada sobre as zonas observadas, e vão envelhecer como os anteriores. Prevalece o JSON.
 
