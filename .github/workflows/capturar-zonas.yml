@@ -1,0 +1,38 @@
+name: Capturar series para validar zonas
+on:
+  push:
+    branches: ["codex/validar-zonas-20260925"]
+permissions:
+  contents: write
+jobs:
+  capturar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+      - name: Registrar as mesmas series usadas pelos monitores
+        run: |
+          mkdir -p validacao
+          node --input-type=module <<'JS'
+          import { writeFileSync } from 'node:fs';
+          const respostas = [];
+          for (const pair of ['XBTUSD', 'XMRUSD', 'XMRBTC']) {
+            for (const interval of [1440, 10080]) {
+              const url = 'https://api.kraken.com/0/public/OHLC?pair=' + pair + '&interval=' + interval + '&assetVersion=1';
+              const r = await fetch(url, { signal: AbortSignal.timeout(30000) });
+              const corpo = await r.text();
+              const j = JSON.parse(corpo);
+              if (!r.ok || j.error?.length || !j.result) throw new Error('Falha na fonte: ' + url);
+              respostas.push({url, ok:r.ok, status:r.status, tipo:'text', corpo});
+              console.log(pair, interval, Object.values(j.result).find(Array.isArray).length, 'velas');
+            }
+          }
+          writeFileSync('validacao/series-kraken.json', JSON.stringify({instante:Date.now(), respostas}));
+          JS
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add validacao/series-kraken.json
+          git commit -m "test: registrar series reais para comparar zonas [skip ci]"
+          git push origin HEAD:codex/validar-zonas-20260925
