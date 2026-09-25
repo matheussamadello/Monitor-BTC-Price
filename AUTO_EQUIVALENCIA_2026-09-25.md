@@ -72,3 +72,14 @@ Agora o resto de cada lado do núcleo é reagrupado pelo mesmo processo. Todo pi
 | BTC/USD | semanal | 52 → 75 | 3 entraram, 3 saíram |
 
 Gatilhos ativos inalterados. As zonas que entraram na seleção pública têm score mediano igual ou maior que o das que saíram. Em [comparacao-auto-equivalencia-2026-09-25.json](comparacao-auto-equivalencia-2026-09-25.json), `depois` e `calculadas_depois` passaram a refletir o reagrupamento; os valores desta comparação original continuam gravados em `depois_sem_reagrupamento` e `calculadas_depois_sem_reagrupamento`. `antes` não mudou.
+
+## Adendo — rebaixa na mesma vela (2026-09-25)
+
+O teto de largura dividiu zonas largas numa vela já avaliada, e o pedaço que herdou cada id herdou também a situação da mãe: numa reexecução da mesma vela o ciclo de vida não andava, nem para rebaixar. Agora a rebaixa (score abaixo de 30 ou sem toque além do limite) é conferida também na mesma vela; contadores e promoção continuam só em vela nova. Com a mesma entrada congelada, no BTC/USD:
+
+| TF | Zona | Antes | Depois |
+|---|---|---|---|
+| semanal | `usd\|semanal\|z27` | `ativa`, score 55 | `enfraquecida`, score 55 |
+| diario | `usd\|diario\|z26` | `ativa`, score 72 | `enfraquecida`, score 61 (perdeu a confluência da semanal acima) |
+
+Gatilhos ativos inalterados. No XMR e no USD a entrada congelada não muda. `depois` e `calculadas_depois` refletem a correção; os valores anteriores ficam em `depois_com_status_herdado` e `calculadas_depois_com_status_herdado`.
