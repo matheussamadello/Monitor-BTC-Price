@@ -137,28 +137,13 @@ const TIMEFRAMES = [
 // timeframes, sendo o diario o operacional.
 const NIVEIS_USD = {
   faixas: [
-    // Promovida do radar em 2026-09-22: usd|diario|z26, ativa,
-    // score 74 e 7 toques. Preserva os limites estruturais publicados.
-    [85847.83, 89595.87, "faixa_85847_83_89595_87"],
+    // Recalibracao de largura em 2026-09-25: ver REVISAO_ZONAS_2026-09-25.md.
+    [88372.86, 89602.14, "faixa_88372_86_89602_14"],
     [79000, 81000, "faixa_79k_81k"],
     [76000, 78000, "faixa_76k_78k"],
     [74000, 76000, "faixa_74k_76k"],
     [72000, 74000, "regiao_suporte_72k_74k"],
-    // Promovida do radar de manutencao em 2026-09-14. A zona automatica
-    // usd|diario|z3 vinha com score 78 (bruto 91, penalizada em
-    // rompida_2x_sem_reacao), 10 toques e 7 rejeicoes, forca de reacao
-    // media de 2,84 ATR, volume acima da media na epoca, confirmada no
-    // diario E no semanal, com role reversal e sem confluencia com
-    // faixa manual nenhuma. Primeiro toque em 2024-10-14, ultimo em
-    // 2026-08-17.
-    //
-    // Os limites ESTRUTURais eram 64.419,30 e 66.836,00. Arredondei para
-    // fora, para os milhares que as outras faixas usam: 64.000-67.000
-    // cobre a zona inteira (sobreposicao 1,00) e nao invade vizinha
-    // nenhuma, porque a mais proxima comeca em 72.000. E' o mesmo
-    // criterio da promocao de 74-76k, que preferiu numeros redondos a
-    // cobertura perfeita quando as duas coisas competiam.
-    [64000, 67000, "faixa_64k_67k"],
+    [64297.86, 66023.34, "faixa_64297_86_66023_34"],
   ],
   // Dentro da zona de score 99: e' o preco que mais rejeitou o mercado.
   resistencia: 80000,
@@ -1802,21 +1787,23 @@ export function relatorioParaJSON(texto, zonas = null) {
 // manuais e nao alteram confluencia_entrada/pullback/deterioracao.
 //
 // Dois pares de limites, com propositos distintos:
-//   - estruturais: derivados dos pivos e da volatilidade DA EPOCA deles.
-//     Usados para identidade, matching e merge. Nao mudam quando o ATR
-//     atual muda.
-//   - operacionais: centro +- 0,35 x ATR fechado ATUAL. Usados para
+//   - estruturais: extremos dos pivos + folga historica, sujeitos ao
+//     limite de largura do timeframe. ATR atual menor pode exigir novo
+//     agrupamento; nunca se corta uma borda deixando pivos fora dela.
+//   - operacionais: centro +- 0,25 x ATR fechado ATUAL. Usados para
 //     medir distancia e interacao no regime de volatilidade corrente.
 //   - episodios historicos: janela reconstruida vela a vela com o ATR
-//     DAQUELA epoca. Uma mudanca do ATR de hoje nunca altera
-//     retroativamente quantos toques a zona teve no passado.
+//     DAQUELA epoca. Mantido o centro, o ATR de hoje nao altera
+//     os toques passados; apos reagrupar, cada zona reavalia seus episodios.
 // ------------------------------------------------------------
 
 const ATR_PERIODO = 14;
-const ZONA_MEIA_LARGURA_ATR = 0.35;
+const ZONA_MEIA_LARGURA_ATR = 0.25;
 const ZONA_LARGURA_MIN_PCT = 0.15;
 const ZONA_LARGURA_MAX_PCT = 1.5;
 const CLUSTER_DIAMETRO_MAX = 1.0; // distancia normalizada entre QUALQUER par
+export const ZONA_ESTRUTURAL_MAX_ATR = { diario: 0.8, semanal: 1.2 };
+const CLUSTER_GAP_MIN_ATR = 0.2;
 const MATCH_MAX_ATR = 0.75;
 const MERGE_SOBREPOSICAO_MIN = 0.5;
 const MATCH_SOBREPOSICAO_MIN = 0.35;
@@ -1886,7 +1873,7 @@ function distNorm(a, b) {
 // Clustering guloso com verificacao de TODOS OS PARES: um candidato so
 // entra se for compativel com cada membro ja presente. Isso elimina o
 // chaining (A~B, B~C, mas A e C distantes).
-export function agruparPivos(lista) {
+export function agruparPivos(lista, tfKey = "diario", atrAtual = null) {
   const ord = [...lista].sort((x, y) => x.preco - y.preco);
   const clusters = [];
   for (const p of ord) {
@@ -1897,18 +1884,73 @@ export function agruparPivos(lista) {
       clusters.push([p]);
     }
   }
-  return clusters;
+  return clusters.flatMap((c) => dividirCluster(c, tfKey, atrAtual));
 }
 
-function limitesEstruturais(membros) {
-  const precos = membros.map((m) => m.preco);
+function atrReferenciaZona(membros, atrAtual) {
   const atrMedio =
     membros.reduce((s, m) => s + (m.atr_at_pivot || 0), 0) / membros.length;
-  const folga = 0.15 * atrMedio;
+  // Volatilidade atual maior nao alarga uma regiao antiga. Quando
+  // menor, limita tambem a admissao de membros ao novo agrupamento.
+  return atrAtual > 0 ? Math.min(atrMedio, atrAtual) : atrMedio;
+}
+
+export function limitesEstruturais(membros, atrAtual = null) {
+  const precos = membros.map((m) => m.preco);
+  const folga = 0.15 * atrReferenciaZona(membros, atrAtual);
   return {
     inferior: Math.min(...precos) - folga,
     superior: Math.max(...precos) + folga,
   };
+}
+
+function clusterCabe(membros, tfKey, atrAtual) {
+  const est = limitesEstruturais(membros, atrAtual);
+  const max = (ZONA_ESTRUTURAL_MAX_ATR[tfKey] || ZONA_ESTRUTURAL_MAX_ATR.diario) *
+    (atrAtual > 0 ? atrAtual : atrReferenciaZona(membros, atrAtual));
+  const erro = Number.EPSILON * Math.max(...membros.map((m) => Math.abs(m.preco)), 1) * 8;
+  return est.superior - est.inferior <= max + erro &&
+    membros.every((p, i) => membros.slice(i + 1).every((q) => distNorm(p, q) <= CLUSTER_DIAMETRO_MAX));
+}
+
+// Divide somente onde ha um vao real entre duas concentracoes de
+// pivos. Dois pontos isolados ou uma nuvem uniforme nao viram varias
+// microzonas: conserva-se o nucleo compacto com mais pivos, usando
+// recencia e menor amplitude como desempates. As bordas continuam
+// vindo dos membros selecionados, nunca de um corte de precos.
+export function dividirCluster(membros, tfKey = "diario", atrAtual = null) {
+  if (!membros.length) return [];
+  const ord = [...membros].sort((a, b) => a.preco - b.preco || a.time - b.time);
+  if (clusterCabe(ord, tfKey, atrAtual)) return [ord];
+  const cortes = [];
+  for (let i = 2; i <= ord.length - 2; i++) {
+    const gap = ord[i].preco - ord[i - 1].preco;
+    const passoEsq = (ord[i - 1].preco - ord[0].preco) / (i - 1);
+    const passoDir = (ord.at(-1).preco - ord[i].preco) / (ord.length - i - 1);
+    if (gap > 0 && gap >= CLUSTER_GAP_MIN_ATR * atrReferenciaZona(ord, atrAtual) &&
+        gap >= 2 * Math.max(passoEsq, passoDir)) cortes.push({ i, gap });
+  }
+  cortes.sort((a, b) => b.gap - a.gap || a.i - b.i);
+  for (const { i } of cortes) {
+    const partes = [
+      ...dividirCluster(ord.slice(0, i), tfKey, atrAtual),
+      ...dividirCluster(ord.slice(i), tfKey, atrAtual),
+    ];
+    if (partes.every((c) => new Set(c.map((p) => p.time)).size >= 2)) return partes;
+  }
+  let melhor = [ord[0]];
+  const recente = (c) => Math.max(...c.map((p) => p.time));
+  const amplitude = (c) => c.at(-1).preco - c[0].preco;
+  for (let i = 0; i < ord.length; i++) {
+    for (let j = i + 1; j <= ord.length; j++) {
+      const c = ord.slice(i, j);
+      if (!clusterCabe(c, tfKey, atrAtual)) continue;
+      if (c.length > melhor.length || (c.length === melhor.length &&
+          (recente(c) > recente(melhor) || (recente(c) === recente(melhor) &&
+           amplitude(c) < amplitude(melhor))))) melhor = c;
+    }
+  }
+  return [melhor];
 }
 
 // Exportada para teste: o piso e o teto de largura sao calibrados por
@@ -1917,7 +1959,7 @@ export function limitesOperacionais(centro, atrAtual) {
   let meia = ZONA_MEIA_LARGURA_ATR * (atrAtual || 0);
   const piso = (ZONA_LARGURA_MIN_PCT / 100) * Math.abs(centro);
   const teto = (ZONA_LARGURA_MAX_PCT / 100) * Math.abs(centro);
-  if (meia < piso) meia = piso;
+  if (!(atrAtual > 0)) meia = piso;
   if (meia > teto) meia = teto;
   return { inferior: centro - meia, superior: centro + meia };
 }
@@ -1942,7 +1984,7 @@ function meiaLarguraNaEpoca(centro, atrEpoca) {
   let meia = ZONA_MEIA_LARGURA_ATR * (atrEpoca || 0);
   const piso = (ZONA_LARGURA_MIN_PCT / 100) * Math.abs(centro);
   const teto = (ZONA_LARGURA_MAX_PCT / 100) * Math.abs(centro);
-  if (meia < piso) meia = piso;
+  if (!(atrEpoca > 0)) meia = piso;
   if (meia > teto) meia = teto;
   return meia;
 }
@@ -2223,7 +2265,7 @@ export function casarZonas(anteriores, novas, atrAtual) {
 // Merge topo/fundo e montagem das zonas
 // ------------------------------------------------------------
 
-function fundirZonasOpostas(zonas) {
+export function fundirZonasOpostas(zonas, tfKey = "diario", atrAtual = null) {
   const out = [];
   const consumidas = new Set();
   for (let i = 0; i < zonas.length; i++) {
@@ -2233,11 +2275,12 @@ function fundirZonasOpostas(zonas) {
       if (consumidas.has(j)) continue;
       const o = zonas[j];
       if (o.origem === z.origem) continue;
-      // Merge usa limites ESTRUTURAIS: um pico momentaneo de ATR nao
-      // pode fundir zonas que historicamente sempre foram distintas.
+      // Merge exige sobreposicao estrutural, compatibilidade entre todos
+      // os pivos e largura final dentro do teto do timeframe.
       if (sobreposicaoFrac(z.limites_estruturais, o.limites_estruturais) >= MERGE_SOBREPOSICAO_MIN) {
         const membros = [...z.membros, ...o.membros].sort((a, b) => a.time - b.time);
-        const est = limitesEstruturais(membros);
+        if (!clusterCabe(membros, tfKey, atrAtual)) continue;
+        const est = limitesEstruturais(membros, atrAtual);
         z = {
           ...z,
           membros,
@@ -2285,7 +2328,7 @@ function fundirZonasOpostas(zonas) {
 // Agora a ficha coberta fica DORMENTE: continua no estado, para poder
 // ser reencontrada, mas nao e' publicada nem conta como confluencia
 // semanal. A duplicata que o descarte evitava continua nao existindo.
-export function reconciliarAnteriores(anteriores, zonasCalculadas, tfKey, ultimaVelaFechada) {
+export function reconciliarAnteriores(anteriores, zonasCalculadas, tfKey, ultimaVelaFechada, atrAtual = null) {
   const par = PARAMS_TF[tfKey] || PARAMS_TF.diario;
   const calculadas = zonasCalculadas || [];
   const idsCalculados = new Set(calculadas.map((z) => z.id));
@@ -2308,7 +2351,12 @@ export function reconciliarAnteriores(anteriores, zonasCalculadas, tfKey, ultima
     }
     orfa.ultimaVelaAvaliada = ultimaVelaFechada;
     orfa.orfa = true;
-    orfa.absorvida = calculadas.some(
+    // Ficha legada larga demais fica dormente durante a carencia:
+    // mantem memoria, mas nao recoloca a zona gigante na tela ou no score.
+    const largaDemais = atrAtual > 0 &&
+      ant.limites_estruturais.superior - ant.limites_estruturais.inferior >
+        ZONA_ESTRUTURAL_MAX_ATR[tfKey] * atrAtual;
+    orfa.absorvida = largaDemais || calculadas.some(
       (z) => sobreposicaoFrac(z.limites_estruturais, ant.limites_estruturais) >= 0.5
     );
     out.push(orfa);
@@ -2414,10 +2462,12 @@ export function calcularZonas(cfg, tf, d, ctx) {
     clusters
       .filter((c) => c.length > 0)
       .map((membros) => {
-        const est = limitesEstruturais(membros);
+        const est = limitesEstruturais(membros, atrAtual);
         const centro = (est.inferior + est.superior) / 2;
         return {
-          membros: membros.map((m) => ({ time: m.time, preco: m.preco, tipo: m.tipo, idx: m.idx })),
+          // Preserva ATR ate a fusao; a serializacao publica de membros
+          // continua com os mesmos campos.
+          membros: membros.map((m) => ({ ...m })),
           origem,
           limites_estruturais: est,
           centro,
@@ -2425,10 +2475,10 @@ export function calcularZonas(cfg, tf, d, ctx) {
       });
 
   let zonas = [
-    ...montar(agruparPivos(pv.topos), "topo"),
-    ...montar(agruparPivos(pv.fundos), "fundo"),
+    ...montar(agruparPivos(pv.topos, tf.key, atrAtual), "topo"),
+    ...montar(agruparPivos(pv.fundos, tf.key, atrAtual), "fundo"),
   ];
-  zonas = fundirZonasOpostas(zonas);
+  zonas = fundirZonasOpostas(zonas, tf.key, atrAtual);
 
   // limites operacionais (interacao com o preco AGORA)
   for (const z of zonas) {
@@ -2455,9 +2505,14 @@ export function calcularZonas(cfg, tf, d, ctx) {
       // Suaviza UMA vez por vela nova, nao a cada retry do workflow.
       // Na mesma barra o centro fica fixo; preco vivo ainda pode mudar
       // estado_atual e distancia, que sao explicitamente contextuais.
-      z.centro = par.ant.ultimaVelaAvaliada === ultimaVelaFechada
+      const suavizado = par.ant.ultimaVelaAvaliada === ultimaVelaFechada
         ? par.ant.centro
         : suavizarCentro(par.ant.centro, z.centro);
+      // O centro da ficha mae pode estar no vao entre duas filhas.
+      // Suaviza apenas dentro da concentracao de pivos da nova zona.
+      const precos = z.membros.map((m) => m.preco);
+      if (suavizado >= Math.min(...precos) && suavizado <= Math.max(...precos))
+        z.centro = suavizado;
       z.limites_operacionais = limitesOperacionais(z.centro, atrAtual);
       z.role_reversal = z.role_reversal || par.ant.role_reversal || par.trocouTipo;
       z.cruzamento_confirmado = par.ant.cruzamento_confirmado || false;
@@ -2578,7 +2633,7 @@ export function calcularZonas(cfg, tf, d, ctx) {
     );
 
     // NOVOS — faixa x faixa sobre os limites OPERACIONAIS. O operacional
-    // e' estreito por construcao (centro +- 0,35 ATR), entao nao produz
+    // e' estreito por construcao (centro +- 0,25 ATR), entao nao produz
     // o artefato de uma zona estrutural larga "engolir" a faixa manual.
     const sobrepoeFaixa = (faixa) =>
       sobreposicaoFrac(z.limites_operacionais, {
@@ -2613,7 +2668,7 @@ export function calcularZonas(cfg, tf, d, ctx) {
 
   // Fichas sem dona nesta execucao: dormem, nao sao rasgadas.
   zonas.push(
-    ...reconciliarAnteriores(anteriores, [...zonas], tf.key, ultimaVelaFechada)
+    ...reconciliarAnteriores(anteriores, [...zonas], tf.key, ultimaVelaFechada, atrAtual)
   );
 
   // ---- duas colecoes distintas ----

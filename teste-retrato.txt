@@ -61,10 +61,10 @@ nivel_73000_estado: sem_registro
 nivel_73000_historico: nenhum
 niveis_mudancas_nesta_vela: rompido_80000
 niveis_manuais_situacao: obsoleto
-niveis_manuais_faixa_mais_proxima: faixa_85847_83_89595_87
+niveis_manuais_faixa_mais_proxima: faixa_88372_86_89602_14
 niveis_manuais_distancia_atr: 4.48
 niveis_manuais_alinhamento: parcial
-niveis_manuais_faixas_corroboradas: 4 de 6
+niveis_manuais_faixas_corroboradas: 5 de 6
 zonas_candidatas_a_faixa: nenhuma
 
 fracao_periodo_decorrida: 0.500
@@ -113,12 +113,11 @@ padrao_candles: nenhum
 padrao_em_formacao: nenhum
 alertas_tecnicos: rompimento_confirmado_80000, rompido_80000, rompimento_com_volume_fraco
 
-zonas_automaticas_total: 5
-zona_auto_1: id=usd|diario|z13 tipo=resistencia status=candidata estado=em_teste score=69 estrutural=95548.786697-96976.348505 operacional=95705.113059-96820.022142 centro=96262.567601 toques=9 rejeicoes=6 role_reversal=sim dist_pct=-0.15 confluencia_manual=nao confluencia_faixa=nao confluencia_macro=nao confluencia_qualquer=nao
-zona_auto_2: id=usd|diario|z14 tipo=resistencia status=enfraquecida estado=abaixo score=44 estrutural=100270.272076-101387.462717 operacional=100271.412855-101386.321938 centro=100828.867396 toques=2 rejeicoes=2 role_reversal=nao dist_pct=-4.67 confluencia_manual=nao confluencia_faixa=nao confluencia_macro=nao confluencia_qualquer=nao
-zona_auto_3: id=usd|diario|z12 tipo=suporte status=candidata estado=acima score=72 estrutural=92928.662101-94767.858391 operacional=93290.805704-94405.714788 centro=93848.260246 toques=8 rejeicoes=5 role_reversal=sim dist_pct=2.42 confluencia_manual=nao confluencia_faixa=nao confluencia_macro=nao confluencia_qualquer=nao
-zona_auto_4: id=usd|diario|z11 tipo=suporte status=candidata estado=acima score=80 estrutural=90763.569073-93014.420748 operacional=91331.540368-92446.449452 centro=91888.994910 toques=17 rejeicoes=16 role_reversal=sim dist_pct=4.60 confluencia_manual=nao confluencia_faixa=nao confluencia_macro=nao confluencia_qualquer=nao
-zona_auto_5: id=usd|diario|z10 tipo=suporte status=candidata estado=acima score=71 estrutural=89243.967620-91225.732734 operacional=89677.395635-90792.304719 centro=90234.850177 toques=16 rejeicoes=6 role_reversal=sim dist_pct=6.52 confluencia_manual=nao confluencia_faixa=nao confluencia_macro=nao confluencia_qualquer=nao
+zonas_automaticas_total: 4
+zona_auto_1: id=usd|diario|z17 tipo=resistencia status=enfraquecida estado=abaixo score=44 estrutural=100286.270654-101371.464139 operacional=100430.685581-101227.049212 centro=100828.867396 toques=2 rejeicoes=2 role_reversal=nao dist_pct=-4.67 confluencia_manual=nao confluencia_faixa=nao confluencia_macro=nao confluencia_qualquer=nao
+zona_auto_2: id=usd|diario|z16 tipo=resistencia status=candidata estado=em_teste score=69 estrutural=95309.877608-96313.256182 operacional=95413.385079-96209.748710 centro=95811.566895 toques=8 rejeicoes=5 role_reversal=sim dist_pct=0.32 confluencia_manual=nao confluencia_faixa=nao confluencia_macro=nao confluencia_qualquer=nao
+zona_auto_3: id=usd|diario|z15 tipo=suporte status=candidata estado=acima score=73 estrutural=93627.155596-94761.195708 operacional=93795.993836-94592.357467 centro=94194.175652 toques=10 rejeicoes=5 role_reversal=sim dist_pct=2.04 confluencia_manual=nao confluencia_faixa=nao confluencia_macro=nao confluencia_qualquer=nao
+zona_auto_4: id=usd|diario|z14 tipo=suporte status=candidata estado=acima score=70 estrutural=92935.324784-93704.783897 operacional=92921.872525-93718.236156 centro=93320.054341 toques=8 rejeicoes=5 role_reversal=sim dist_pct=3.00 confluencia_manual=nao confluencia_faixa=nao confluencia_macro=nao confluencia_qualquer=nao
 
 confluencia_entrada: rompimento_confirmado_por_fechamento, di_plus_dominante
 confluencia_pullback: di_plus_ainda_dominante, volume_decrescente_na_correcao
@@ -236,12 +235,12 @@ padrao_em_formacao: nenhum
 alertas_tecnicos: adx_subindo_com_di_plus_dominante
 
 zonas_automaticas_total: 6
-zona_auto_1: id=usd|semanal|z7 tipo=resistencia status=candidata estado=abaixo score=74 estrutural=79145.093438-80592.858945 operacional=79390.325985-80347.626398 centro=79868.976192 toques=11 rejeicoes=4 role_reversal=nao dist_pct=-1.16 confluencia_manual=sim confluencia_faixa=sim confluencia_macro=nao confluencia_qualquer=sim
-zona_auto_2: id=usd|semanal|z8 tipo=resistencia status=enfraquecida estado=abaixo score=66 estrutural=81297.312017-82648.591565 operacional=81494.301585-82451.601998 centro=81972.951791 toques=11 rejeicoes=9 role_reversal=sim dist_pct=-3.70 confluencia_manual=nao confluencia_faixa=nao confluencia_macro=nao confluencia_qualquer=nao
-zona_auto_3: id=usd|semanal|z9 tipo=resistencia status=enfraquecida estado=abaixo score=26 estrutural=82983.834736-84791.234842 operacional=83408.884582-84366.184995 centro=83887.534789 toques=2 rejeicoes=0 role_reversal=nao dist_pct=-5.90 confluencia_manual=nao confluencia_faixa=nao confluencia_macro=nao confluencia_qualquer=nao
-zona_auto_4: id=usd|semanal|z6 tipo=resistencia status=candidata estado=em_teste score=79 estrutural=77709.868879-79565.270194 operacional=78158.919330-79116.219743 centro=78637.569536 toques=12 rejeicoes=8 role_reversal=sim dist_pct=0.38 confluencia_manual=nao confluencia_faixa=nao confluencia_macro=nao confluencia_qualquer=nao
-zona_auto_5: id=usd|semanal|z5 tipo=suporte status=candidata estado=acima score=90 estrutural=76211.280597-78137.193963 operacional=76695.587073-77652.887486 centro=77174.237280 toques=8 rejeicoes=7 role_reversal=sim dist_pct=2.29 confluencia_manual=nao confluencia_faixa=sim confluencia_macro=nao confluencia_qualquer=sim
-zona_auto_6: id=usd|semanal|z4 tipo=suporte status=enfraquecida estado=acima score=74 estrutural=74741.997113-75701.049347 operacional=74742.873023-75700.173436 centro=75221.523230 toques=7 rejeicoes=5 role_reversal=sim dist_pct=4.94 confluencia_manual=nao confluencia_faixa=sim confluencia_macro=nao confluencia_qualquer=sim
+zona_auto_1: id=usd|semanal|z6 tipo=resistencia status=candidata estado=em_teste score=80 estrutural=78236.402664-79766.905626 operacional=78659.761140-79343.547149 centro=79001.654145 toques=12 rejeicoes=7 role_reversal=sim dist_pct=-0.08 confluencia_manual=nao confluencia_faixa=sim confluencia_macro=nao confluencia_qualquer=sim
+zona_auto_2: id=usd|semanal|z7 tipo=resistencia status=candidata estado=abaixo score=72 estrutural=79612.539004-80797.348071 operacional=79863.050533-80546.836542 centro=80204.943538 toques=7 rejeicoes=2 role_reversal=sim dist_pct=-1.58 confluencia_manual=sim confluencia_faixa=sim confluencia_macro=nao confluencia_qualquer=sim
+zona_auto_3: id=usd|semanal|z8 tipo=resistencia status=enfraquecida estado=abaixo score=66 estrutural=81239.139611-82853.727368 operacional=81704.540485-82388.326494 centro=82046.433489 toques=11 rejeicoes=9 role_reversal=sim dist_pct=-3.79 confluencia_manual=nao confluencia_faixa=nao confluencia_macro=nao confluencia_qualquer=nao
+zona_auto_4: id=usd|semanal|z16 tipo=resistencia status=candidata estado=acima score=79 estrutural=77504.733076-79007.329030 operacional=77914.138048-78597.924058 centro=78256.031053 toques=9 rejeicoes=5 role_reversal=sim dist_pct=0.87 confluencia_manual=nao confluencia_faixa=nao confluencia_macro=nao confluencia_qualquer=nao
+zona_auto_5: id=usd|semanal|z5 tipo=suporte status=enfraquecida estado=acima score=83 estrutural=76010.528701-77647.957652 operacional=76487.350172-77171.136181 centro=76829.243176 toques=8 rejeicoes=7 role_reversal=sim dist_pct=2.75 confluencia_manual=nao confluencia_faixa=sim confluencia_macro=nao confluencia_qualquer=sim
+zona_auto_6: id=usd|semanal|z4 tipo=suporte status=enfraquecida estado=acima score=87 estrutural=74536.861310-75906.185149 operacional=74879.630225-75563.416234 centro=75221.523230 toques=7 rejeicoes=6 role_reversal=sim dist_pct=4.94 confluencia_manual=nao confluencia_faixa=sim confluencia_macro=nao confluencia_qualquer=sim
 
 confluencia_entrada: estrutura_de_alta_preservada, di_plus_dominante
 confluencia_pullback: tendencia_hh_hl_preservada, di_plus_ainda_dominante
@@ -315,10 +314,10 @@ nivel_73000_estado: sem_registro
 nivel_73000_historico: nenhum
 niveis_mudancas_nesta_vela: rompido_80000
 niveis_manuais_situacao: obsoleto
-niveis_manuais_faixa_mais_proxima: faixa_85847_83_89595_87
+niveis_manuais_faixa_mais_proxima: faixa_88372_86_89602_14
 niveis_manuais_distancia_atr: 4.48
 niveis_manuais_alinhamento: parcial
-niveis_manuais_faixas_corroboradas: 4 de 6
+niveis_manuais_faixas_corroboradas: 5 de 6
 zonas_candidatas_a_faixa: nenhuma
 
 fracao_periodo_decorrida: 0.500
@@ -367,12 +366,11 @@ padrao_candles: nenhum
 padrao_em_formacao: nenhum
 alertas_tecnicos: rompimento_confirmado_80000, rompido_80000, rompimento_com_volume_fraco
 
-zonas_automaticas_total: 5
-zona_auto_1: id=usd|diario|z13 tipo=resistencia status=candidata estado=em_teste score=69 estrutural=95548.786697-96976.348505 operacional=95705.113059-96820.022142 centro=96262.567601 toques=9 rejeicoes=6 role_reversal=sim dist_pct=-0.15 confluencia_manual=nao confluencia_faixa=nao confluencia_macro=nao confluencia_qualquer=nao
-zona_auto_2: id=usd|diario|z14 tipo=resistencia status=enfraquecida estado=abaixo score=44 estrutural=100270.272076-101387.462717 operacional=100271.412855-101386.321938 centro=100828.867396 toques=2 rejeicoes=2 role_reversal=nao dist_pct=-4.67 confluencia_manual=nao confluencia_faixa=nao confluencia_macro=nao confluencia_qualquer=nao
-zona_auto_3: id=usd|diario|z12 tipo=suporte status=candidata estado=acima score=72 estrutural=92928.662101-94767.858391 operacional=93290.805704-94405.714788 centro=93848.260246 toques=8 rejeicoes=5 role_reversal=sim dist_pct=2.42 confluencia_manual=nao confluencia_faixa=nao confluencia_macro=nao confluencia_qualquer=nao
-zona_auto_4: id=usd|diario|z11 tipo=suporte status=candidata estado=acima score=80 estrutural=90763.569073-93014.420748 operacional=91331.540368-92446.449452 centro=91888.994910 toques=17 rejeicoes=16 role_reversal=sim dist_pct=4.60 confluencia_manual=nao confluencia_faixa=nao confluencia_macro=nao confluencia_qualquer=nao
-zona_auto_5: id=usd|diario|z10 tipo=suporte status=candidata estado=acima score=71 estrutural=89243.967620-91225.732734 operacional=89677.395635-90792.304719 centro=90234.850177 toques=16 rejeicoes=6 role_reversal=sim dist_pct=6.52 confluencia_manual=nao confluencia_faixa=nao confluencia_macro=nao confluencia_qualquer=nao
+zonas_automaticas_total: 4
+zona_auto_1: id=usd|diario|z17 tipo=resistencia status=enfraquecida estado=abaixo score=44 estrutural=100286.270654-101371.464139 operacional=100430.685581-101227.049212 centro=100828.867396 toques=2 rejeicoes=2 role_reversal=nao dist_pct=-4.67 confluencia_manual=nao confluencia_faixa=nao confluencia_macro=nao confluencia_qualquer=nao
+zona_auto_2: id=usd|diario|z16 tipo=resistencia status=candidata estado=em_teste score=69 estrutural=95309.877608-96313.256182 operacional=95413.385079-96209.748710 centro=95811.566895 toques=8 rejeicoes=5 role_reversal=sim dist_pct=0.32 confluencia_manual=nao confluencia_faixa=nao confluencia_macro=nao confluencia_qualquer=nao
+zona_auto_3: id=usd|diario|z15 tipo=suporte status=candidata estado=acima score=73 estrutural=93627.155596-94761.195708 operacional=93795.993836-94592.357467 centro=94194.175652 toques=10 rejeicoes=5 role_reversal=sim dist_pct=2.04 confluencia_manual=nao confluencia_faixa=nao confluencia_macro=nao confluencia_qualquer=nao
+zona_auto_4: id=usd|diario|z14 tipo=suporte status=candidata estado=acima score=70 estrutural=92935.324784-93704.783897 operacional=92921.872525-93718.236156 centro=93320.054341 toques=8 rejeicoes=5 role_reversal=sim dist_pct=3.00 confluencia_manual=nao confluencia_faixa=nao confluencia_macro=nao confluencia_qualquer=nao
 
 confluencia_entrada: rompimento_confirmado_por_fechamento, di_plus_dominante
 confluencia_pullback: di_plus_ainda_dominante, volume_decrescente_na_correcao
@@ -490,12 +488,12 @@ padrao_em_formacao: nenhum
 alertas_tecnicos: adx_subindo_com_di_plus_dominante
 
 zonas_automaticas_total: 6
-zona_auto_1: id=usd|semanal|z7 tipo=resistencia status=candidata estado=abaixo score=74 estrutural=79145.093438-80592.858945 operacional=79390.325985-80347.626398 centro=79868.976192 toques=11 rejeicoes=4 role_reversal=nao dist_pct=-1.16 confluencia_manual=sim confluencia_faixa=sim confluencia_macro=nao confluencia_qualquer=sim
-zona_auto_2: id=usd|semanal|z8 tipo=resistencia status=enfraquecida estado=abaixo score=66 estrutural=81297.312017-82648.591565 operacional=81494.301585-82451.601998 centro=81972.951791 toques=11 rejeicoes=9 role_reversal=sim dist_pct=-3.70 confluencia_manual=nao confluencia_faixa=nao confluencia_macro=nao confluencia_qualquer=nao
-zona_auto_3: id=usd|semanal|z9 tipo=resistencia status=enfraquecida estado=abaixo score=26 estrutural=82983.834736-84791.234842 operacional=83408.884582-84366.184995 centro=83887.534789 toques=2 rejeicoes=0 role_reversal=nao dist_pct=-5.90 confluencia_manual=nao confluencia_faixa=nao confluencia_macro=nao confluencia_qualquer=nao
-zona_auto_4: id=usd|semanal|z6 tipo=resistencia status=candidata estado=em_teste score=79 estrutural=77709.868879-79565.270194 operacional=78158.919330-79116.219743 centro=78637.569536 toques=12 rejeicoes=8 role_reversal=sim dist_pct=0.38 confluencia_manual=nao confluencia_faixa=nao confluencia_macro=nao confluencia_qualquer=nao
-zona_auto_5: id=usd|semanal|z5 tipo=suporte status=candidata estado=acima score=90 estrutural=76211.280597-78137.193963 operacional=76695.587073-77652.887486 centro=77174.237280 toques=8 rejeicoes=7 role_reversal=sim dist_pct=2.29 confluencia_manual=nao confluencia_faixa=sim confluencia_macro=nao confluencia_qualquer=sim
-zona_auto_6: id=usd|semanal|z4 tipo=suporte status=enfraquecida estado=acima score=74 estrutural=74741.997113-75701.049347 operacional=74742.873023-75700.173436 centro=75221.523230 toques=7 rejeicoes=5 role_reversal=sim dist_pct=4.94 confluencia_manual=nao confluencia_faixa=sim confluencia_macro=nao confluencia_qualquer=sim
+zona_auto_1: id=usd|semanal|z6 tipo=resistencia status=candidata estado=em_teste score=80 estrutural=78236.402664-79766.905626 operacional=78659.761140-79343.547149 centro=79001.654145 toques=12 rejeicoes=7 role_reversal=sim dist_pct=-0.08 confluencia_manual=nao confluencia_faixa=sim confluencia_macro=nao confluencia_qualquer=sim
+zona_auto_2: id=usd|semanal|z7 tipo=resistencia status=candidata estado=abaixo score=72 estrutural=79612.539004-80797.348071 operacional=79863.050533-80546.836542 centro=80204.943538 toques=7 rejeicoes=2 role_reversal=sim dist_pct=-1.58 confluencia_manual=sim confluencia_faixa=sim confluencia_macro=nao confluencia_qualquer=sim
+zona_auto_3: id=usd|semanal|z8 tipo=resistencia status=enfraquecida estado=abaixo score=66 estrutural=81239.139611-82853.727368 operacional=81704.540485-82388.326494 centro=82046.433489 toques=11 rejeicoes=9 role_reversal=sim dist_pct=-3.79 confluencia_manual=nao confluencia_faixa=nao confluencia_macro=nao confluencia_qualquer=nao
+zona_auto_4: id=usd|semanal|z16 tipo=resistencia status=candidata estado=acima score=79 estrutural=77504.733076-79007.329030 operacional=77914.138048-78597.924058 centro=78256.031053 toques=9 rejeicoes=5 role_reversal=sim dist_pct=0.87 confluencia_manual=nao confluencia_faixa=nao confluencia_macro=nao confluencia_qualquer=nao
+zona_auto_5: id=usd|semanal|z5 tipo=suporte status=enfraquecida estado=acima score=83 estrutural=76010.528701-77647.957652 operacional=76487.350172-77171.136181 centro=76829.243176 toques=8 rejeicoes=7 role_reversal=sim dist_pct=2.75 confluencia_manual=nao confluencia_faixa=sim confluencia_macro=nao confluencia_qualquer=sim
+zona_auto_6: id=usd|semanal|z4 tipo=suporte status=enfraquecida estado=acima score=87 estrutural=74536.861310-75906.185149 operacional=74879.630225-75563.416234 centro=75221.523230 toques=7 rejeicoes=6 role_reversal=sim dist_pct=4.94 confluencia_manual=nao confluencia_faixa=sim confluencia_macro=nao confluencia_qualquer=sim
 
 confluencia_entrada: estrutura_de_alta_preservada, di_plus_dominante
 confluencia_pullback: tendencia_hh_hl_preservada, di_plus_ainda_dominante

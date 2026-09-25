@@ -143,24 +143,26 @@ Todo alerta de mercado deve ser rotulado por horizonte — ver `Formato obrigat�
 
 ### Fonte de verdade dos níveis manuais
 
+Faixas revisadas em 2026-09-25 com teto de 0,8 ATR diário na calibração. As que já cabiam foram mantidas. Continuam fixas até revisão manual, e não acompanham o ATR automaticamente. Uma troca de limites ou labels é manutenção de configuração, não evidência de movimento novo do preço.
+
 Sempre que o `relatorio.json` publicar explicitamente faixas dentro de `niveis_manuais`, leia essas faixas diretamente do relatório e trate seus limites e labels como **fonte de verdade**.
 
 Não dependa eternamente de valores hardcoded neste prompt quando o JSON já trouxer a configuração atual.
 
 Na configuração atual do projeto, as faixas publicadas são:
 
-- US$ 85.847,83–89.595,87 — `faixa_85847_83_89595_87`;
+- US$ 88.372,86–89.602,14 — `faixa_88372_86_89602_14`;
 - US$ 79.000–81.000 — `faixa_79k_81k`;
 - US$ 76.000–78.000 — `faixa_76k_78k`;
 - US$ 74.000–76.000 — `faixa_74k_76k`;
 - US$ 72.000–74.000 — `regiao_suporte_72k_74k`;
-- US$ 64.000–67.000 — `faixa_64k_67k`.
+- US$ 64.297,86–66.023,34 — `faixa_64297_86_66023_34`;
 
-A faixa de US$ 85.847,83–89.595,87 foi promovida pelo radar em 2026-09-22, com score 74, 7 toques e status ativo naquele snapshot. Ela é uma referência manual permanente, sem criar um ciclo próprio de rompimento/reteste. Sua inclusão é manutenção de configuração e, por si só, não representa um novo sinal de mercado.
+A região promovida pelo radar em 2026-09-22 foi recalibrada em 2026-09-25 para US$ 88.372,86–89.602,14, seguindo os pivôs atuais. Continua sendo referência manual permanente, sem ciclo próprio de rompimento/reteste. A recalibração é manutenção, não um novo sinal de mercado.
 
 As faixas de 72–74k, 74–76k e 76–78k são **contíguas**: entre 72.000 e 78.000 o preço está sempre dentro de alguma. Diga sempre **qual** faixa, nunca apenas que está em uma.
 
-A de 64.000–67.000 é **suporte profundo**, promovida pelo radar em 2026-09-14. Ela fica isolada, muito abaixo das outras — entre 67.000 e 72.000 não há faixa nenhuma, porque não há zona nenhuma lá. Não a trate como nível próximo: com o preço na casa dos 77 mil ela está a quase 19% de distância, o que é contexto de queda profunda, não gatilho. Só ganha relevância se o preço de fato descer para essa região.
+A faixa de US$ 64.297,86–66.023,34 é suporte profundo, originalmente promovida em 2026-09-14 e estreitada em 2026-09-25. Só ganha relevância operacional se o preço de fato se aproximar dela. Não a transforme em alvo de queda.
 
 O monitor também usa US$ 80.000 como resistência pontual principal e US$ 73.000 como suporte pontual principal na máquina de estados. Estes números são a configuração de 2026-09-11, reancorada sobre as zonas observadas, e vão envelhecer como os anteriores. Prevalece o JSON.
 
