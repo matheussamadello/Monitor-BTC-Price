@@ -1333,6 +1333,23 @@ console.log("\n== radar de promocao: zona madura que nenhuma faixa cobre ==");
   ok(zonasCandidatas(muitas, niveis, 150, "diario").length === 3,
     "publica no maximo tres, e as de maior score");
 
+  // As duas regioes que o radar passou a sugerir em 2026-09-26, contra a
+  // configuracao ATUAL do BTC/USD e o ATR diario daquele dia.
+  const btcUsd = PARES_TESTE.find((p) => p.label === "BTC/USD");
+  if (btcUsd) {
+    const zona = (lo, hi, score, toques) => ({ score, numero_toques: toques, status: "ativa",
+      limites_estruturais: { inferior: lo, superior: hi } });
+    const hoje = zonasCandidatas([zona(75873.93, 76122.27, 82, 6), zona(78094.83, 78343.17, 71, 9)],
+      btcUsd.niveis, 84029.4, "diario", 2483.49);
+    ok(!hoje.some((c) => c.inferior === 75873.93),
+      "75.873,93-76.122,27 sai: colada em 76.150-76.700, vao de 27,73 (0,011 ATR)");
+    // Resultado do criterio, registrado: 957 ate 79.300 e 1.395 ate
+    // 76.700 sao 0,385 e 0,56 ATR, acima dos 0,2 -- regiao distinta, entao
+    // o radar continua mostrando. Promover ou nao e' decisao de revisao.
+    ok(hoje.length === 1 && hoje[0].inferior === 78094.83,
+      "78.094,83-78.343,17 fica: 0,385 ATR da faixa mais proxima (79.300-79.700)");
+  }
+
   // O campo sai no relatorio, e no bloco DIARIO.
   const linha = blocoTf(r1.texto, "GRAFICO DIARIO", PARES_TESTE[0].label);
   ok(/^zonas_candidatas_a_faixa: /m.test(linha),
