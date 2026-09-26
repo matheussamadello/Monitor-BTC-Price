@@ -306,6 +306,13 @@ Resistência pontual: **80.000**. Suporte pontual: **73.000**.
 
 Nenhuma das duas sobrepõe as faixas recalibradas: restam 5.792 até a de 88.700, 1.450 entre elas e 769 até a de 79.300–79.700. A resistência pontual de 80.000 cai nesse vão de baixo, **fora** da faixa de 80.469–80.721, então a máquina de rompimento/reteste dela segue intacta e exclusiva dos níveis pontuais.
 
+**Avaliadas e não promovidas em 2026-09-26.** O radar passou a listar 75.873,93–76.122,27 (score 82, 6 toques) e 78.094,83–78.343,17 (score 71, 9 toques) depois que o reagrupamento dos pivôs de 2026-09-25 criou zonas para pivôs antes descartados. As duas são zonas de **um pivô só** — a largura de 248,35 é exatamente 0,1 ATR, a folga dos dois lados de um ponto —, e entre 75.000 e 79.300 existem só quatro pivôs em todo o histórico: o topo de 75.998,1 (17/03/2026), os fundos de 76.236,9 (02/09/2026) e 76.615,7 (11/03/2025), que ancoram a faixa 76.150–76.700, e o fundo de 78.219 (28/02/2025).
+
+- **75.874–76.122** termina **28 dólares** abaixo da faixa 76.150–76.700 (0,01 ATR): não é uma região separada, é a borda de baixo do mesmo suporte, e a zona já marca confluência com essa faixa. Promover criaria duas faixas encostadas — dois alertas de entrada para um mesmo movimento —, contra o critério de manter as faixas separadas; e alargar 76.150–76.700 desfaria a recalibração, que é para ficar.
+- **78.095–78.343** é um fundo de fevereiro de 2025, confirmado só no diário, com score 71 (o corte é 70) e a penalidade de ter sido rompido duas vezes sem reação. Em agosto e setembro de 2026 o preço atravessou a região em 43 velas: é um nível que o mercado atravessa, não um que ele respeita, e faixa manual não expira.
+
+Enquanto seguirem ativas, as duas continuam no radar; o prompt já diz para não repetir o aviso de uma região comunicada.
+
 Os [resultados do reajuste](REAJUSTE_FAIXAS_2026-09-25.md) e a [evidência com pivôs, janelas e medidas](reajuste-faixas-manuais-2026-09-25.json) documentam os limites atuais. A [auditoria anterior](AUDITORIA_FAIXAS_2026-09-25.md) e a [calibração mais estreita](revisao-faixas-manuais-2026-09-25.json) permanecem como registros históricos.
 
 O relatório atual é a fonte de verdade para `niveis_manuais.faixas`. A mudança não reescreve o histórico. Labels anteriores permanecem nos registros antigos. Novos limites podem aumentar o tempo dentro da faixa e alterar a assinatura no primeiro processamento; isso é manutenção de configuração, não movimento novo do preço.
