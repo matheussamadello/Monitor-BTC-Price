@@ -1,4 +1,4 @@
-timestamp: 2026-09-26 15:24 UTC
+timestamp: 2026-09-26 17:16 UTC
 fonte: Kraken OHLC — interval=1440 (diario) e interval=10080 (semanal)
 indicadores: RSI e DMI/ADX por Wilder/RMA com periodos por timeframe (RSI diario 21, semanal 14; DMI/ADX diario 28/42, semanal 14/21), EMA(89) exponencial
 nota: campos *_fechado usam apenas velas fechadas; *_provisorio inclui a vela em formacao
@@ -8,17 +8,17 @@ nota: a linha "eventos:" existe so no bloco diario; no semanal ela se chama "eve
 
 BTC/USD
 timeframe: diario
-preco_atual: 84043.10
+preco_atual: 84041.40
 vela_atual_em_formacao: sim
 candle_atual_data: 2026-09-26
 candle_atual_open: 84090.50
 candle_atual_high: 84314.70
 candle_atual_low: 83777.00
-candle_atual_close_provisorio: 84043.10
+candle_atual_close_provisorio: 84041.40
 candle_atual_var_pct_desde_abertura: -0.06
 ema89: 73627.69
 posicao_vs_ema89: acima
-distancia_ema89_pct: 14.15
+distancia_ema89_pct: 14.14
 
 # principais: calculados SOMENTE com velas fechadas
 rsi_length: 21
@@ -39,7 +39,7 @@ atr14_pct: 2.95
 
 # PROVISORIOS: incluem a vela em formacao e PODEM MUDAR ate o
 # fechamento diario. NAO sao a referencia principal.
-rsi_provisorio: 63.83
+rsi_provisorio: 63.82
 di_plus_provisorio: 33.97
 di_minus_provisorio: 14.13
 adx_provisorio: 32.41
@@ -66,16 +66,16 @@ niveis_manuais_alinhamento: alinhado
 niveis_manuais_faixas_corroboradas: 8 de 8
 zonas_candidatas_a_faixa: 78094.83-78343.17 score=71 toques=9 (abaixo do preco)
 
-fracao_periodo_decorrida: 0.642
+fracao_periodo_decorrida: 0.720
 volume_parcial: sim
-volume_atual: 600.9380
+volume_atual: 673.3956
 volume_ultima_fechada: 3084.1657
 volume_media20: 2680.1253
 volume_vs_media_pct: 15.08
 volume_referencia: ultima_vela_fechada
 volume_classificacao: normal
 volume_tendencia_3_fechadas: decrescente
-trades_vela_atual: 36931
+trades_vela_atual: 41734
 
 estrutura_preco: HH_LL
 estrutura_tendencia: lateral_expansao
@@ -88,18 +88,18 @@ pivos_fundos_recentes: 2026-08-14=62490.00 2026-09-02=76236.90 2026-09-15=74891.
 
 divergencia_rsi: nenhuma
 divergencia_rsi_provisoria: bearish_regular_PROVISORIA
-divergencia_rsi_provisoria_detalhe_1: tipo=bearish_regular lado=topo status=PROVISORIA pivo_anterior=2026-09-03 preco_anterior=82288.10 rsi_anterior=70.86 pivo_atual=2026-09-26 preco_atual=84314.70 rsi_atual=63.83
+divergencia_rsi_provisoria_detalhe_1: tipo=bearish_regular lado=topo status=PROVISORIA pivo_anterior=2026-09-03 preco_anterior=82288.10 rsi_anterior=70.86 pivo_atual=2026-09-26 preco_atual=84314.70 rsi_atual=63.82
 
 corpo_pct_range: 13.89
 sombra_sup_pct_range: 41.63
 sombra_inf_pct_range: 44.48
 sombra_sup_vs_corpo: 3.00
 sombra_inf_vs_corpo: 3.20
-candle_atual_corpo_pct_range: 8.82
+candle_atual_corpo_pct_range: 9.13
 candle_atual_sombra_sup_pct_range: 41.70
-candle_atual_sombra_inf_pct_range: 49.49
-candle_atual_sombra_sup_vs_corpo: 4.73
-candle_atual_sombra_inf_vs_corpo: 5.61
+candle_atual_sombra_inf_pct_range: 49.17
+candle_atual_sombra_sup_vs_corpo: 4.57
+candle_atual_sombra_inf_vs_corpo: 5.38
 
 eventos: nenhum cruzamento nesta vela
 mediana_corpo_20: 533.450000
@@ -130,14 +130,14 @@ deterioracao_tendencia: nenhuma
 
 BTC/USD
 timeframe: semanal
-preco_atual: 84043.00
+preco_atual: 84041.40
 vela_atual_em_formacao: sim
 candle_atual_data: 2026-09-24
 candle_atual_open: 84384.50
 candle_atual_high: 85247.40
 candle_atual_low: 82832.30
-candle_atual_close_provisorio: 84043.00
-candle_atual_var_pct_desde_abertura: -0.40
+candle_atual_close_provisorio: 84041.40
+candle_atual_var_pct_desde_abertura: -0.41
 ema89: 79269.13
 posicao_vs_ema89: acima
 distancia_ema89_pct: 6.02
@@ -168,7 +168,7 @@ atr14_pct: 7.67
 
 # PROVISORIOS: incluem a vela em formacao e PODEM MUDAR ate o
 # fechamento semanal. NAO sao a referencia principal.
-rsi_provisorio: 61.34
+rsi_provisorio: 61.33
 di_plus_provisorio: 29.71
 di_minus_provisorio: 16.32
 adx_provisorio: 28.14
@@ -195,16 +195,16 @@ niveis_manuais_alinhamento: alinhado
 niveis_manuais_faixas_corroboradas: 8 de 8
 zonas_candidatas_a_faixa: nenhuma
 
-fracao_periodo_decorrida: 0.377
+fracao_periodo_decorrida: 0.389
 volume_parcial: sim
-volume_atual: 7047.9626
+volume_atual: 7120.4200
 volume_ultima_fechada: 21336.9926
 volume_media20: 14648.3110
 volume_vs_media_pct: 45.66
 volume_referencia: ultima_vela_fechada
 volume_classificacao: acima_da_media
 volume_tendencia_3_fechadas: crescente
-trades_vela_atual: 307570
+trades_vela_atual: 312372
 volume_semana_dias_fechados: 2
 volume_semana_soma_dias_fechados: 6447.0243
 volume_semanas_anteriores_mesmos_dias_media: 5894.1008
@@ -228,11 +228,11 @@ sombra_sup_pct_range: 26.60
 sombra_inf_pct_range: 1.82
 sombra_sup_vs_corpo: 0.37
 sombra_inf_vs_corpo: 0.03
-candle_atual_corpo_pct_range: 14.14
+candle_atual_corpo_pct_range: 14.21
 candle_atual_sombra_sup_pct_range: 35.73
-candle_atual_sombra_inf_pct_range: 50.13
-candle_atual_sombra_sup_vs_corpo: 2.53
-candle_atual_sombra_inf_vs_corpo: 3.55
+candle_atual_sombra_inf_pct_range: 50.06
+candle_atual_sombra_sup_vs_corpo: 2.52
+candle_atual_sombra_inf_vs_corpo: 3.52
 
 eventos_semanal: nenhum cruzamento nesta vela
 mediana_corpo_20: 2224.100000
