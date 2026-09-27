@@ -1350,6 +1350,23 @@ console.log("\n== radar de promocao: zona madura que nenhuma faixa cobre ==");
       "78.094,83-78.343,17 fica: 0,385 ATR da faixa mais proxima (79.300-79.700)");
   }
 
+  // O painel aplica as verificacoes do prompt: o pivo unico de 78k (score
+  // 71) sai como observacao; uma regiao larga e sem vizinhas proximas sai
+  // como recomendacao.
+  if (btcUsd) {
+    const dados = relatorioParaJSON(r1.texto, r1.zonas);
+    dados.diario["BTC/USD"].atr14 = "2354.26";
+    dados.diario["BTC/USD"].zonas_candidatas_a_faixa =
+      "78101.29-78336.71 score=71 toques=9 (abaixo do preco) | 60000.00-61200.00 score=85 toques=8 (abaixo do preco)";
+    const pag = toHTML(r1.texto, dados);
+    const radarRec = (pag.match(/<span class="lradar">([^<]*)<\/span>/) || [])[1] || "";
+    const radarObs = (pag.match(/<span class="lradar obs">([^<]*)<\/span>/) || [])[1] || "";
+    ok(radarRec.includes("60000.00-61200.00") && !radarRec.includes("78101.29"),
+      "no painel, so a regiao que passa nas verificacoes aparece como recomendacao");
+    ok(radarObs.includes("78101.29-78336.71") && /pivô único com score abaixo de 80/.test(radarObs),
+      "e o pivo unico de 78k aparece em observacao, com o motivo");
+  }
+
   // O campo sai no relatorio, e no bloco DIARIO.
   const linha = blocoTf(r1.texto, "GRAFICO DIARIO", PARES_TESTE[0].label);
   ok(/^zonas_candidatas_a_faixa: /m.test(linha),
