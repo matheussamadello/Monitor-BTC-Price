@@ -307,7 +307,7 @@ Resistência pontual: **80.000**. Suporte pontual: **73.000**.
 **Revisão manual de 2026-09-28.** Com o preço a 83.214, o cartão apontava como resistência mais próxima a faixa de 88.700, a 6,6%, e havia duas regiões no caminho sem faixa:
 
 - **83.750–84.550** — onde o BTC fechou todos os dias de 23 a 27/09 (84.090 a 84.444), sobre a zona diária `usd|diario|z25` (83.758–84.534, **score 85**, 4 toques, um abaixo do corte do radar), o fundo semanal de 84.421,4 (dezembro de 2025) e o diário de 83.870,8. Fica 842 (0,37 ATR) acima da faixa 82.171–82.908: região distinta.
-- **86.250–86.550** — resistência intermediária de força moderada: zona diária `usd|diario|z59` (86.288–86.514, score 66, 5 toques), topo de 86.401 de abril de 2025 e os fechamentos de 21 e 22/09. O topo de 87.446,7 de 21/09 ficou de fora por ter um toque só.
+- **86.250–86.550** — resistência intermediária de força moderada: zona diária `usd|diario|z59` (86.288–86.514, score 66, 5 toques), topo de 86.401 de abril de 2025 e os fechamentos de 21 e 22/09. O topo de 87.446,7 de 21/09 ficou de fora por ter um toque só. Ela só tem zona automática no diário, então o alinhamento semanal passou de `alinhado` (8 de 8) para `parcial` (9 de 10) — consequência esperada, registrada também no prompt para não virar alerta de revisão.
 
 As linhas pontuais não mudaram. A de 80.000 está em `rompimento_candidato` no semanal, à espera do fechamento de 30/09, e mudá-la apagaria essa confirmação pendente. Depois dela, vale rediscutir subir a resistência pontual para perto de 87.500. A de 73.000 nunca abriu registro e segue como suporte profundo. As demais faixas foram reavaliadas e ficaram como estavam.
 
