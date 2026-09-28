@@ -152,6 +152,8 @@ Não dependa eternamente de valores hardcoded neste prompt quando o JSON já tro
 Na configuração atual do projeto, as faixas publicadas são:
 
 - US$ 88.700–89.300 — `faixa_88700_89300`;
+- US$ 86.250–86.550 — `faixa_86250_86550`;
+- US$ 83.750–84.550 — `faixa_83750_84550`;
 - US$ 82.171–82.908 — `faixa_82171_82908`;
 - US$ 80.469–80.721 — `faixa_80469_80721`;
 - US$ 79.300–79.700 — `faixa_79300_79700`;
@@ -159,6 +161,8 @@ Na configuração atual do projeto, as faixas publicadas são:
 - US$ 74.700–75.100 — `faixa_74700_75100`;
 - US$ 73.400–73.800 — `regiao_suporte_73400_73800`;
 - US$ 64.600–65.700 — `faixa_64600_65700`;
+
+As faixas de US$ 83.750–84.550 e US$ 86.250–86.550 foram acrescentadas em 2026-09-28 por **revisão manual**, não pelo radar. A primeira é a região onde o BTC fechou de 23 a 27/09, sobre uma zona diária de score 85 e um fundo semanal de 84.421 de dezembro de 2025. A segunda é uma resistência intermediária de força moderada (zona diária de score 66, topo de 86.401 de abril de 2025). Ambas ficam logo acima da de 82.171–82.908, então o preço pode passar por três faixas manuais em poucos dias. Trate cada entrada como contexto, não como três sinais independentes. O topo de 87.446,7 de 21/09 **não** é faixa: tem um toque só.
 
 A região promovida pelo radar em 2026-09-22 foi recalibrada em 2026-09-25 para US$ 88.700–89.300, seguindo os pivôs atuais. Continua sendo referência manual permanente, sem ciclo próprio de rompimento/reteste. A recalibração é manutenção, não um novo sinal de mercado.
 

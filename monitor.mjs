@@ -142,6 +142,20 @@ const NIVEIS_USD = {
     // Faixas fixas revistas por pivos/reacoes em 2026-09-25; teto de 0,5 ATR na calibracao.
     // Evidencia: reajuste-faixas-manuais-2026-09-25.json. Pontos de rompimento intactos.
     [88700, 89300, "faixa_88700_89300"],
+    // Acrescentadas em 2026-09-28 por revisao manual, com o preco a 83.214
+    // e o cartao apontando como resistencia mais proxima a de 88.700 (6,6%).
+    //   86250-86550  zona diaria usd|diario|z59 (86.288-86.514, score 66,
+    //                5 toques), topo de 86.401 de 2025-04-15, fechamentos de
+    //                86.196 e 86.594 em 21 e 22/09. Forca moderada. O topo de
+    //                87.446,7 (21/09) tem 1 toque e ficou de fora.
+    //   83750-84550  zona diaria usd|diario|z25 (83.758-84.534, score 85, 4
+    //                toques -- um abaixo do corte do radar), fechamentos de
+    //                84.090 a 84.444 de 23 a 27/09, fundo semanal de 84.421,4
+    //                (2025-12-18) e diario de 83.870,8 (2025-12-01).
+    // Larguras 300 e 800 = 0,13 e 0,35 ATR diario (2.259). A de 83.750 fica
+    // 842 (0,37 ATR) acima da de 82.171-82.908: regiao distinta.
+    [86250, 86550, "faixa_86250_86550"],
+    [83750, 84550, "faixa_83750_84550"],
     // Promovidas pelo radar em 2026-09-25, com os limites ESTRUTURais das
     // zonas, arredondados para fora no inteiro mais proximo -- 0,05% e
     // 0,23% de alargamento, entao a identidade da regiao nao muda. Os

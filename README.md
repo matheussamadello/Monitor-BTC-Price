@@ -292,6 +292,8 @@ As faixas não mudam automaticamente com o ATR. A revisão preservou o número d
 | Faixa atual | Label | Pivôs confirmados incluídos |
 | --- | --- | --- |
 | 88.700–89.300 | `faixa_88700_89300` | 88.750, 89.005,8, 89.042,7, 89.225 |
+| 86.250–86.550 | `faixa_86250_86550` | 86.401 |
+| 83.750–84.550 | `faixa_83750_84550` | 83.870,8, 84.421,4 |
 | 82.171–82.908 | `faixa_82171_82908` | 82.288,1, 82.790,9 |
 | 80.469–80.721 | `faixa_80469_80721` | 80.595,2 |
 | 79.300–79.700 | `faixa_79300_79700` | 79.490,7 |
@@ -301,6 +303,13 @@ As faixas não mudam automaticamente com o ATR. A revisão preservou o número d
 | 64.600–65.700 | `faixa_64600_65700` | 64.675, 64.960, 65.072,2, 65.199, 65.425,5, 65.646,2 |
 
 Resistência pontual: **80.000**. Suporte pontual: **73.000**.
+
+**Revisão manual de 2026-09-28.** Com o preço a 83.214, o cartão apontava como resistência mais próxima a faixa de 88.700, a 6,6%, e havia duas regiões no caminho sem faixa:
+
+- **83.750–84.550** — onde o BTC fechou todos os dias de 23 a 27/09 (84.090 a 84.444), sobre a zona diária `usd|diario|z25` (83.758–84.534, **score 85**, 4 toques, um abaixo do corte do radar), o fundo semanal de 84.421,4 (dezembro de 2025) e o diário de 83.870,8. Fica 842 (0,37 ATR) acima da faixa 82.171–82.908: região distinta.
+- **86.250–86.550** — resistência intermediária de força moderada: zona diária `usd|diario|z59` (86.288–86.514, score 66, 5 toques), topo de 86.401 de abril de 2025 e os fechamentos de 21 e 22/09. O topo de 87.446,7 de 21/09 ficou de fora por ter um toque só.
+
+As linhas pontuais não mudaram. A de 80.000 está em `rompimento_candidato` no semanal, à espera do fechamento de 30/09, e mudá-la apagaria essa confirmação pendente. Depois dela, vale rediscutir subir a resistência pontual para perto de 87.500. A de 73.000 nunca abriu registro e segue como suporte profundo. As demais faixas foram reavaliadas e ficaram como estavam.
 
 **Promoções de 2026-09-25.** As faixas de 82.171–82.908 e 80.469–80.721 vieram do radar, e usam os limites **estruturais** das zonas `usd|diario|z39` (score 90, 5 toques, 3 rejeições, 1,53 ATR de reação média) e `usd|diario|z8` (score 84, 6 toques, 4 rejeições, 2,42 ATR, com role reversal), ambas confirmadas no diário e no semanal. Os limites foram arredondados para fora no inteiro mais próximo, o que alarga 0,05% e 0,23% — a identidade da região não muda. Os limites **operacionais** ficaram de fora de propósito: são uma janela derivada do ATR corrente e se movem a cada execução, enquanto faixa manual não expira nem respira com o regime.
 
