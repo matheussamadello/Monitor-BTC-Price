@@ -1357,7 +1357,7 @@ console.log("\n== radar de promocao: zona madura que nenhuma faixa cobre ==");
     const dados = relatorioParaJSON(r1.texto, r1.zonas);
     dados.diario["BTC/USD"].atr14 = "2354.26";
     dados.diario["BTC/USD"].zonas_candidatas_a_faixa =
-      "78101.29-78336.71 score=71 toques=9 (abaixo do preco) | 60000.00-61200.00 score=85 toques=8 (abaixo do preco)";
+      "78101.29-78336.71 score=71 toques=9 (abaixo do fechamento) | 60000.00-61200.00 score=85 toques=8 (abaixo do fechamento)";
     const pag = toHTML(r1.texto, dados);
     const radarRec = (pag.match(/<span class="lradar">([^<]*)<\/span>/) || [])[1] || "";
     const radarObs = (pag.match(/<span class="lradar obs">([^<]*)<\/span>/) || [])[1] || "";
