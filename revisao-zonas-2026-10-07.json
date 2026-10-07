@@ -1,0 +1,75 @@
+{
+  "revisado_em": "2026-10-07T09:48:03.723Z",
+  "relatorio_main": "2026-10-07 07:19 UTC",
+  "fontes": [
+    {
+      "url": "https://api.kraken.com/0/public/OHLC?pair=XBTUSD&interval=1440&assetVersion=1",
+      "status": 200,
+      "sha256": "d65e8159fa2f3b9ad06425579754f35f4bee4a8b2c084e366ac7da074410ef91"
+    },
+    {
+      "url": "https://api.kraken.com/0/public/OHLC?pair=XBTUSD&interval=10080&assetVersion=1",
+      "status": 200,
+      "sha256": "a972904184d03b1f13d02c02cc0189d1047e5764eae99d7ac09209920826bee5"
+    }
+  ],
+  "criterios": "Somente diario, ativa, score >=70, pelo menos 5 episodios, sem faixa equivalente/colada (<0,2 ATR). Pivo unico (largura <=0,12 ATR) exige score >=80; nao fragmentar entre faixas vizinhas a menos de 1 ATR. Limites estruturais fixos; teto de calibracao 0,5 ATR.",
+  "correcoes_novas": [
+    "Bloco semanal com falha preserva memoria, mas nao confirma nem pontua zonas diarias.",
+    "Sem pivos na serie valida, as fichas antigas passam pela reconciliacao e pela carencia de orfas."
+  ],
+  "correcoes_pendentes_da_revisao_anterior": [
+    "Idade maxima da fonte em relacao ao relogio.",
+    "Contexto atual e idade em velas das zonas orfas."
+  ],
+  "pares": [
+    {
+      "par": "BTC/USD",
+      "preco_na_coleta": 83764,
+      "atr_diario": 2147.24,
+      "radar_antes": "nenhuma",
+      "candidatos": [],
+      "novas_regioes_sem_maturidade": [
+        {
+          "id": "usd|diario|z49",
+          "limites_estruturais": {
+            "inferior": 81353.63819695803,
+            "superior": 81568.36180304197
+          },
+          "tipo": "suporte",
+          "status": "ativa",
+          "score": 60,
+          "toques": 3,
+          "rejeicoes": 2,
+          "decisao": "nao promover: criterios de maturidade nao atendidos"
+        },
+        {
+          "id": "usd|diario|z76",
+          "limites_estruturais": {
+            "inferior": 87339.33819695802,
+            "superior": 87554.06180304197
+          },
+          "tipo": "resistencia",
+          "status": "candidata",
+          "score": 44,
+          "toques": 2,
+          "rejeicoes": 1,
+          "decisao": "nao promover: criterios de maturidade nao atendidos"
+        },
+        {
+          "id": "usd|diario|z69",
+          "limites_estruturais": {
+            "inferior": 78111.63819695803,
+            "superior": 78326.36180304197
+          },
+          "tipo": "suporte",
+          "status": "ativa",
+          "score": 68,
+          "toques": 9,
+          "rejeicoes": 5,
+          "decisao": "nao promover: criterios de maturidade nao atendidos"
+        }
+      ]
+    }
+  ]
+}
