@@ -183,18 +183,43 @@ const NIVEIS_USD = {
     [76150, 76700, "faixa_76150_76700"],
     [74700, 75100, "faixa_74700_75100"],
     [73400, 73800, "regiao_suporte_73400_73800"],
+    // Acrescentadas em 2026-11-15 por revisao manual. A queda de 21/10 a
+    // 14/11 (84.022 -> 64.115) deixou o preco na faixa mais baixa, sem
+    // nenhuma faixa abaixo dela e com um vao de 12% sem faixa ate a de
+    // 73.400. Contagens sobre as velas diarias da Kraken desde 2024-10
+    // (pivos 5/5 no diario, 2/2 no semanal), ATR diario da revisao 2.439.
+    //   66800-67300  topos de 15/06 e 21/07/2026 (67.263,5 e 66.907,3),
+    //                fundo de 04/11/2024 (66.836) e topo semanal de 2021
+    //                (66.982,2). Zona diaria usd|diario|z4 (score 73, ativa)
+    //                e semanal z25 (score 82). Rejeitou em 15-16/06 e 21-22/07;
+    //                em 13/11 a minima parou em 67.500. 0,21 ATR.
+    //   62150-62550  o piso do verao de 2026: fundos de 24/02, 01/08 e 14/08
+    //                (62.500, 62.200,5 e 62.490), tambem pivo semanal.
+    //                Segurou 22 vezes e foi cruzada 4. Zona diaria z23 (8
+    //                toques) e semanal z55 (score 82) colada abaixo. 0,16 ATR.
+    //   57700-58900  fundos de jun/jul 2026 (57.740 e 58.033, o primeiro
+    //                tambem semanal), de 10/10/2024 (58.888, diario e
+    //                semanal) e topo semanal de 2021 (58.339). Zona semanal
+    //                z51 (score 80). Nunca cruzada: 7 de 7. 0,49 ATR.
+    // Ficaram de fora 68.900-72.100 (topos de 69.448, 70.935 e 71.985: o
+    // preco atravessou quase tanto quanto respeitou) e 60.500 (um fundo so).
+    [66800, 67300, "faixa_66800_67300"],
     [64600, 65700, "faixa_64600_65700"],
+    [62150, 62550, "faixa_62150_62550"],
+    [57700, 58900, "faixa_57700_58900"],
   ],
-  // Pontuais mantidos de proposito no reajuste de 2026-09-25 ("pontos de
-  // rompimento intactos"). Desde entao NAO ficam dentro de faixa manual:
-  // 80.000 cai no vao entre 79.300-79.700 e 80.469-80.721, e 73.000 fica
-  // 400 abaixo de 73.400-73.800. Nada depende disso -- a maquina de
-  // rompimento/reteste usa so o numero pontual --, mas quem ler um nivel
-  // e uma faixa lado a lado nao deve supor que um contem o outro.
-  resistencia: 80000,
-  resistenciaLabel: "80000",
-  suporte: 73000,
-  suporteLabel: "73000",
+  // Movidas em 2026-11-15. A resistencia de 80.000 falhou em 29/10 e o
+  // preco ficou 23% abaixo; o suporte de 73.000 foi rompido em 13/11 e o
+  // preco ja estava 12% abaixo. As novas vigiam as decisoes de agora:
+  // recuperar 67.000 (dentro de 66.800-67.300, os topos do verao) ou perder
+  // 64.600, o piso da faixa 64.600-65.700 onde o preco esta. Pela folga de
+  // 0,25 ATR da maquina, perder exige fechar abaixo de ~63.990, e o
+  // fechamento de 14/11 (64.115) ainda nao conta.
+  // Antes: 80.000 e 73.000 (configuracao de 2026-09-11 ate 2026-11-15).
+  resistencia: 67000,
+  resistenciaLabel: "67000",
+  suporte: 64600,
+  suporteLabel: "64600",
 };
 
 const PAIRS = [

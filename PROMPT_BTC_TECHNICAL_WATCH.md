@@ -162,7 +162,10 @@ Na configuração atual do projeto, as faixas publicadas são:
 - US$ 76.150–76.700 — `faixa_76150_76700`;
 - US$ 74.700–75.100 — `faixa_74700_75100`;
 - US$ 73.400–73.800 — `regiao_suporte_73400_73800`;
+- US$ 66.800–67.300 — `faixa_66800_67300`;
 - US$ 64.600–65.700 — `faixa_64600_65700`;
+- US$ 62.150–62.550 — `faixa_62150_62550`;
+- US$ 57.700–58.900 — `faixa_57700_58900`;
 
 As faixas de US$ 83.750–84.550 e US$ 86.250–86.550 foram acrescentadas em 2026-09-28 por **revisão manual**, não pelo radar. A primeira é a região onde o BTC fechou de 23 a 27/09, sobre uma zona diária de score 85 e um fundo semanal de 84.421 de dezembro de 2025. A segunda é uma resistência intermediária de força moderada (zona diária de score 66, topo de 86.401 de abril de 2025). Ambas ficam logo acima da de 82.171–82.908, então o preço pode passar por três faixas manuais em poucos dias. Trate cada entrada como contexto, não como três sinais independentes. O topo de 87.446,7 de 21/09 **não** é faixa: tem um toque só. A de 86.250–86.550 nasceu com zona automática só no diário, e por isso o alinhamento **semanal** do BTC/USD saiu `parcial` (9 de 10) a partir de 2026-09-28; hoje a contagem atual sai em `niveis_manuais_faixas_corroboradas`. Se o semanal voltar a sair `parcial` por causa dessa faixa, é esperado e **não** é motivo de revisão dos níveis manuais.
 
@@ -170,13 +173,15 @@ A região promovida pelo radar em 2026-09-22 foi recalibrada em 2026-09-25 para 
 
 As faixas de US$ 82.171–82.908 e US$ 80.469–80.721 foram promovidas pelo radar em 2026-09-25, e usam os limites **estruturais** das zonas que as originaram — não os operacionais, que são uma janela de ATR corrente e mudam a cada execução. A primeira vem de uma zona de score 90 com 5 toques e 3 rejeições; a segunda, de uma de score 84 com 6 toques e 4 rejeições. Ambas confirmadas no diário e no semanal. Como qualquer faixa, são referência manual permanente **sem ciclo próprio de rompimento/reteste**: esse acompanhamento continua exclusivo dos níveis pontuais.
 
-Nenhuma das duas encosta nas faixas recalibradas, e a resistência pontual de US$ 80.000 fica no vão **abaixo** da faixa de 80.469–80.721, fora dela. Estar perto de 80.000 não é estar dentro dessa faixa.
+Nenhuma das duas encosta nas faixas recalibradas. (A resistência pontual de US$ 80.000, usada até 2026-11-15, ficava no vão **abaixo** da faixa de 80.469–80.721, fora dela.)
 
 As faixas refinadas são separadas e deixam lacunas entre os núcleos. Estar entre duas faixas não significa estar dentro de uma delas. Diga sempre **qual** faixa, nunca apenas que está em uma.
 
-A faixa de US$ 64.600–65.700 é suporte profundo, originalmente promovida em 2026-09-14 e estreitada em 2026-09-25. Só ganha relevância operacional se o preço de fato se aproximar dela. Não a transforme em alvo de queda.
+A faixa de US$ 64.600–65.700 foi promovida em 2026-09-14 como suporte profundo e estreitada em 2026-09-25. Desde 14/11/2026 o preço está nela, e ela passou a ser o nível de trabalho.
 
-O monitor também usa US$ 80.000 como resistência pontual principal e US$ 73.000 como suporte pontual principal na máquina de estados. Estes números são a configuração de 2026-09-11, reancorada sobre as zonas observadas, e vão envelhecer como os anteriores. Prevalece o JSON.
+As faixas de US$ 66.800–67.300, 62.150–62.550 e 57.700–58.900 foram acrescentadas em 2026-11-15 por **revisão manual**, depois da queda de 21/10 a 14/11 (84.022 → 64.115), que deixou o preço na faixa mais baixa sem nada abaixo dela. A primeira são os topos de junho e julho de 2026 (zona diária ativa de score 73); a segunda, o piso do verão de 2026 (fundos de 62.200 a 62.500); a terceira, os fundos de junho e julho de 2026 e de outubro de 2024 (zona semanal de score 80), um suporte profundo. É manutenção de configuração, não sinal de mercado: não alerte pela mudança. Não transforme as faixas de baixo em alvo de queda.
+
+O monitor usa US$ 67.000 como resistência pontual principal e US$ 64.600 como suporte pontual principal na máquina de estados, desde a revisão de 2026-11-15. Até então eram US$ 80.000 e US$ 73.000 (configuração de 2026-09-11). As linhas novas começam como `sem_registro`, e o rompimento de 73.000 registrado em 13/11 não aparece mais nos campos de nível; a faixa 73.400–73.800 continua como referência dele. Romper 67.000 exige fechar acima de cerca de 67.610, e perder 64.600, fechar abaixo de cerca de 63.990: o fechamento de 14/11 (64.115) ainda não é perda. Efeito esperado, que não é alerta nem motivo de revisão: até o fechamento semanal de 19/11, o bloco semanal mostra `rompimento_confirmado_67000`, porque a última semana fechou a 73.928, acima da linha nova. É a fotografia de uma semana já encerrada, não um rompimento. Prevalece o JSON.
 
 Se o JSON atualizado publicar outros níveis/faixas, **prevalece o JSON**. Para resistência/suporte pontual, leia o valor atual diretamente de `niveis_manuais` quando houver metadado suficiente para isso. Se o relatório ainda não publicar explicitamente o número pontual, use temporariamente o valor legado conhecido sem transformar essa ausência em alerta.
 
@@ -475,7 +480,7 @@ Explique que é um sinal intermediário: superior à janela agressiva e inferior
 
 ## Confirmação conservadora de entrada
 
-Use a resistência manual principal publicada em `niveis_manuais` como âncora enquanto ela continuar estruturalmente relevante. Na configuração atual essa âncora é US$ 80.000, mas se o JSON publicar outra, prevalece o JSON.
+Use a resistência manual principal publicada em `niveis_manuais` como âncora enquanto ela continuar estruturalmente relevante. Na configuração atual essa âncora é US$ 67.000, dentro da faixa 66.800–67.300 (era 80.000 até 2026-11-15), mas se o JSON publicar outra, prevalece o JSON.
 
 Trate o nível como **âncora de uma região de decisão**, não como linha exata. Use também as faixas manuais e zonas automáticas próximas para definir a região efetivamente relevante.
 
@@ -644,7 +649,7 @@ quando uma falha/rejeição relevante vier acompanhada de **deterioração estru
 
 A perda da região de suporte manual principal também pode evoluir para esse alerta quando houver confirmação por fechamento e deterioração estrutural relevante.
 
-Na configuração atual a âncora inferior pontual é US$ 73.000 e a faixa relacionada é US$ 73.400–73.800, mas leia a configuração do JSON sempre que disponível.
+Na configuração atual a âncora inferior pontual é US$ 64.600 e a faixa relacionada é US$ 64.600–65.700 (até 2026-11-15 eram 73.000 e 73.400–73.800), mas leia a configuração do JSON sempre que disponível.
 
 Não transforme uma simples aproximação ou perfuração intradiária em confirmação conservadora.
 
@@ -769,7 +774,7 @@ Use exatamente esse título quando a travessia for para cima, com a mesma estrut
 
 Enquanto o suporte pontual/manual principal publicado em `niveis_manuais` continuar estruturalmente relevante, trate-o como âncora de uma **REGIÃO de suporte**, não como linha exata.
 
-Na configuração atual essa âncora é US$ 73.000, mas, se o JSON publicar outro valor como suporte principal, prevalece o JSON. Use as faixas manuais atuais e as zonas automáticas próximas para definir a região estrutural efetiva.
+Na configuração atual essa âncora é US$ 64.600 (era 73.000 até 2026-11-15), mas, se o JSON publicar outro valor como suporte principal, prevalece o JSON. Use as faixas manuais atuais e as zonas automáticas próximas para definir a região estrutural efetiva.
 
 Simples toque ou perfuração intradiária não basta.
 

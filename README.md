@@ -308,9 +308,22 @@ As faixas não mudam automaticamente com o ATR. A revisão preservou o número d
 | 76.150–76.700 | `faixa_76150_76700` | 76.236,9, 76.615,7 |
 | 74.700–75.100 | `faixa_74700_75100` | 74.891,5, 74.940 |
 | 73.400–73.800 | `regiao_suporte_73400_73800` | 73.574,9 |
+| 66.800–67.300 | `faixa_66800_67300` | 66.836, 66.907,3, 67.263,5 (revisão de 2026-11-15) |
 | 64.600–65.700 | `faixa_64600_65700` | 64.675, 64.960, 65.072,2, 65.199, 65.425,5, 65.646,2 |
+| 62.150–62.550 | `faixa_62150_62550` | 62.200,5, 62.490, 62.500 (revisão de 2026-11-15) |
+| 57.700–58.900 | `faixa_57700_58900` | 57.740, 58.033, 58.888 (revisão de 2026-11-15) |
 
-Resistência pontual: **80.000**. Suporte pontual: **73.000**.
+Resistência pontual: **67.000** (era 80.000 até 2026-11-15). Suporte pontual: **64.600** (era 73.000 até 2026-11-15).
+
+**Revisão manual de 2026-11-15.** De 21/10 a 14/11 o BTC caiu de 84.022 para 64.115 e ficou na faixa mais baixa, 64.600–65.700, sem nenhuma faixa abaixo dela e com um vão de 12% sem faixa até a de 73.400. As contagens sobre as velas diárias da Kraken desde outubro de 2024 (pivôs 5/5 no diário e 2/2 no semanal) deram três faixas:
+
+- **66.800–67.300**, resistência: topos de 15/06 e 21/07/2026 (67.263,5 e 66.907,3), fundo de 04/11/2024 (66.836) e topo semanal de 2021 (66.982,2), sobre a zona diária `usd|diario|z4` (score 73, ativa) e a semanal `z25` (score 82). Rejeitou o preço em 15–16/06 e em 21–22/07, e em 13/11 a mínima parou em 67.500.
+- **62.150–62.550**, suporte: o piso do verão de 2026, com fundos de 24/02, 01/08 e 14/08 (62.500, 62.200,5 e 62.490). Segurou 22 vezes e foi cruzada 4.
+- **57.700–58.900**, suporte profundo: fundos de junho e julho de 2026 (57.740 e 58.033), de 10/10/2024 (58.888) e o topo semanal de 2021 (58.339), sobre a zona semanal `z51` (score 80). Nunca foi cruzada: segurou nas 7 vezes em que o preço chegou nela.
+
+As larguras vão de 0,16 a 0,49 ATR diário (2.439), dentro do teto da calibração de setembro. Ficaram de fora a região de 68.900 a 72.100 (topos de 69.448, 70.935 e 71.985: o preço atravessou essas regiões quase tantas vezes quanto foi rejeitado) e o fundo de 60.500 de fevereiro, que é um pivô só.
+
+As linhas foram para as decisões de agora. A resistência passou de 80.000, cujo rompimento falhou em 29/10 e que ficou 23% acima do preço, para **67.000**, dentro de 66.800–67.300: romper exige fechar acima de cerca de 67.610. O suporte passou de 73.000, rompido em 13/11 com o preço já 12% abaixo, para **64.600**, o piso da faixa onde o preço está: perder exige fechar abaixo de cerca de 63.990, e o fechamento de 14/11 (64.115) ainda não conta. Mudar a de 73.000 apagou o registro do rompimento de 13/11; a faixa 73.400–73.800 continua como referência dele. Até o fechamento semanal de 19/11, o bloco semanal mostra `rompimento_confirmado_67000`, porque a última semana fechou a 73.928, acima da linha nova; é fotografia de uma semana já encerrada, e o prompt diz para não alertar por isso.
 
 **Revisão manual de 2026-09-28.** Com o preço a 83.214, o cartão apontava como resistência mais próxima a faixa de 88.700, a 6,6%, e havia duas regiões no caminho sem faixa:
 
@@ -1047,12 +1060,15 @@ const NIVEIS_USD = {
     [76150, 76700, "faixa_76150_76700"],
     [74700, 75100, "faixa_74700_75100"],
     [73400, 73800, "regiao_suporte_73400_73800"],
+    [66800, 67300, "faixa_66800_67300"],
     [64600, 65700, "faixa_64600_65700"],
+    [62150, 62550, "faixa_62150_62550"],
+    [57700, 58900, "faixa_57700_58900"],
   ],
-  resistencia: 80000,
-  resistenciaLabel: "80000",
-  suporte: 73000,
-  suporteLabel: "73000",
+  resistencia: 67000,
+  resistenciaLabel: "67000",
+  suporte: 64600,
+  suporteLabel: "64600",
 };
 ```
 
