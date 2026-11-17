@@ -380,6 +380,8 @@ Essa distinção não é detalhe. A página mostra no máximo três zonas de cad
 
 Era o caso do monitor de BTC quando este campo foi criado, e foi ele que motivou a reancoragem das faixas. Nenhuma das três atingia o limite de sobreposição no semanal, e no diário a mais importante ficava cerca de mil dólares abaixo da região que o mercado respeitava. Nada no relatório dizia isso, porque o único campo que olhava as faixas media distância até o preço. O sinal existia por zona, em `confluencia_faixa_manual`, mas nunca era somado.
 
+**A contagem pode mudar sem o mercado mudar.** A sobreposição é medida contra a janela operacional de cada zona, o centro ± 0,25 ATR atual, e não contra os limites estruturais. Uma faixa que está no limite da sobreposição mínima (0,35) entra e sai da contagem quando o ATR sobe ou desce. Em 2026-11-17 era o caso da faixa mais funda do USDT/BRL, 4,874–4,893: a zona diária que a corrobora cobria 34% dela, e o alinhamento diário alternava entre 16 de 16 e 15 de 16. O relatório publica a contagem, não o nome da faixa; os prompts tratam uma queda de uma unidade, sozinha, como insuficiente para pedir revisão.
+
 `obsoleto` não é alerta de mercado: é aviso de manutenção. Significa que os níveis descrevem um regime que ficou para trás e precisam de revisão.
 
 ### Perda de suporte: forte x fraca
