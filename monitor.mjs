@@ -183,6 +183,17 @@ const NIVEIS_USD = {
     [76150, 76700, "faixa_76150_76700"],
     [74700, 75100, "faixa_74700_75100"],
     [73400, 73800, "regiao_suporte_73400_73800"],
+    // Acrescentada em 2026-11-17, depois da revisao de 2026-11-15. Com a
+    // vela de 14/11, as zonas diarias de 70.813-71.057 e 71.863-72.107 se
+    // juntaram numa so, usd|diario 70.803,65-72.116,55 (score 79, 8 toques,
+    // ativa), e o radar passou a aponta-la. Na revisao os dois pedacos
+    // tinham sido avaliados separados e ficado de fora (o preco atravessava
+    // cada um quase tanto quanto era rejeitado); a regiao inteira segurou
+    // 13 vezes e foi cruzada 5 desde 2024-10. Topos de 15/02 e 25/03/2026
+    // (70.935,2 e 71.985) e topos semanais de 2024 (71.896,4 e 71.900).
+    // Fica no vao de 9% sem faixa entre 67.300 e 73.400. Largura 1.300 =
+    // 0,49 ATR diario de 2026-11-15 (2.631).
+    [70800, 72100, "faixa_70800_72100"],
     // Acrescentadas em 2026-11-15 por revisao manual. A queda de 21/10 a
     // 14/11 (84.022 -> 64.115) deixou o preco na faixa mais baixa, sem
     // nenhuma faixa abaixo dela e com um vao de 12% sem faixa ate a de
@@ -201,8 +212,9 @@ const NIVEIS_USD = {
     //                tambem semanal), de 10/10/2024 (58.888, diario e
     //                semanal) e topo semanal de 2021 (58.339). Zona semanal
     //                z51 (score 80). Nunca cruzada: 7 de 7. 0,49 ATR.
-    // Ficaram de fora 68.900-72.100 (topos de 69.448, 70.935 e 71.985: o
-    // preco atravessou quase tanto quanto respeitou) e 60.500 (um fundo so).
+    // Ficaram de fora 68.900-69.500 (topo de 69.448: o preco atravessou
+    // quase tanto quanto respeitou) e 60.500 (um fundo so). A regiao de
+    // 70.800-72.100 entrou depois, em 2026-11-17 (acima).
     [66800, 67300, "faixa_66800_67300"],
     [64600, 65700, "faixa_64600_65700"],
     [62150, 62550, "faixa_62150_62550"],

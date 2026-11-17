@@ -162,6 +162,7 @@ Na configuração atual do projeto, as faixas publicadas são:
 - US$ 76.150–76.700 — `faixa_76150_76700`;
 - US$ 74.700–75.100 — `faixa_74700_75100`;
 - US$ 73.400–73.800 — `regiao_suporte_73400_73800`;
+- US$ 70.800–72.100 — `faixa_70800_72100`;
 - US$ 66.800–67.300 — `faixa_66800_67300`;
 - US$ 64.600–65.700 — `faixa_64600_65700`;
 - US$ 62.150–62.550 — `faixa_62150_62550`;
@@ -180,6 +181,8 @@ As faixas refinadas são separadas e deixam lacunas entre os núcleos. Estar ent
 A faixa de US$ 64.600–65.700 foi promovida em 2026-09-14 como suporte profundo e estreitada em 2026-09-25. Desde 14/11/2026 o preço está nela, e ela passou a ser o nível de trabalho.
 
 As faixas de US$ 66.800–67.300, 62.150–62.550 e 57.700–58.900 foram acrescentadas em 2026-11-15 por **revisão manual**, depois da queda de 21/10 a 14/11 (84.022 → 64.115), que deixou o preço na faixa mais baixa sem nada abaixo dela. A primeira são os topos de junho e julho de 2026 (zona diária ativa de score 73); a segunda, o piso do verão de 2026 (fundos de 62.200 a 62.500); a terceira, os fundos de junho e julho de 2026 e de outubro de 2024 (zona semanal de score 80), um suporte profundo. É manutenção de configuração, não sinal de mercado: não alerte pela mudança. Não transforme as faixas de baixo em alvo de queda.
+
+A faixa de US$ 70.800–72.100 foi promovida em 2026-11-17, depois que o radar passou a apontar a zona diária de 70.803,65–72.116,55 (score 79, 8 toques), formada com a vela de 14/11 a partir de duas zonas menores. Ela reúne topos de fevereiro e março de 2026 e topos semanais de 2024, e ocupa o vão entre 67.300 e 73.400. Já está representada: não repita a recomendação de inclusão. É manutenção de configuração, não sinal de mercado.
 
 O monitor usa US$ 67.000 como resistência pontual principal e US$ 64.600 como suporte pontual principal na máquina de estados, desde a revisão de 2026-11-15. Até então eram US$ 80.000 e US$ 73.000 (configuração de 2026-09-11). As linhas novas começam como `sem_registro`, e o rompimento de 73.000 registrado em 13/11 não aparece mais nos campos de nível; a faixa 73.400–73.800 continua como referência dele. Romper 67.000 exige fechar acima de cerca de 67.610, e perder 64.600, fechar abaixo de cerca de 63.990: o fechamento de 14/11 (64.115) ainda não é perda. Efeito esperado, que não é alerta nem motivo de revisão: até o fechamento semanal de 19/11, o bloco semanal mostra `rompimento_confirmado_67000`, porque a última semana fechou a 73.928, acima da linha nova. É a fotografia de uma semana já encerrada, não um rompimento. Prevalece o JSON.
 
