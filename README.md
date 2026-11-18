@@ -1058,37 +1058,45 @@ Em um fork com outro nome de usuário/repositório, ajuste os URLs usados por bo
 
 ## Personalizando níveis e faixas
 
-A configuração manual fica no objeto `NIVEIS_USD` de `monitor.mjs`.
-
-Exemplo da estrutura atual:
+A configuração manual fica no objeto `NIVEIS_USD` de `monitor.mjs`, com o motivo de cada faixa em comentário; a tabela de faixas, mais acima, repete os valores para leitura. O formato:
 
 ```js
 const NIVEIS_USD = {
   faixas: [
-    [88700, 89300, "faixa_88700_89300"],
-    [86250, 86550, "faixa_86250_86550"],
-    [83750, 84550, "faixa_83750_84550"],
-    [82171, 82908, "faixa_82171_82908"],
-    [80469, 80721, "faixa_80469_80721"],
-    [79300, 79700, "faixa_79300_79700"],
-    [76150, 76700, "faixa_76150_76700"],
-    [74700, 75100, "faixa_74700_75100"],
+    // [inferior, superior, label], de cima para baixo
     [73400, 73800, "regiao_suporte_73400_73800"],
     [70800, 72100, "faixa_70800_72100"],
-    [66800, 67300, "faixa_66800_67300"],
-    [64600, 65700, "faixa_64600_65700"],
-    [62150, 62550, "faixa_62150_62550"],
-    [57700, 58900, "faixa_57700_58900"],
+    // ...
   ],
   resistencia: 67000,
   resistenciaLabel: "67000",
   suporte: 64600,
   suporteLabel: "64600",
+  revisoes: {
+    faixas: {
+      faixa_70800_72100: { desde: "2026-11-17", atr: 2631 },
+      faixa_66800_67300: { desde: "2026-11-15" },
+      // ...
+    },
+    linhasAnteriores: [
+      { ate: "2026-11-15", resistencia: 80000, resistenciaLabel: "80000", suporte: 73000, suporteLabel: "73000" },
+    ],
+  },
 };
 ```
 
 As faixas são automaticamente refletidas em `niveis_manuais.faixas` no `relatorio.json`.
 
+**`revisoes` é o histórico das mudanças depois da calibração de 2026-09-25, e é dele que os testes leem.** Em `faixas`, cada faixa acrescentada depois da calibração tem a data em que entrou (`desde`) e, quando ficou mais larga que o teto da calibração de setembro (0,5 ATR diário de referência), o ATR diário que a limitou (`atr`). Em `linhasAnteriores`, cada par de linhas pontuais anterior, valendo até a data em `ate`. A função `niveisEm(niveis, data)` reconstrói daí a configuração de qualquer data: é assim que os testes de replay e de promoção comparam capturas antigas com a configuração de quando foram feitas.
+
+### Roteiro de uma revisão de níveis
+
+1. Em `monitor.mjs`, acrescente ou mova as faixas e as linhas, com o motivo em comentário, e registre a mudança em `revisoes`: a faixa nova com `desde` (e `atr`, se for mais larga que 0,5 ATR da referência de setembro); a linha movida com uma entrada nova em `linhasAnteriores`, com os valores antigos e `ate` igual à data da mudança.
+2. No README, a faixa na tabela e um parágrafo com a evidência. No prompt, a faixa na lista e, se a mudança deixar algum efeito passageiro, uma nota curta com a data em que ele acaba.
+3. Rode a bateria de testes. O retrato (`teste-retrato.txt`) muda com os níveis: confira que só mudaram linhas ligadas a eles e atualize com `node teste-retrato.mjs --atualizar`.
+4. Commit, push e, para ver no ar, rode o workflow do monitor.
+
+Até 2026-11-18 cada revisão também acrescentava a faixa ou a linha a listas dentro dos testes compartilhados (`teste-zonas.mjs` e `teste-auto-equivalencia.mjs`, nos três repositórios) e, no USD, reconstruía à mão a configuração anterior em `teste-promocao-zonas.mjs`. Uma faixa nova mexia em cerca de dez arquivos; agora mexe em três (`monitor.mjs`, README e prompt), mais o retrato. Se faltar a entrada em `revisoes`, `teste-zonas.mjs` falha e diz qual faixa; se uma linha mudar sem entrada em `linhasAnteriores`, ele falha na conferência das linhas da calibração.
 Ao alterar níveis pontuais, mantenha coerentes o valor e o respectivo label, pois o label participa dos nomes de campos da máquina de estados publicada no relatório.
 
 ## Usando o JSON com bots, agentes e LLMs

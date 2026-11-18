@@ -232,6 +232,28 @@ const NIVEIS_USD = {
   resistenciaLabel: "67000",
   suporte: 64600,
   suporteLabel: "64600",
+  // Historico das revisoes depois da calibracao de 2026-09-25. Os testes
+  // leem daqui: quando cada faixa acrescentada entrou ("desde"; as sem
+  // entrada sao da calibracao), o ATR diario que limitou a largura dela
+  // quando nao foi o de referencia de setembro ("atr"), e as linhas
+  // pontuais anteriores, cada uma valendo ate a data em "ate" (exclusive).
+  // niveisEm() reconstroi daqui a configuracao de qualquer data. Revisar
+  // niveis mexe so neste objeto, no README e no prompt.
+  revisoes: {
+    faixas: {
+      faixa_86250_86550: { desde: "2026-09-28" },
+      faixa_83750_84550: { desde: "2026-09-28" },
+      faixa_82171_82908: { desde: "2026-09-25" },
+      faixa_80469_80721: { desde: "2026-09-25" },
+      faixa_70800_72100: { desde: "2026-11-17", atr: 2631 },
+      faixa_66800_67300: { desde: "2026-11-15" },
+      faixa_62150_62550: { desde: "2026-11-15" },
+      faixa_57700_58900: { desde: "2026-11-15" },
+    },
+    linhasAnteriores: [
+      { ate: "2026-11-15", resistencia: 80000, resistenciaLabel: "80000", suporte: 73000, suporteLabel: "73000" },
+    ],
+  },
 };
 
 const PAIRS = [
@@ -1538,6 +1560,25 @@ export function alinhamentoNiveis(niveis, zonas) {
       ? "desalinhado"
       : "parcial";
   return { situacao, corroboradas, total: faixas.length, semZona };
+}
+
+// Os niveis como estavam numa data (AAAA-MM-DD), pelo historico em
+// niveis.revisoes: sem as faixas que entraram depois dela e com as linhas
+// pontuais da epoca. Serve aos testes que conferem capturas gravadas
+// contra a configuracao de quando foram feitas; o monitor so usa a atual.
+export function niveisEm(niveis, data) {
+  const rev = niveis.revisoes || {};
+  const faixas = niveis.faixas.filter(([, , label]) => !(rev.faixas?.[label]?.desde > data));
+  const linhas = (rev.linhasAnteriores || []).find((l) => data < l.ate) || niveis;
+  const out = {
+    faixas,
+    resistencia: linhas.resistencia,
+    resistenciaLabel: linhas.resistenciaLabel,
+    suporte: linhas.suporte,
+    suporteLabel: linhas.suporteLabel,
+  };
+  if (niveis.resistenciaMacro) out.resistenciaMacro = niveis.resistenciaMacro;
+  return out;
 }
 
 export function situacaoNiveis(niveis, preco, atr) {
