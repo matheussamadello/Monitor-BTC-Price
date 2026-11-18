@@ -1117,7 +1117,7 @@ Um consumidor robusto deve, no mínimo:
 6. evitar transformar cada campo de `alertas_tecnicos` em uma notificação independente;
 7. fundir sinais relacionados para reduzir spam.
 
-O arquivo [`PROMPT_BTC_TECHNICAL_WATCH.md`](./PROMPT_BTC_TECHNICAL_WATCH.md) contém uma política pronta e mais completa para uma LLM/agente transformar o `relatorio.json` em alertas seletivos de swing trade, incluindo compra de BTC com BRL, realização parcial BTC→BRL, hierarquia de sinais, regras anti-spam, interpretação de RSI/DMI/ADX e tratamento dos níveis e zonas automáticas.
+O arquivo [`PROMPT_BTC_TECHNICAL_WATCH.md`](./PROMPT_BTC_TECHNICAL_WATCH.md) contém uma política pronta e mais completa para uma LLM/agente transformar o `relatorio.json` em alertas seletivos de swing trade, incluindo compra de BTC com BRL, realização parcial BTC→BRL, hierarquia de sinais, regras anti-spam, interpretação de RSI/DMI/ADX e tratamento dos níveis e zonas automáticas. Desde 2026-11-18 o prompt traz só o que o agente precisa para decidir: regras, campos, níveis atuais e avisos ainda válidos. O histórico das revisões de níveis, os casos que motivaram cada regra e as mudanças do painel ficam neste README, de onde saíram as notas datadas que o prompt acumulava (de 17 a 22 parágrafos por prompt, alguns já vencidos e enganando o agente).
 
 ## Relação entre o monitor e o prompt de alerta
 

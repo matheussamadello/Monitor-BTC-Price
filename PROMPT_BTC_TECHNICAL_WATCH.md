@@ -56,7 +56,7 @@ Monitore o relatório técnico de BTC/USD a cada execução usando como fonte pr
 
 Só processe um `timestamp` **estritamente mais novo** que o maior timestamp já processado. Um timestamp novo sozinho **NÃO gera alerta**. Considere o maior timestamp já processado como baseline e somente mudanças posteriores realmente novas podem gerar alerta.
 
-Um timestamp recente não garante dados de mercado válidos. Se um bloco publicar `falha`, não use sua memória preservada para confirmar eventos novos; aplique o tratamento de indisponibilidade já definido abaixo. Os demais blocos válidos continuam utilizáveis. Quando o semanal falhar, as zonas do diário não recebem confirmação semanal da memória preservada.
+Um timestamp recente não garante dados de mercado válidos. Se um bloco publicar `falha`, não use sua memória preservada para confirmar eventos novos; aplique o tratamento de indisponibilidade já definido abaixo. Os demais blocos válidos continuam utilizáveis. Quando o semanal falhar, as zonas do diário não recebem confirmação semanal da memória preservada. `falha: sem resposta da fonte em 30 s` é uma fonte que não respondeu no prazo: trate como qualquer falha de fonte.
 
 Se JSON e HTML falharem totalmente por **4 execuções consecutivas**, envie um único alerta curto de indisponibilidade. Não repita esse alerta a cada nova falha. Zere a contagem assim que alguma fonte voltar a funcionar. Se um alerta operacional do fallback já estiver ativo para a mesma indisponibilidade, não envie um segundo alerta redundante.
 
@@ -146,11 +146,9 @@ Todo alerta de mercado deve ser rotulado por horizonte — ver `Formato obrigat�
 
 ### Fonte de verdade dos níveis manuais
 
-Faixas revistas em 2026-09-25 conforme as concentrações de pivôs e reações. O teto de segurança na calibração é **0,5 ATR diário de largura total**, sem largura alvo uniforme nem limite percentual de 1%. Apenas faixas que excluíam evidência próxima foram alargadas. Permanecem fixas até revisão manual. Os níveis pontuais e seus ciclos de rompimento/reteste continuam iguais. Uma troca de limites ou labels é manutenção de configuração, não evidência de movimento novo do preço.
+As faixas manuais são revistas à mão quando o mercado muda de regime, a partir das concentrações de pivôs e reações, com teto de largura de **0,5 ATR diário** na calibração. Ficam fixas até a próxima revisão. Uma troca de faixas, linhas pontuais ou labels é manutenção de configuração, não evidência de movimento novo do preço: não alerte pela mudança, e as linhas novas começam como `sem_registro`. O histórico das revisões e a evidência de cada faixa ficam no README do repositório, não aqui.
 
-Sempre que o `relatorio.json` publicar explicitamente faixas dentro de `niveis_manuais`, leia essas faixas diretamente do relatório e trate seus limites e labels como **fonte de verdade**.
-
-Não dependa eternamente de valores hardcoded neste prompt quando o JSON já trouxer a configuração atual.
+Sempre que o `relatorio.json` publicar explicitamente faixas dentro de `niveis_manuais`, leia essas faixas diretamente do relatório e trate seus limites e labels como **fonte de verdade**. Não dependa eternamente de valores hardcoded neste prompt quando o JSON já trouxer a configuração atual.
 
 Na configuração atual do projeto, as faixas publicadas são:
 
@@ -167,25 +165,16 @@ Na configuração atual do projeto, as faixas publicadas são:
 - US$ 66.800–67.300 — `faixa_66800_67300`;
 - US$ 64.600–65.700 — `faixa_64600_65700`;
 - US$ 62.150–62.550 — `faixa_62150_62550`;
-- US$ 57.700–58.900 — `faixa_57700_58900`;
+- US$ 57.700–58.900 — `faixa_57700_58900`.
 
-As faixas de US$ 83.750–84.550 e US$ 86.250–86.550 foram acrescentadas em 2026-09-28 por **revisão manual**, não pelo radar. A primeira é a região onde o BTC fechou de 23 a 27/09, sobre uma zona diária de score 85 e um fundo semanal de 84.421 de dezembro de 2025. A segunda é uma resistência intermediária de força moderada (zona diária de score 66, topo de 86.401 de abril de 2025). Ambas ficam logo acima da de 82.171–82.908, então o preço pode passar por três faixas manuais em poucos dias. Trate cada entrada como contexto, não como três sinais independentes. O topo de 87.446,7 de 21/09 **não** é faixa: tem um toque só. A de 86.250–86.550 nasceu com zona automática só no diário, e por isso o alinhamento **semanal** do BTC/USD saiu `parcial` (9 de 10) a partir de 2026-09-28; hoje a contagem atual sai em `niveis_manuais_faixas_corroboradas`. Se o semanal voltar a sair `parcial` por causa dessa faixa, é esperado e **não** é motivo de revisão dos níveis manuais.
+A máquina de estados usa US$ 67.000 como resistência pontual principal (dentro da faixa 66.800–67.300) e US$ 64.600 como suporte pontual principal (o piso da faixa 64.600–65.700). A faixa 73.400–73.800 continua como referência do suporte de 73.000, perdido em 13/11/2026.
 
-A região promovida pelo radar em 2026-09-22 foi recalibrada em 2026-09-25 para US$ 88.700–89.300, seguindo os pivôs atuais. Continua sendo referência manual permanente, sem ciclo próprio de rompimento/reteste. A recalibração é manutenção, não um novo sinal de mercado.
+- Faixas manuais **não têm ciclo próprio de rompimento/reteste**: esse acompanhamento é exclusivo dos níveis pontuais. Uma faixa é referência permanente de região.
+- As faixas são separadas e deixam lacunas entre os núcleos. Estar entre duas faixas não significa estar dentro de uma delas. Diga sempre **qual** faixa, nunca apenas que está em uma.
+- As faixas de 82.171–82.908, 83.750–84.550 e 86.250–86.550 ficam perto umas das outras, e o preço pode passar pelas três em poucos dias. Trate cada entrada como contexto, não como três sinais independentes.
+- Faixas abaixo do preço são suporte, não alvo de queda.
 
-As faixas de US$ 82.171–82.908 e US$ 80.469–80.721 foram promovidas pelo radar em 2026-09-25, e usam os limites **estruturais** das zonas que as originaram — não os operacionais, que são uma janela de ATR corrente e mudam a cada execução. A primeira vem de uma zona de score 90 com 5 toques e 3 rejeições; a segunda, de uma de score 84 com 6 toques e 4 rejeições. Ambas confirmadas no diário e no semanal. Como qualquer faixa, são referência manual permanente **sem ciclo próprio de rompimento/reteste**: esse acompanhamento continua exclusivo dos níveis pontuais.
-
-Nenhuma das duas encosta nas faixas recalibradas. (A resistência pontual de US$ 80.000, usada até 2026-11-15, ficava no vão **abaixo** da faixa de 80.469–80.721, fora dela.)
-
-As faixas refinadas são separadas e deixam lacunas entre os núcleos. Estar entre duas faixas não significa estar dentro de uma delas. Diga sempre **qual** faixa, nunca apenas que está em uma.
-
-A faixa de US$ 64.600–65.700 foi promovida em 2026-09-14 como suporte profundo e estreitada em 2026-09-25. Desde 14/11/2026 o preço está nela, e ela passou a ser o nível de trabalho.
-
-As faixas de US$ 66.800–67.300, 62.150–62.550 e 57.700–58.900 foram acrescentadas em 2026-11-15 por **revisão manual**, depois da queda de 21/10 a 14/11 (84.022 → 64.115), que deixou o preço na faixa mais baixa sem nada abaixo dela. A primeira são os topos de junho e julho de 2026 (zona diária ativa de score 73); a segunda, o piso do verão de 2026 (fundos de 62.200 a 62.500); a terceira, os fundos de junho e julho de 2026 e de outubro de 2024 (zona semanal de score 80), um suporte profundo. É manutenção de configuração, não sinal de mercado: não alerte pela mudança. Não transforme as faixas de baixo em alvo de queda.
-
-A faixa de US$ 70.800–72.100 foi promovida em 2026-11-17, depois que o radar passou a apontar a zona diária de 70.803,65–72.116,55 (score 79, 8 toques), formada com a vela de 14/11 a partir de duas zonas menores. Ela reúne topos de fevereiro e março de 2026 e topos semanais de 2024, e ocupa o vão entre 67.300 e 73.400. Já está representada: não repita a recomendação de inclusão. É manutenção de configuração, não sinal de mercado.
-
-O monitor usa US$ 67.000 como resistência pontual principal e US$ 64.600 como suporte pontual principal na máquina de estados, desde a revisão de 2026-11-15. Até então eram US$ 80.000 e US$ 73.000 (configuração de 2026-09-11). As linhas novas começam como `sem_registro`, e o rompimento de 73.000 registrado em 13/11 não aparece mais nos campos de nível; a faixa 73.400–73.800 continua como referência dele. Romper 67.000 exige fechar acima de cerca de 67.610, e perder 64.600, fechar abaixo de cerca de 63.990: o fechamento de 14/11 (64.115) ainda não é perda. Efeito esperado, que não é alerta nem motivo de revisão: até o fechamento semanal de 19/11, o bloco semanal mostra `rompimento_confirmado_67000`, porque a última semana fechou a 73.928, acima da linha nova. É a fotografia de uma semana já encerrada, não um rompimento. Prevalece o JSON.
+Aviso válido agora: até o fechamento semanal de 19/11/2026, o bloco semanal mostra `rompimento_confirmado_67000`, porque a última semana fechada (73.928) ficou acima da linha nova de 67.000. É a fotografia de uma semana encerrada, não um rompimento; não alerte por ele.
 
 Se o JSON atualizado publicar outros níveis/faixas, **prevalece o JSON**. Para resistência/suporte pontual, leia o valor atual diretamente de `niveis_manuais` quando houver metadado suficiente para isso. Se o relatório ainda não publicar explicitamente o número pontual, use temporariamente o valor legado conhecido sem transformar essa ausência em alerta.
 
@@ -484,7 +473,7 @@ Explique que é um sinal intermediário: superior à janela agressiva e inferior
 
 ## Confirmação conservadora de entrada
 
-Use a resistência manual principal publicada em `niveis_manuais` como âncora enquanto ela continuar estruturalmente relevante. Na configuração atual essa âncora é US$ 67.000, dentro da faixa 66.800–67.300 (era 80.000 até 2026-11-15), mas se o JSON publicar outra, prevalece o JSON.
+Use a resistência manual principal publicada em `niveis_manuais` como âncora enquanto ela continuar estruturalmente relevante. Na configuração atual essa âncora é US$ 67.000, dentro da faixa 66.800–67.300, mas se o JSON publicar outra, prevalece o JSON.
 
 Trate o nível como **âncora de uma região de decisão**, não como linha exata. Use também as faixas manuais e zonas automáticas próximas para definir a região efetivamente relevante.
 
@@ -653,7 +642,7 @@ quando uma falha/rejeição relevante vier acompanhada de **deterioração estru
 
 A perda da região de suporte manual principal também pode evoluir para esse alerta quando houver confirmação por fechamento e deterioração estrutural relevante.
 
-Na configuração atual a âncora inferior pontual é US$ 64.600 e a faixa relacionada é US$ 64.600–65.700 (até 2026-11-15 eram 73.000 e 73.400–73.800), mas leia a configuração do JSON sempre que disponível.
+Na configuração atual a âncora inferior pontual é US$ 64.600 e a faixa relacionada é US$ 64.600–65.700, mas leia a configuração do JSON sempre que disponível.
 
 Não transforme uma simples aproximação ou perfuração intradiária em confirmação conservadora.
 
@@ -778,7 +767,7 @@ Use exatamente esse título quando a travessia for para cima, com a mesma estrut
 
 Enquanto o suporte pontual/manual principal publicado em `niveis_manuais` continuar estruturalmente relevante, trate-o como âncora de uma **REGIÃO de suporte**, não como linha exata.
 
-Na configuração atual essa âncora é US$ 64.600 (era 73.000 até 2026-11-15), mas, se o JSON publicar outro valor como suporte principal, prevalece o JSON. Use as faixas manuais atuais e as zonas automáticas próximas para definir a região estrutural efetiva.
+Na configuração atual essa âncora é US$ 64.600, mas, se o JSON publicar outro valor como suporte principal, prevalece o JSON. Use as faixas manuais atuais e as zonas automáticas próximas para definir a região estrutural efetiva.
 
 Simples toque ou perfuração intradiária não basta.
 
@@ -986,11 +975,11 @@ Zona `enfraquecida` conta para o alinhamento enquanto os pivôs dela continuarem
 
 Existe também um radar de promoção. `zonas_candidatas_a_faixa` lista, **só no bloco diário**, regiões que amadureceram e que nenhuma faixa manual já representa: zona com score 70 ou mais, pelo menos 5 toques e situação `ativa`, que nenhuma faixa cobre e que não está **colada** em faixa nenhuma. O lado entre parênteses (`acima do fechamento`, `abaixo do fechamento`, `no fechamento`) é medido contra o último fechamento diário, não contra `preco_atual`.
 
-`zonas_candidatas_a_faixa` é um radar de **manutenção**, e por isso usa um critério próprio de "já representada", diferente da confluência. Uma zona conta como representada por uma faixa quando a faixa a cobre (a mesma sobreposição mínima da confluência) **ou** quando as duas estão coladas: o vão entre as bordas é menor que 0,2 ATR diário, sobreposição parcial incluída. Uma zona assim pode ser suprimida do radar mesmo sem atingir a sobreposição de confluência, porque promovê-la só criaria um fragmento encostado numa faixa que já existe. O número 0,2 ATR é o mesmo vão que o monitor exige para separar uma nuvem de pivôs em duas zonas distintas. Acima dele a região é tratada como distinta, mesmo a menos de 1 ATR de uma faixa. Isso muda só o radar: `confluencia_faixa_manual` e `niveis_manuais_alinhamento` continuam com a sobreposição de sempre, e a faixa existente não é alargada nem fundida com nada. No semanal ele não roda, porque a estrutura fica em outro patamar e um único conjunto de faixas serve aos dois timeframes. Desde 2026-11-14 o mesmo critério vale entre as próprias candidatas: duas zonas sobrepostas ou coladas são uma região só, e o campo traz apenas a de maior score. A zona que sai do radar por isso continua existindo entre as zonas automáticas; não trate a saída como enfraquecimento nem como sinal de mercado.
+`zonas_candidatas_a_faixa` é um radar de **manutenção** e usa um critério próprio de "já representada": uma zona conta como representada quando uma faixa a cobre (a sobreposição mínima da confluência) **ou** quando as duas estão coladas, com vão menor que 0,2 ATR diário entre as bordas, sobreposição parcial incluída. Promovê-la só criaria um fragmento encostado numa faixa que já existe. Acima de 0,2 ATR a região é distinta, mesmo a menos de 1 ATR de uma faixa. Isso muda só o radar: `confluencia_faixa_manual` e `niveis_manuais_alinhamento` continuam com a sobreposição de sempre, e a faixa existente não é alargada nem fundida com nada. No semanal o radar não roda. O mesmo critério vale entre as candidatas: duas zonas sobrepostas ou coladas são uma região só, e o campo traz apenas a de maior score. A zona que sai do radar por isso continua existindo entre as zonas automáticas; não trate a saída como enfraquecimento nem como sinal de mercado.
 
-O radar examina o **conjunto inteiro de zonas vivas** do par, não apenas as que aparecem na lista publicada. A página mostra no máximo três de cada lado do preço, por legibilidade; esse corte é de exibição, não de análise, e escondia do radar regiões maduras que só não coubessem na lista. Em compensação, o radar exige situação `ativa`: região `enfraquecida` (que parou de receber toques) ou ainda `candidata` (que nunca se provou) não é candidata a faixa manual, porque faixa manual não expira e virar faixa é justamente o contrário de estar perdendo validade.
+O radar examina o **conjunto inteiro de zonas vivas** do par, não só as três de cada lado da lista publicada, e exige situação `ativa`: região `enfraquecida` (que parou de receber toques) ou ainda `candidata` (que nunca se provou) não é candidata a faixa manual, porque faixa manual não expira.
 
-Os números publicados são os limites **estruturais** da zona — a identidade da região, dada pelos extremos dos pivôs que a formam, mais uma folga pequena. Não são os operacionais, que são uma janela de ±0,25 ATR corrente em torno do centro, com teto em percentual (o piso percentual só entra quando falta ATR), e que mudam a cada execução. O estrutural é bem mais estável, mas não é imutável: a largura máxima de uma zona é proporcional ao ATR **atual**, então uma queda forte da volatilidade pode reagrupar os pivôs e mudar esses limites. Por isso a faixa manual congela o estrutural **do dia da promoção**: ela não expira nem se mexe depois, mesmo que a zona automática que a originou mude.
+Os números publicados são os limites **estruturais** da zona (os extremos dos pivôs que a formam, mais uma folga pequena), não os operacionais, que são uma janela de ±0,25 ATR corrente em torno do centro e mudam a cada execução. O estrutural é estável, mas não imutável: a largura máxima de uma zona acompanha o ATR atual, e uma queda forte da volatilidade pode reagrupar os pivôs e mudar esses limites. Por isso a faixa manual congela o estrutural **do dia da promoção** e não se mexe depois, mesmo que a zona de origem mude.
 
 O radar diz que uma região **passou nos critérios mínimos**, não que ela merece virar faixa. Antes de comunicar uma candidata, confira com os dados do próprio relatório estes três pontos. Se falhar em qualquer um, **não comunique** — a região continua visível na lista, e volta a ser avaliada nas próximas execuções:
 
@@ -998,13 +987,11 @@ O radar diz que uma região **passou nos critérios mínimos**, não que ela mer
 2. **Não fragmente o espaço entre duas faixas próximas.** Se a candidata fica entre duas faixas manuais vizinhas cujo vão (da borda de cima da faixa de baixo até a borda de baixo da faixa de cima) é menor que 1 × `atr14` diário, não comunique. O preço atravessa esse vão num dia comum, e uma terceira faixa no meio só multiplicaria alertas de entrada sem dar informação nova.
 3. **Não comunique no mesmo dia de uma mudança nas zonas.** Quando este prompt registrar uma correção de dados ou de cálculo que refez as zonas de um par, as candidatas desse par nas execuções seguintes são consequência da correção, e não de mercado. Espere o prazo indicado junto com a correção.
 
-O campo `zonas_candidatas_a_faixa` do relatório continua publicado pelos critérios mínimos, e a decisão de promover continua sendo de revisão manual. O painel visual aplica os dois primeiros filtros com os mesmos números: o que passa aparece como "região amadurecida sem faixa manual", e o que não passa aparece como "em observação, sem recomendação", com o motivo. Se o painel mostrar uma região em observação, ela também não deve ser comunicada.
+O campo continua publicado pelos critérios mínimos, e a decisão de promover é de revisão manual. O painel aplica os dois primeiros filtros com os mesmos números: o que passa aparece como "região amadurecida sem faixa manual", e o que não passa como "em observação, sem recomendação", com o motivo. Região em observação no painel também não deve ser comunicada.
 
 **Verificação obrigatória antes de recomendar inclusão.** Para cada candidata do radar, calcule `(superior - inferior) / atr14` usando o ATR do mesmo bloco diário. Se o resultado for até 0,12 e o score estiver abaixo de 80, descarte a recomendação de manutenção dessa região. Vários toques ou rejeições não significam vários pivôs: não use essas contagens para dispensar o filtro. A proximidade da EMA89, a situação ativa ou a confirmação de fechamento também não dispensam esse requisito. A candidata pode continuar no radar mínimo e no relatório sem justificar uma mensagem ao usuário. Se ela for o único motivo de manutenção e não houver outro evento elegível, aplique a regra final de silêncio.
 
-**Caso conferido em 2026-10-30.** A região 78.112,55–78.325,45 (`usd|diario|z69`) tinha score 74, 10 toques e 5 rejeições. Sua largura de 212,90 dividida pelo ATR diário de 2.129,10 corresponde a aproximadamente 0,10 ATR: ela não passava pelo filtro de pivô único, apesar da proximidade da EMA89. O alerta de revisão das 02h01 UTC foi indevido e a região permaneceu em observação. Recalcule o filtro com os dados de cada execução; não repita o pedido de inclusão enquanto ele continuar bloqueado.
-
-O cartão do painel mostra o suporte e a resistência manuais mais próximos da cotação (faixas, níveis pontuais e resistência macro, com o papel dado pela posição) no lugar da antiga linha de situação dos níveis. É só apresentação: nenhum campo do relatório mudou, e `niveis_manuais_situacao` continua valendo como antes. Na leitura curta do painel, a linha pontual é chamada de suporte ou de resistência conforme o lado do fechamento diário, e a leitura longa começa por "fechou a semana": também é só apresentação. Desde 2026-11-14, a leitura curta do painel põe primeiro o nível que mudou de estado na vela e, sem mudança, o que ainda está perto do preço; o estado antigo de um nível afastado só aparece quando todos estão afastados. Também é só apresentação: `nivel_*_estado` e `niveis_mudancas_nesta_vela` não mudaram. Desde 2026-11-14, o painel também escreve a distância do fechamento semanal até a faixa em porcentagem e com o lado ("2,4% acima da faixa manual de …"), põe "fechamento" antes da porcentagem da leitura curta, mostra a estrutura recente pelo nome ("lateral em contração") e o radar no formato da página. Também é só apresentação: nenhum campo do relatório mudou.
+É o caso da região de 78 mil do BTC/USD: pivô único de cerca de 0,1 ATR, com score abaixo de 80, em observação. Recalcule o filtro com os dados de cada execução; não repita o pedido de inclusão enquanto ele continuar bloqueado.
 
 Quando esse campo trouxer algo, **diga ao usuário em linguagem simples**, como manutenção e não como alerta de mercado: que região é, quantas vezes o preço reagiu nela e por que merece entrar na configuração manual. Promover uma zona a faixa manual mantém essa região como referência nas leituras e nas regras de faixas, mas **não cria um ciclo próprio de rompimento e reteste**. Esse acompanhamento persistente existe somente para os preços pontuais configurados como suporte e resistência. Zonas automáticas podem expirar pelo ciclo de vida; faixas manuais permanecem até revisão explícita da configuração. A promoção é uma sugestão de manutenção, não uma alteração automática nem uma promessa de acompanhar retestes em cada faixa. Isto não consome a cota de mensagens de mercado, e o rodapé de registro dele sai com `MANUTENÇÃO`, nunca com `TÁTICO`. Não deve ser repetido a cada execução: uma vez por região é suficiente, enquanto ela continuar na lista. Se uma região já comunicada sair da lista antes de ser promovida, não avise: ela deixou de cumprir os critérios (normalmente, parou de receber toques), e isso também é manutenção, não mercado.
 
